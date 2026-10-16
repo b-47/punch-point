@@ -14,7 +14,7 @@ import websocket
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parent.parent
-WIDTH = 880
+WIDTH = 640
 
 
 class Chrome:
@@ -60,6 +60,9 @@ class Chrome:
             if self.eval("(document.getElementById('loadState') || {}).textContent || ''").startswith("Drag"):
                 break
             time.sleep(0.1)
+        # record the parts only: hide the buttons and status text drawn over the 3D view
+        self.eval("const st = document.createElement('style'); st.textContent = "
+                  "'.viewer-tools, .load-state, .coil { display: none !important; }'; document.head.appendChild(st)")
         time.sleep(1.5)   # let the orbit controls settle
 
     def settle(self):
@@ -78,16 +81,6 @@ class Chrome:
         shutil.rmtree(self.profile, ignore_errors=True)
 
 
-def side_by_side(left, right):
-    h = max(left.height, right.height)
-    right = right.resize((round(right.width * h / right.height), h), Image.LANCZOS) if right.height != h else right
-    left = left.resize((round(left.width * h / left.height), h), Image.LANCZOS) if left.height != h else left
-    out = Image.new("RGB", (left.width + right.width + 8, h), (242, 244, 246))
-    out.paste(left, (0, 0))
-    out.paste(right, (left.width + 8, 0))
-    return out
-
-
 def encode(frames, out, fps):
     out.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory() as tmp:
@@ -95,7 +88,7 @@ def encode(frames, out, fps):
             f.save(f"{tmp}/f{i:04d}.png")
         subprocess.run(
             ["ffmpeg", "-y", "-loglevel", "error", "-framerate", str(fps), "-i", f"{tmp}/f%04d.png",
-             "-vf", f"scale={WIDTH}:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=128:stats_mode=diff[p];"
+             "-vf", f"scale={WIDTH}:-2:flags=lanczos,split[a][b];[a]palettegen=max_colors=128:stats_mode=diff[p];"
                     "[b][p]paletteuse=dither=bayer:bayer_scale=4:diff_mode=rectangle",
              "-loop", "0", str(out)], check=True)
     print(f"{out.relative_to(ROOT)}: {len(frames)} frames, {out.stat().st_size / 1e6:.1f} MB")
@@ -106,9 +99,9 @@ def rig(c):
     c.eval("document.getElementById('play').textContent === 'Pause' && document.getElementById('play').click()")
     frames = []
     for i in range(40):   # one strike, 3.2 s
-        c.eval(f"const s = document.getElementById('scrub'); s.value = {i * 25}; s.dispatchEvent(new Event('input'))")
+        c.eval(f"{{ const s = document.getElementById('scrub'); s.value = {i * 25}; s.dispatchEvent(new Event('input')); }}")
         c.settle()
-        frames.append(side_by_side(c.shot("#viewer"), c.shot("#xsec")))
+        frames.append(c.shot("#scene"))
     encode(frames, ROOT / "test-rig-v3/media/strike.gif", 12.5)
 
 
@@ -119,7 +112,7 @@ def six(c, fps=10):
     for _ in range(int(7.4 * fps)):   # five cells, then a short hold on the finished word
         c.eval(f"sixCapture.step({1 / fps})")
         c.settle()
-        frames.append(side_by_side(c.shot(".viewer"), c.shot(".side")))
+        frames.append(c.shot("#scene"))
     encode(frames, ROOT / "concepts/six_solenoid_head/media/emboss.gif", fps)
 
 
