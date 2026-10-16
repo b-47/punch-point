@@ -490,6 +490,9 @@ function tick(now) {
   requestAnimationFrame(tick);
 }
 
+// tools/record_gifs.py steps the animation frame by frame through this
+window.sixCapture = { step: (dt) => { step(dt); update(); }, restart, pause: () => setPlaying(false) };
+
 setPlaying(playing);
 init3D();
 restart();
