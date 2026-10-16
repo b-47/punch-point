@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Punch Test Rig v3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root {
+  --bg: #F2F4F6;
+  --surface: #FFFFFF;
+  --scene: #E4EAF0;
+  --ink: #17202A;
+  --muted: #5A6774;
+  --rule: #D3DAE1;
+  --steel: #2D6A93;
+  --steel-soft: #DDE9F2;
+  --metal: #8C949C;
+  --metal-dark: #454C54;
+  --copper: #B4612F;
+  --sheet: #FFFFFF;
+  --strike: #C2410C;
+  --warn: #A85A06;
+  --bad: #B42318;
+  --ok: #2E7D4F;
+  --font-display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-data: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1318; --surface: #151C23; --scene: #1B242D; --ink: #E2E8EE; --muted: #97A4B0;
+    --rule: #2B3641; --steel: #7DB3D8; --steel-soft: #1D3243; --metal: #9AA3AC; --metal-dark: #5E6770;
+    --copper: #E08A55; --sheet: #DCE1E6; --strike: #F28C4C; --warn: #F0A43A; --bad: #F07167; --ok: #6CC08F;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E1318; --surface: #151C23; --scene: #1B242D; --ink: #E2E8EE; --muted: #97A4B0;
+  --rule: #2B3641; --steel: #7DB3D8; --steel-soft: #1D3243; --metal: #9AA3AC; --metal-dark: #5E6770;
+  --copper: #E08A55; --sheet: #DCE1E6; --strike: #F28C4C; --warn: #F0A43A; --bad: #F07167; --ok: #6CC08F;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+}
+.wrap {
+  max-width: 1180px;
+  margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-stretch: 80%;
+  line-height: 1.1;
+  text-wrap: balance;
+  margin: 0;
+}
+h1 { font-size: clamp(2rem, 5vw, 3.1rem); font-weight: 800; letter-spacing: -0.01em; }
+h2 { font-size: 1.6rem; font-weight: 750; }
+h3 { font-size: 1.12rem; font-weight: 700; font-stretch: 90%; }
+p { margin: 0; }
+a { color: var(--steel); }
+code, .mono { font-family: var(--font-data); font-size: 0.9em; }
+.num { font-variant-numeric: tabular-nums; }
+
+/* ---------- header ---------- */
+.top { padding-block: 28px 18px; display: grid; gap: 12px; }
+
+/* ---------- stage ---------- */
+.stage {
+  display: grid;
+  padding-bottom: 32px;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 14px;
+  padding-block: 6px 8px;
+}
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  min-width: 0;
+}
+.viewer { position: relative; overflow: hidden; background: var(--scene); min-height: 460px; max-width: 100%; }
+.viewer canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; touch-action: none; }
+.viewer-tools {
+  position: absolute; top: 10px; left: 10px; right: 10px;
+  display: flex; flex-wrap: wrap; gap: 6px; pointer-events: none;
+}
+.viewer-tools button { pointer-events: auto; }
+.load-state {
+  position: absolute; left: 12px; bottom: 10px; font-size: 0.82rem; color: var(--muted);
+  font-family: var(--font-data);
+}
+.coil {
+  position: absolute; right: 12px; bottom: 10px; display: flex; align-items: center; gap: 6px;
+  font-family: var(--font-data); font-size: 0.8rem; color: var(--muted);
+}
+.coil i { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--copper); display: inline-block; }
+.coil.on { color: var(--copper); }
+.coil.on i { background: var(--copper); }
+
+button, .seg label {
+  font: 500 0.84rem/1 var(--font-body);
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 7px 10px;
+  cursor: pointer;
+}
+button:hover, .seg label:hover { border-color: var(--steel); }
+button[aria-pressed="true"] { background: var(--steel-soft); border-color: var(--steel); color: var(--ink); }
+button:focus-visible, input:focus-visible, .seg input:focus-visible + span { outline: 2px solid var(--steel); outline-offset: 2px; }
+
+.xsec { padding: 12px 14px 14px; display: grid; gap: 10px; align-content: start; }
+.xsec svg { width: 100%; height: auto; display: block; background: var(--scene); border-radius: 4px; }
+.xsec figcaption, .note { font-size: 0.82rem; color: var(--muted); }
+.x-table { fill: var(--steel-soft); stroke: var(--steel); stroke-width: 0.025; }
+.x-nose { fill: var(--steel); opacity: 0.55; }
+.x-screw { fill: var(--metal-dark); }
+.x-cavity { fill: var(--scene); }
+.x-stylus { fill: var(--metal); stroke: var(--metal-dark); stroke-width: 0.02; }
+.x-nut { fill: var(--metal); opacity: 0.8; }
+.x-paper { fill: var(--sheet); stroke: var(--ink); stroke-width: 0.02; }
+.x-face { stroke: var(--strike); stroke-width: 0.025; stroke-dasharray: 0.08 0.06; }
+.x-label { fill: var(--muted); font-family: var(--font-data); font-size: 0.2px; }
+.x-label.strong { fill: var(--ink); }
+
+.readout { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 14px; margin: 0; }
+.readout div { display: grid; }
+.readout dt { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+.readout dd { margin: 0; font-family: var(--font-data); font-variant-numeric: tabular-nums; font-size: 1rem; }
+.verdict { font-size: 0.86rem; padding: 7px 10px; border-radius: 4px; border: 1px solid currentColor; }
+.verdict.ok { color: var(--ok); }
+.verdict.warn { color: var(--warn); }
+.verdict.bad { color: var(--bad); }
+
+.knobs { display: grid; gap: 10px; }
+.knob { display: grid; gap: 4px; }
+.knob-head { display: flex; justify-content: space-between; gap: 10px; font-size: 0.84rem; }
+.knob-head output { font-family: var(--font-data); font-variant-numeric: tabular-nums; }
+input[type="range"] { width: 100%; accent-color: var(--steel); margin: 0; }
+.seg { display: flex; flex-wrap: wrap; gap: 6px; }
+.seg input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.seg label { position: relative; display: inline-flex; }
+.seg label:has(input:checked) { background: var(--steel-soft); border-color: var(--steel); }
+.presets { display: flex; flex-wrap: wrap; gap: 6px; }
+.presets button { padding: 5px 8px; font-size: 0.78rem; }
+
+.timeline {
+  grid-column: 1 / -1;
+  display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px 14px; align-items: center;
+  padding: 12px 14px;
+}
+.timeline #play { min-width: 74px; }
+.phases {
+  grid-column: 1 / -1;
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px;
+}
+.phases li {
+  border: 1px solid var(--rule); border-radius: 4px; padding: 7px 9px; display: grid; gap: 2px;
+  font-size: 0.82rem; background: var(--bg);
+}
+.phases li b { font-family: var(--font-data); font-weight: 500; font-size: 0.74rem; color: var(--muted); }
+.phases li span.r { font-family: var(--font-data); font-size: 0.74rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.phases li.now { border-color: var(--steel); background: var(--steel-soft); }
+.phases li.now.strike { border-color: var(--strike); }
+
+
+@media (max-width: 880px) {
+  .stage { grid-template-columns: minmax(0, 1fr); }
+  .viewer { min-height: 0; aspect-ratio: 4 / 4.2; }
+  .phases { grid-template-columns: minmax(0, 1fr); }
+  .phases li { grid-template-columns: 1.4em minmax(0, 1fr) auto; align-items: baseline; gap: 8px; }
+}
+@media (max-width: 420px) {
+  .readout { grid-template-columns: minmax(0, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<header class="wrap top">
+  <h1>Punch Test Rig v3</h1>
+</header>
+
+<section class="wrap stage" aria-label="Rig in motion">
+  <div class="panel viewer" id="viewer">
+    <canvas id="scene" role="img" aria-label="3D model of the test rig. The solenoid hangs below a paper table; a hex standoff carries the steel stylus up through the table into a set-screw die held by the arm above."></canvas>
+    <div class="viewer-tools">
+      <button id="cutaway" type="button" aria-pressed="true">Cutaway</button>
+      <button id="viewRig" type="button">Whole rig</button>
+      <button id="viewTip" type="button">Tip close-up</button>
+    </div>
+    <p class="load-state" id="loadState">Loading parts…</p>
+    <p class="coil" id="coil"><i></i><span>coil off</span></p>
+  </div>
+
+  <div class="panel xsec">
+    <figure>
+      <svg id="xsec" viewBox="-3.6 -3.2 7.2 5.8" role="img" aria-label="Cross-section through the punch axis, about 7 mm across: the stylus rises through the table skin, lifts the paper to the die face and pushes it into the set-screw socket.">
+        <g id="xStatic"></g>
+        <path id="xNut" class="x-nut"></path>
+        <path id="xStylus" class="x-stylus"></path>
+        <path id="xPaper" class="x-paper"></path>
+        <g id="xLabels"></g>
+      </svg>
+      <figcaption>Section through the punch axis, about 7&nbsp;mm across. Geometry only: real paper stretches and compresses, which is what the rig is for.</figcaption>
+    </figure>
+    <dl class="readout">
+      <div><dt>Dot height</dt><dd id="outH">0.48 mm</dd></div>
+      <div><dt>Dot base</dt><dd id="outBase">≈ 1.50 mm</dd></div>
+      <div><dt>Paper reaches die</dt><dd id="outReach">at 9.52 mm</dd></div>
+      <div><dt>Room at socket edge</dt><dd id="outRim">0.15 mm</dd></div>
+    </dl>
+    <p class="verdict warn" id="verdict">Squeezed at the socket edge.</p>
+    <div class="knobs">
+      <div class="knob">
+        <div class="knob-head"><label for="paper">Paper thickness</label><output id="paperOut" for="paper">0.23 mm</output></div>
+        <input id="paper" type="range" min="0.10" max="0.40" step="0.01" value="0.23">
+        <div class="presets">
+          <button type="button" data-paper="0.23">65 lb cover ≈ 0.23</button>
+          <button type="button" data-paper="0.29">100 lb cover ≈ 0.29</button>
+          <button type="button" data-paper="0.20">160 g/m² ≈ 0.20</button>
+        </div>
+      </div>
+      <div class="knob">
+        <div class="knob-head"><label for="die">Die face above table</label><output id="dieOut" for="die">1.00 mm</output></div>
+        <input id="die" type="range" min="0.50" max="1.50" step="0.05" value="1.00">
+      </div>
+      <div class="knob">
+        <div class="knob-head"><span id="sockLabel">Die socket</span></div>
+        <div class="seg" role="radiogroup" aria-labelledby="sockLabel">
+          <label><input type="radio" name="sock" value="1.5" checked><span>M3 · 1.5 mm</span></label>
+          <label><input type="radio" name="sock" value="2.0"><span>M4 · 2.0 mm</span></label>
+        </div>
+      </div>
+      <div class="knob">
+        <div class="knob-head"><span id="tipLabel">Stylus tip radius (filed)</span></div>
+        <div class="seg" role="radiogroup" aria-labelledby="tipLabel">
+          <label><input type="radio" name="tip" value="0.6"><span>0.6 mm</span></label>
+          <label><input type="radio" name="tip" value="0.75" checked><span>0.75 mm</span></label>
+          <label><input type="radio" name="tip" value="1.0"><span>1.0 mm</span></label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel timeline">
+    <button id="play" type="button">Pause</button>
+    <input id="scrub" type="range" min="0" max="1000" value="450" aria-label="Position in the strike cycle">
+    <ol class="phases" id="phases">
+      <li data-p="0"><b>1</b>At rest<span class="r">coil off</span></li>
+      <li data-p="1"><b>2</b>Plunger accelerates<span class="r num">0 → 8.75 mm</span></li>
+      <li data-p="2"><b>3</b>Paper lifts to the die<span class="r num" id="ph3">8.75 → 9.52 mm</span></li>
+      <li data-p="3" class="strike"><b>4</b>Dot forms, plunger seats<span class="r num" id="ph4">9.52 → 10.00 mm</span></li>
+      <li data-p="4"><b>5</b>Pulse off, plunger falls<span class="r">gravity + spring</span></li>
+    </ol>
+  </div>
+</section>
+
+
+<script src="vendor/three.min.js"></script>
+<script src="vendor/OrbitControls.js"></script>
+<script src="vendor/STLLoader.js"></script>
+<script src="parts.js"></script>
+<script>
+(() => {
+
+// ---------------------------------------------------------------- geometry (mm, from punch_rig_v3_002.scad)
+const STROKE = 10, TIP_FULL = 1.25, NOSE_Z = 1.6, SKIN = 1.6, HOLE_R = 1.7, NUT_BORE_R = 3.45;
+const DOG_R = 1.0, DOG_L = 1.5, THREAD_R = 1.5, SCREW_R = 1.5, SOCKET_DEPTH = 1.5;
+const s = { t: 0.23, D: 1.0, sock: 1.5, R: 0.75 };
+const CYCLE = 3.2;   // seconds per animated strike
+
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let u = 0.45, playing = !reduced;
+
+// lift of the moving parts over one cycle u in [0, 1)
+function liftAt(u) {
+  if (u < 0.12) return 0;
+  if (u < 0.42) { const k = (u - 0.12) / 0.30; return STROKE * k * k; }
+  if (u < 0.58) return STROKE;
+  if (u < 0.86) { const k = (u - 0.58) / 0.28; return STROKE * (1 - k * k); }
+  return 0;
+}
+const coilOn = (u) => u >= 0.12 && u < 0.58;
+const dotH = () => Math.max(0, Math.min(SOCKET_DEPTH, TIP_FULL + s.t - s.D));
+
+// top surface of the stylus at radius a, tip apex at z = tip
+function stylusZ(a, tip) {
+  a = Math.abs(a);
+  if (a <= s.R) return tip - s.R + Math.sqrt(s.R * s.R - a * a);
+  if (a <= DOG_R) return Math.max(tip - DOG_L, tip - s.R - (a - s.R) * 0.6);
+  if (a <= THREAD_R) return tip - DOG_L;
+  return -Infinity;
+}
+const smooth = (e0, e1, x) => { const k = Math.min(1, Math.max(0, (x - e0) / (e1 - e0))); return k * k * (3 - 2 * k); };
+
+// paper underside at radius a: lifted as a tent until it meets the die face, then formed by the stylus
+function paperBottom(a, tip) {
+  a = Math.abs(a);
+  const lift = Math.min(Math.max(tip, 0), s.D - s.t);
+  let b = Math.max(0, lift * (1 - smooth(0.9, 3.6, a)), stylusZ(a, tip));
+  if (a >= s.sock / 2) b = Math.min(b, s.D - s.t);
+  return b;
+}
+
+// room between the stylus and the socket edge at the end of the stroke (negative: stylus reaches the die face)
+function rimClearance() {
+  const px = s.sock / 2, pz = s.D;
+  if (stylusZ(px, TIP_FULL) >= pz) return pz - stylusZ(px, TIP_FULL);
+  let best = Infinity;
+  for (let i = 0; i <= 400; i++) {
+    const x = THREAD_R * i / 400, z = stylusZ(x, TIP_FULL);
+    best = Math.min(best, Math.hypot(x - px, z - pz));
+  }
+  return best;
+}
+
+// ---------------------------------------------------------------- cross-section
+const NS = 'http://www.w3.org/2000/svg';
+const $ = (id) => document.getElementById(id);
+const el = (tag, attrs, parent) => {
+  const n = document.createElementNS(NS, tag);
+  for (const k in attrs) n.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(n);
+  return n;
+};
+const Y = (z) => (-z).toFixed(3);
+const X0 = -3.6, X1 = 3.6, ZTOP = 3.2, ZBOT = -2.6;
+
+function drawStatic() {
+  const g = $('xStatic'); g.replaceChildren();
+  const L = $('xLabels'); L.replaceChildren();
+  // table skin with the stylus hole, and the round bore wall below it
+  el('path', { class: 'x-table', d:
+    `M${X0} ${Y(0)} H${-HOLE_R} V${Y(-SKIN)} H${-NUT_BORE_R} V${Y(ZBOT)} H${X0} Z ` +
+    `M${X1} ${Y(0)} H${HOLE_R} V${Y(-SKIN)} H${NUT_BORE_R} V${Y(ZBOT)} H${X1} Z` }, g);
+  // printed nose around the die screw (an M4 die is a 4 mm screw)
+  const sr = s.sock === 2 ? 2.0 : SCREW_R;
+  el('path', { class: 'x-nose', d:
+    `M${X0} ${Y(ZTOP)} V${Y(NOSE_Z)} H${-sr} V${Y(ZTOP)} Z M${X1} ${Y(ZTOP)} V${Y(NOSE_Z)} H${sr} V${Y(ZTOP)} Z` }, g);
+  // die screw with its hex socket (section across flats) and the drill-point bottom
+  const h = s.sock / 2, D = s.D;
+  el('path', { class: 'x-screw', d:
+    `M${-sr} ${Y(ZTOP)} V${Y(D + 0.15)} L${-sr + 0.15} ${Y(D)} H${-h} V${Y(D + SOCKET_DEPTH)} ` +
+    `L0 ${Y(D + SOCKET_DEPTH + h * 0.6)} L${h} ${Y(D + SOCKET_DEPTH)} V${Y(D)} H${sr - 0.15} L${sr} ${Y(D + 0.15)} V${Y(ZTOP)} Z` }, g);
+  el('line', { class: 'x-face', x1: X0, x2: X1, y1: Y(D), y2: Y(D) }, g);
+  const t = (x, z, txt, cls = 'x-label', anchor = 'start') => {
+    const n = el('text', { class: cls, x, y: Y(z), 'text-anchor': anchor }, L); n.textContent = txt;
+  };
+  t(sr + 0.12, 2.85, s.sock === 2 ? 'M4 set screw' : 'M3 set screw', 'x-label strong');
+  t(sr + 0.12, 2.6, 'printed nose');
+  t(X1 - 0.08, D + 0.07, 'die face', 'x-label', 'end');
+  t(X0 + 0.08, -0.85, 'table skin');
+  t(-NUT_BORE_R + 0.1, -2.15, 'nut bore');
+}
+
+function drawMoving(lift) {
+  const tip = TIP_FULL - STROKE + lift;
+  // stylus outline from the profile, down past the bottom of the view; lock nut 6 mm below the tip
+  const pts = [];
+  const N = 80;
+  for (let i = 0; i <= N; i++) {
+    const x = -THREAD_R + 2 * THREAD_R * i / N;
+    pts.push(`${x.toFixed(3)} ${Y(stylusZ(x, tip))}`);
+  }
+  const nutTop = tip - 6 + 2.4, nutBot = tip - 6;
+  $('xStylus').setAttribute('d', `M${-THREAD_R} ${Y(ZBOT - 1)} L${pts.join(' L')} L${THREAD_R} ${Y(ZBOT - 1)} Z`);
+  $('xNut').setAttribute('d', nutTop > ZBOT - 0.5 ? `M-2.75 ${Y(nutBot)} H2.75 V${Y(nutTop)} H-2.75 Z` : '');
+  // paper: underside and top surface
+  const top = [], bot = [];
+  const M = 240;
+  for (let i = 0; i <= M; i++) {
+    const x = X0 + (X1 - X0) * i / M;
+    const b = paperBottom(x, tip);
+    bot.push(`${x.toFixed(3)} ${Y(b)}`);
+    top.push(`${x.toFixed(3)} ${Y(b + s.t)}`);
+  }
+  $('xPaper').setAttribute('d', `M${top.join(' L')} L${bot.reverse().join(' L')} Z`);
+  return tip;
+}
+
+// ---------------------------------------------------------------- readouts
+function fmt(v) { return v.toFixed(2) + ' mm'; }
+function updateReadouts() {
+  const h = dotH();
+  const reach = STROKE - h;
+  $('outH').textContent = fmt(h);
+  $('outBase').textContent = '≈ ' + s.sock.toFixed(2) + ' mm';
+  $('outReach').textContent = 'at ' + reach.toFixed(2) + ' mm';
+  $('ph3').textContent = `8.75 → ${reach.toFixed(2)} mm`;
+  $('ph4').textContent = `${reach.toFixed(2)} → 10.00 mm`;
+  const c = rimClearance();
+  $('outRim').textContent = (c < 0 ? '−' : '') + Math.abs(c).toFixed(2) + ' mm';
+  const v = $('verdict');
+  if (h <= 0.001) {
+    v.className = 'verdict bad';
+    v.textContent = 'No dot: the die face is too high for this paper. Turn the knob down.';
+  } else if (c < 0) {
+    v.className = 'verdict bad';
+    v.textContent = 'The stylus shoulder reaches the die face. Expect a cut: raise the die or use the M4 socket.';
+  } else if (c < s.t) {
+    v.className = 'verdict warn';
+    v.textContent = `Squeezed: ${c.toFixed(2)} mm of room at the socket edge for ${s.t.toFixed(2)} mm paper. The rim may crack; raise the die, file a finer tip, or try M4.`;
+  } else {
+    v.className = 'verdict ok';
+    v.textContent = `Clear: ${c.toFixed(2)} mm of room at the socket edge for ${s.t.toFixed(2)} mm paper.`;
+  }
+  $('paperOut').textContent = fmt(s.t);
+  $('dieOut').textContent = fmt(s.D) + (Math.abs(s.D - 1) < 0.001 ? '' : `  (${s.D > 1 ? '+' : '−'}${(Math.abs(s.D - 1) / 0.5).toFixed(1)} turn)`);
+}
+
+let lastPhase = -1;
+function phaseOf(u, lift) {
+  if (!coilOn(u)) return lift > 0 ? 4 : 0;
+  if (lift < STROKE - TIP_FULL) return 1;
+  if (lift < STROKE - dotH()) return 2;
+  return 3;
+}
+function setPhase(p) {
+  if (p === lastPhase) return;
+  lastPhase = p;
+  document.querySelectorAll('#phases li').forEach((li) => li.classList.toggle('now', Number(li.dataset.p) === p));
+  const coil = $('coil');
+  const on = p >= 1 && p <= 3;
+  coil.classList.toggle('on', on);
+  coil.querySelector('span').textContent = on ? 'coil on' : 'coil off';
+}
+
+// ---------------------------------------------------------------- controls
+const paperIn = $('paper'), dieIn = $('die');
+paperIn.addEventListener('input', () => { s.t = Number(paperIn.value); changed(); });
+dieIn.addEventListener('input', () => { s.D = Number(dieIn.value); changed(); });
+document.querySelectorAll('[data-paper]').forEach((b) => b.addEventListener('click', () => {
+  s.t = Number(b.dataset.paper); paperIn.value = s.t; changed();
+}));
+document.querySelectorAll('input[name="sock"]').forEach((r) => r.addEventListener('change', () => { s.sock = Number(r.value); changed(); }));
+document.querySelectorAll('input[name="tip"]').forEach((r) => r.addEventListener('change', () => { s.R = Number(r.value); changed(); }));
+const playBtn = $('play'), scrub = $('scrub');
+function setPlaying(p) { playing = p; playBtn.textContent = p ? 'Pause' : 'Play'; }
+playBtn.addEventListener('click', () => setPlaying(!playing));
+scrub.addEventListener('input', () => { setPlaying(false); u = Number(scrub.value) / 1000; frame(); });
+setPlaying(playing);
+
+function changed() { drawStatic(); updateReadouts(); frame(); }
+
+// ---------------------------------------------------------------- 3D
+let renderer, scene, camera, controls, moving, paperPatch, materials = [];
+const clip = new THREE.Plane(new THREE.Vector3(0, 0, -1), 0);   // keeps model y >= 0 (removes the front half)
+let cut = true;
+
+const PARTS = [
+  ['frame', 0x3b79a6, 0.15, 0.55, false],
+  ['arm', 0x3b79a6, 0.15, 0.55, false],
+  ['table', 0xa7c4d9, 0.1, 0.6, false],
+  ['sol_frame', 0x5b6168, 0.7, 0.4, false],
+  ['sol_coil', 0xb4612f, 0.3, 0.45, false],
+  ['die_screw', 0x464d55, 0.7, 0.35, false],
+  ['die_nuts', 0xc5cbd1, 0.8, 0.3, false],
+  ['plunger', 0xc5cbd1, 0.8, 0.3, true],
+  ['standoff', 0xc9a24a, 0.8, 0.3, true],
+  ['nut', 0xb4bac0, 0.8, 0.3, true],
+  ['stylus', 0x8a929b, 0.8, 0.3, true],
+];
+
+function cssVar(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+function applyTheme() { if (scene) scene.background = new THREE.Color(cssVar('--scene') || '#E4EAF0'); }
+
+const VIEWS = {
+  rig: { target: [-4, -30, 0], pos: [118, 40, 220] },
+  tip: { target: [0, 0.4, 0], pos: [16, 9, 30] },
+};
+function setView(name) {
+  const v = VIEWS[name];
+  controls.target.set(...v.target);
+  camera.position.set(v.target[0] + v.pos[0], v.target[1] + v.pos[1], v.target[2] + v.pos[2]);
+  controls.update();
+}
+
+function buildPaper(root) {
+  const mat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.9, metalness: 0, side: THREE.DoubleSide, transparent: true, opacity: 0.92 });
+  materials.push(mat);
+  const RP = 3.6;
+  const shape = new THREE.Shape();
+  shape.moveTo(-28, -35); shape.lineTo(19.4, -35); shape.lineTo(19.4, 35); shape.lineTo(-28, 35); shape.closePath();
+  const hole = new THREE.Path(); hole.absarc(0, 0, RP, 0, Math.PI * 2, true); shape.holes.push(hole);
+  const sheet = new THREE.Mesh(new THREE.ShapeGeometry(shape, 48), mat);
+  sheet.position.z = s.t;
+  sheet.userData.sheet = true;
+  root.add(sheet);
+  // radial patch around the axis that takes the dot shape
+  const RINGS = 30, SEGS = 72;
+  const pos = new Float32Array((1 + RINGS * SEGS) * 3), idx = [];
+  for (let i = 1; i <= RINGS; i++) for (let j = 0; j < SEGS; j++) {
+    const k = 1 + (i - 1) * SEGS + j, r = RP * i / RINGS, a = (j / SEGS) * Math.PI * 2;
+    pos[k * 3] = r * Math.cos(a); pos[k * 3 + 1] = r * Math.sin(a);
+  }
+  for (let j = 0; j < SEGS; j++) idx.push(0, 1 + j, 1 + (j + 1) % SEGS);
+  for (let i = 1; i < RINGS; i++) for (let j = 0; j < SEGS; j++) {
+    const a = 1 + (i - 1) * SEGS + j, b = 1 + (i - 1) * SEGS + (j + 1) % SEGS;
+    const c = a + SEGS, d = b + SEGS;
+    idx.push(a, c, b, b, c, d);
+  }
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  geo.setIndex(idx);
+  paperPatch = new THREE.Mesh(geo, mat);
+  paperPatch.userData.rings = RINGS; paperPatch.userData.segs = SEGS; paperPatch.userData.rp = RP;
+  root.add(paperPatch);
+  return sheet;
+}
+let paperSheet;
+function updatePaper3D(tip) {
+  if (!paperPatch) return;
+  paperSheet.position.z = s.t;
+  const { rings, segs, rp } = paperPatch.userData;
+  const p = paperPatch.geometry.attributes.position.array;
+  p[2] = paperBottom(0, tip) + s.t;
+  for (let i = 1; i <= rings; i++) {
+    const z = paperBottom(rp * i / rings, tip) + s.t;
+    for (let j = 0; j < segs; j++) p[(1 + (i - 1) * segs + j) * 3 + 2] = z;
+  }
+  paperPatch.geometry.attributes.position.needsUpdate = true;
+  paperPatch.geometry.computeVertexNormals();
+}
+
+function setCut(on) {
+  cut = on;
+  $('cutaway').setAttribute('aria-pressed', String(on));
+  for (const m of materials) { m.clippingPlanes = on ? [clip] : []; m.needsUpdate = true; }
+}
+
+async function init3D() {
+  const canvas = $('scene');
+  try {
+    renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+  } catch (e) {
+    $('loadState').textContent = 'This browser has no WebGL. The cross-section still works.';
+    return;
+  }
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.localClippingEnabled = true;
+  scene = new THREE.Scene();
+  applyTheme();
+  camera = new THREE.PerspectiveCamera(32, 4 / 3, 1, 3000);
+  controls = new THREE.OrbitControls(camera, canvas);
+  controls.enableDamping = true;
+  setView('rig');
+
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x50606e, 0.95));
+  const key = new THREE.DirectionalLight(0xffffff, 0.85); key.position.set(120, 200, 160); scene.add(key);
+  const rim = new THREE.DirectionalLight(0xffffff, 0.35); rim.position.set(-160, 60, -120); scene.add(rim);
+
+  const root = new THREE.Group();
+  root.rotation.x = -Math.PI / 2;   // OpenSCAD z-up to three.js y-up
+  scene.add(root);
+  moving = new THREE.Group(); root.add(moving);
+  paperSheet = buildPaper(root);
+
+  let lastW = 0, lastH = 0;
+  const fit = () => {
+    const r = canvas.parentElement.getBoundingClientRect();
+    const w = Math.round(r.width), h = Math.round(r.height);
+    if (w === lastW && h === lastH) return;
+    lastW = w; lastH = h;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / Math.max(1, h);
+    camera.updateProjectionMatrix();
+  };
+  new ResizeObserver(fit).observe(canvas.parentElement);
+  fit();
+
+  // parts.js sets RIG_PARTS: each binary STL exported from the .scad, base64-encoded
+  const loader = new THREE.STLLoader();
+  try {
+    const stl = window.RIG_PARTS;
+    if (!stl) throw new Error('parts.js missing');
+    for (const [name, color, metal, rough, isMoving] of PARTS) {
+      const bytes = Uint8Array.from(atob(stl[name]), (c) => c.charCodeAt(0));
+      const geo = loader.parse(bytes.buffer);
+      geo.computeVertexNormals();
+      const mat = new THREE.MeshStandardMaterial({ color, metalness: metal * 0.5, roughness: rough, side: THREE.DoubleSide });
+      materials.push(mat);
+      (isMoving ? moving : root).add(new THREE.Mesh(geo, mat));
+    }
+    $('loadState').textContent = 'Drag to orbit · scroll or pinch to zoom';
+  } catch (e) {
+    $('loadState').textContent = 'The 3D parts did not load. The cross-section still works.';
+  }
+  setCut(true);
+  frame();
+}
+
+$('cutaway').addEventListener('click', () => setCut(!cut));
+$('viewRig').addEventListener('click', () => controls && setView('rig'));
+$('viewTip').addEventListener('click', () => controls && setView('tip'));
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyTheme);
+new MutationObserver(applyTheme).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+// ---------------------------------------------------------------- loop
+function frame() {
+  const lift = liftAt(u);
+  const tip = drawMoving(lift);
+  setPhase(phaseOf(u, lift));
+  if (moving) moving.position.z = lift;
+  updatePaper3D(tip);
+}
+let last = performance.now();
+function tick(now) {
+  const dt = Math.min(0.1, (now - last) / 1000); last = now;
+  if (playing) { u = (u + dt / CYCLE) % 1; scrub.value = String(Math.round(u * 1000)); frame(); }
+  if (controls) controls.update();
+  if (renderer) renderer.render(scene, camera);
+  requestAnimationFrame(tick);
+}
+
+drawStatic();
+updateReadouts();
+frame();
+requestAnimationFrame(tick);
+init3D();
+})();
+</script>
+</body>
+</html>

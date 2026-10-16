@@ -1,0 +1,16 @@
+# Team Google Drive export (meeting notes, partner messages, order sheets): private
+Punch Point/
+Punch Point-*.zip
+
+# PlatformIO / pioarduino build output
+.pio/
+.vscode/
+
+# Slicer output; regenerate from the .3mf
+*.gcode
+*.bgcode
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*~
