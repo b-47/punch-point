@@ -16,10 +16,10 @@ Six JF-0826B solenoids stand on a ring and pull the outer ends of six levers dow
 
 | File | What |
 | --- | --- |
-| `six_head_002.scad` | The model. `PART` selects a part; `FIRED` sets which dots are struck in the assembly render. |
-| `six_head_002.png`, `six_head_002_top.png` | Renders: the head striking "d" (dots 1-4-5), and the lever star from above with the table removed. |
+| `cad/six_head_002.scad` | The model. `PART` selects a part; `FIRED` sets which dots are struck in the assembly render. |
+| `cad/six_head_002.png`, `cad/six_head_002_top.png` | Renders: the head striking "d" (dots 1-4-5), and the lever star from above with the table removed. |
 | `viewer/index.html` | Animated 3D view: type a word and watch it emboss cell by cell, firing a cell's dots all at once or one after another, with the live current draw. Open it in a browser straight from the folder; it runs offline. |
-| `iterations/` | v001. Its lever ends sat 8 mm above the solenoids but drop 10 mm when fired, so they would hit the solenoid tops. v002 raises them to 14 mm. |
+| `cad/iterations/` | v001. Its lever ends sat 8 mm above the solenoids but drop 10 mm when fired, so they would hit the solenoid tops. v002 raises them to 14 mm. |
 
 Every lever, pin and plunger was swept through its full swing against the frame, the table, every solenoid and each other, with no contact.
 
