@@ -9,6 +9,7 @@ Punch Point-*.zip
 # Slicer output; regenerate from the .3mf
 *.gcode
 *.bgcode
+.*_plate/
 
 # OS / editor
 .DS_Store
