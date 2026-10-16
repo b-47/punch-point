@@ -5,7 +5,7 @@
 
 Needs Google Chrome (or Chromium) and ffmpeg. Drives each viewer frame by frame
 through the Chrome DevTools protocol, so every frame is exact, then encodes
-test-rig/media/strike.gif and concepts/six_solenoid_head/media/emboss.gif.
+concepts/test-rig/media/strike.gif and concepts/six_solenoid_head/media/emboss.gif.
 """
 import base64, io, json, shutil, socket, subprocess, tempfile, time, urllib.request
 from pathlib import Path
@@ -95,14 +95,14 @@ def encode(frames, out, fps):
 
 
 def rig(c):
-    c.open(ROOT / "test-rig/viewer/index.html")
+    c.open(ROOT / "concepts/test-rig/viewer/index.html")
     c.eval("document.getElementById('play').textContent === 'Pause' && document.getElementById('play').click()")
     frames = []
     for i in range(40):   # one strike, 3.2 s
         c.eval(f"{{ const s = document.getElementById('scrub'); s.value = {i * 25}; s.dispatchEvent(new Event('input')); }}")
         c.settle()
         frames.append(c.shot("#scene"))
-    encode(frames, ROOT / "test-rig/media/strike.gif", 12.5)
+    encode(frames, ROOT / "concepts/test-rig/media/strike.gif", 12.5)
 
 
 def six(c, fps=10):
