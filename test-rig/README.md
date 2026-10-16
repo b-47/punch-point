@@ -15,7 +15,7 @@ The solenoid sits under the paper and pushes up, so dots come out facing up. One
 | `print/*.scad` | One wrapper per printed part, in print orientation |
 | `print/*.stl` | Exported parts (validated watertight) |
 | `print/coupon.3mf` | The solenoid pocket around the ledges, 3.4 g, 11 min. Print it first and check the solenoid fits. |
-| `print/rig_v3_plate.3mf` | PrusaSlicer project for a Prusa Core One plate: frame + table 5.8 + M3 arm + shims. PETG, 0.2 mm layers, 3 perimeters, 4 top and bottom layers, 15 % gyroid, no supports. 47 g, about 2 h 20 min |
+| `print/rig_plate.3mf` | PrusaSlicer project for a Prusa Core One plate: frame + table 5.8 + M3 arm + shims. PETG, 0.2 mm layers, 3 perimeters, 4 top and bottom layers, 15 % gyroid, no supports. 47 g, about 2 h 20 min |
 | `firmware/punch_test/punch_test.ino` | ESP32 sketch for one or two solenoids (GPIO 4 and 13). Fire set-length pulses over serial (`f 25`, `f 25 2`, `r 20 25 500`, `s`), or step through a pulse-length sweep with the BOOT button (`w 5 40 5`). Caps pulses at 100 ms and duty at 25 %. Builds for ESP32 and ESP32-S3 (Arduino core 3.3.12); not yet run on a board |
 | `viewer/index.html` | Animated 3D cutaway and cross-section of a strike, with sliders for paper thickness, die height, die socket and stylus tip. Open it in a browser straight from the folder; it runs offline. `viewer/parts.js` holds the part meshes exported from the .scad; three.js r128 (MIT) is in `viewer/vendor/` |
 
