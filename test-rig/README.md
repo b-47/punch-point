@@ -1,4 +1,4 @@
-# Braille punch test rig v3
+# Braille punch test rig
 
 Bench rig for one braille dot: one JF-0826B solenoid, one steel stylus, one metal die.
 
