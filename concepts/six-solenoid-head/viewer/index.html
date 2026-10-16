@@ -47,12 +47,7 @@ p { margin: 0; }
 code { font-family: var(--font-data); font-size: 0.9em; }
 
 .top { padding-block: 28px 18px; display: grid; gap: 12px; }
-.eyebrow { font-family: var(--font-data); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
 .lede { max-width: 70ch; font-size: 1.05rem; }
-.specs { display: flex; flex-wrap: wrap; gap: 8px 26px; margin: 6px 0 0; }
-.specs div { display: grid; }
-.specs dt { font-size: 0.74rem; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
-.specs dd { margin: 0; font-family: var(--font-data); font-size: 1.02rem; font-variant-numeric: tabular-nums; }
 
 .stage { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 14px; padding-block: 6px 8px; }
 .panel { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; min-width: 0; }
@@ -117,23 +112,15 @@ td.n { font-family: var(--font-data); white-space: nowrap; }
 <body>
 
 <header class="wrap top">
-  <p class="eyebrow">Punch Point · concept sketch, not a tested design</p>
   <h1>Six-Solenoid Head</h1>
-  <p class="lede">One whole braille cell per strike. Six solenoids stand on a ring and pull six levers. The levers pivot
-    near the middle, so their short inner ends lift six steel pins, set 2.5&nbsp;mm apart in a 2&nbsp;×&nbsp;3 grid, up
-    through the paper into a six-pocket die. Dot-matrix printer heads use the same trick to fit big actuators around a
-    tiny grid of pins.</p>
-  <dl class="specs">
-    <div><dt>Lever ratio</dt><dd>3.2 : 1</dd></div>
-    <div><dt>Pin stroke</dt><dd>3.2 mm</dd></div>
-    <div><dt>Pin force</dt><dd>≈ 3 × solenoid</dd></div>
-    <div><dt>Head</dt><dd>≈ 145 mm across</dd></div>
-  </dl>
+  <p class="lede">This head embosses a whole braille cell in one strike. Six solenoids stand in a ring, and each one
+    pulls a lever. The levers lift six steel pins up through the paper into a metal die. The pins sit 2.5&nbsp;mm apart,
+    in 2 columns of 3.</p>
 </header>
 
 <section class="wrap stage" aria-label="Head in motion">
   <div class="panel viewer">
-    <canvas id="scene" role="img" aria-label="3D model of the six-solenoid head: six solenoids on a ring under a see-through paper table, six levers meeting under six pins in the middle, and a die on a bridge above the paper."></canvas>
+    <canvas id="scene" role="img" aria-label="3D model of the six-solenoid head. Six solenoids in a ring pull six levers, which lift six pins into a die above the paper."></canvas>
     <div class="viewer-tools">
       <button id="vWhole" type="button">Whole head</button>
       <button id="vPins" type="button">Pins up close</button>
@@ -145,7 +132,7 @@ td.n { font-family: var(--font-data); white-space: nowrap; }
 
   <div class="panel side">
     <form class="field" id="wordForm">
-      <label for="word">Word to emboss (letters a–z and spaces)</label>
+      <label for="word">Word to emboss (letters a to z and spaces)</label>
       <div class="row">
         <input id="word" type="text" value="punch point" maxlength="24" autocomplete="off" spellcheck="false">
         <button class="primary" type="submit">Emboss</button>
@@ -153,7 +140,7 @@ td.n { font-family: var(--font-data); white-space: nowrap; }
       </div>
     </form>
     <div class="field">
-      <span class="lab" id="modeLabel">Firing</span>
+      <span class="lab" id="modeLabel">How the pins fire</span>
       <div class="seg" role="radiogroup" aria-labelledby="modeLabel">
         <label><input type="radio" name="mode" value="together" checked><span>All of a cell's dots at once</span></label>
         <label><input type="radio" name="mode" value="sequence"><span>One dot after another</span></label>
@@ -172,45 +159,47 @@ td.n { font-family: var(--font-data); white-space: nowrap; }
       <div class="hot"><dt>Solenoids on</dt><dd id="outOn">0</dd></div>
       <div class="hot"><dt>Current now</dt><dd id="outAmps">0 A</dd></div>
       <div><dt>Strikes this cell</dt><dd id="outStrikes">1</dd></div>
-      <div><dt>Cells done</dt><dd id="outCells">0 / 11</dd></div>
+      <div><dt>Cells done</dt><dd id="outCells">0 of 11</dd></div>
     </dl>
-    <p class="note">Slowed down. Each solenoid draws about 2&nbsp;A at 12&nbsp;V while it's on, so firing a whole cell at
-      once needs up to 12&nbsp;A; one after another never needs more than 2&nbsp;A but takes a strike per dot.</p>
+    <p class="note">The animation runs slower than a real head. Each solenoid draws about 2&nbsp;A at 12&nbsp;V while it is on.
+      Firing a whole cell at once can draw up to 12&nbsp;A. Firing one dot at a time draws at most 2&nbsp;A, but takes
+      one strike per dot.</p>
   </div>
 </section>
 
 <main class="wrap doc">
   <section aria-labelledby="h-takes">
-    <h2 id="h-takes">What a six-pin head takes</h2>
+    <h2 id="h-takes">What this head needs</h2>
     <ul>
-      <li><strong>Six levers and pivots.</strong> A solenoid is 22&nbsp;mm wide and the dots are 2.5&nbsp;mm apart, so
-        each one reaches its pin through a lever. The 3.2&nbsp;:&nbsp;1 ratio turns the 10&nbsp;mm solenoid stroke into
-        about 3&nbsp;mm at the pin, at about three times the force, minus pivot friction.</li>
-      <li><strong>A six-pocket metal die.</strong> Each pin needs its own pocket, lined up within a tenth of a millimetre
-        or so. M3 set screws are 3&nbsp;mm wide and can't sit 2.5&nbsp;mm apart, so this is a drilled steel block.</li>
-      <li><strong>Power.</strong> Up to 12&nbsp;A when a full cell fires at once, against 2&nbsp;A for one pin.</li>
-      <li><strong>Size and weight.</strong> About 145&nbsp;mm across with six solenoids, all riding on the carriage.</li>
-      <li><strong>Parts.</strong> The solenoids are cheap (about $3.30 each on the order sheet). The cost is the
-        levers, pivots, pins, die and a bigger supply, plus six channels of the test circuit.</li>
+      <li><strong>Six levers.</strong> A solenoid is 22&nbsp;mm wide, but the dots are 2.5&nbsp;mm apart. So each
+        solenoid reaches its pin through a lever. The lever turns the solenoid's 10&nbsp;mm stroke into a 3&nbsp;mm push
+        at the pin, with about 3 times the force.</li>
+      <li><strong>A metal die with six pockets.</strong> Each pin needs its own pocket, lined up to about
+        0.1&nbsp;mm. M3 set screws are 3&nbsp;mm wide, too wide to sit 2.5&nbsp;mm apart. So the die is a drilled steel
+        block.</li>
+      <li><strong>Power.</strong> Up to 12&nbsp;A when all six pins fire at once. One pin needs 2&nbsp;A.</li>
+      <li><strong>Space.</strong> The head is about 145&nbsp;mm across, and all of it moves with the carriage.</li>
+      <li><strong>Parts.</strong> The solenoids are cheap, about $3.30 each. Most of the cost is the levers, pins, die,
+        a bigger power supply, and six copies of the switch circuit.</li>
     </ul>
   </section>
 
   <section aria-labelledby="h-speed">
-    <h2 id="h-speed">Speed, and pictures</h2>
-    <p>Rough model for a full page of text (25 lines × 31 cells, about 3 dots a cell). These are estimates, not
-      measurements; the test rig's strike time will firm them up.</p>
+    <h2 id="h-speed">How fast it prints</h2>
+    <p>These are estimates for a full page of text: 25 lines of 31 cells, with about 3 dots per cell. The test rig will
+      give real numbers.</p>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>Head</th><th>Strikes per cell</th><th>Page, roughly</th></tr></thead>
+        <thead><tr><th>Head</th><th>Strikes per cell</th><th>Time per page</th></tr></thead>
         <tbody>
-          <tr><td>One pin</td><td>one per dot</td><td class="n">≈ 6 min</td></tr>
-          <tr><td>Six pins, one after another</td><td>one per dot</td><td class="n">≈ 3.5 min</td></tr>
-          <tr><td>Six pins, all at once</td><td>one</td><td class="n">≈ 2 min</td></tr>
+          <tr><td>One pin</td><td>One per dot</td><td class="n">About 6 minutes</td></tr>
+          <tr><td>Six pins, one after another</td><td>One per dot</td><td class="n">About 3.5 minutes</td></tr>
+          <tr><td>Six pins, all at once</td><td>One</td><td class="n">About 2 minutes</td></tr>
         </tbody>
       </table>
     </div>
-    <p>Pictures run at one-pin speed whatever the head has: for a tactile graphic the head uses a single pin and moves
-      it anywhere on the page. Six pins only speed up text.</p>
+    <p>Pictures print at one-pin speed on any head. For a tactile graphic, the head uses one pin and moves it around
+      the page. Extra pins only speed up text.</p>
   </section>
 </main>
 
@@ -293,8 +282,8 @@ function showCell(idx) {
   const c = cells[Math.min(idx, cells.length - 1)];
   if (!c) return;
   const name = c.ch === ' ' ? 'space' : c.ch;
-  $('cellLetter').textContent = c.ch === ' ' ? '␣' : c.ch;
-  $('cellDotsText').textContent = c.dots.length ? 'dots ' + c.dots.join(' ') : 'no dots, just move on';
+  $('cellLetter').textContent = c.ch === ' ' ? 'space' : c.ch;
+  $('cellDotsText').textContent = c.dots.length ? 'dots ' + c.dots.join(' ') : 'no dots';
   dotEls.forEach((el, i) => el.setAttribute('class', c.dots.includes(i + 1) ? 'dot on' : 'dot'));
   $('cellSvg').setAttribute('aria-label', c.dots.length ? `Letter ${name}: dots ${c.dots.join(', ')}` : 'Space: no dots');
   $('outStrikes').textContent = c.dots.length ? (mode === 'together' ? '1' : String(c.dots.length)) : '0';
@@ -419,7 +408,7 @@ function init3D() {
   };
   new ResizeObserver(fit).observe(viewer);
   fit();
-  $('loadState').textContent = 'Drag to orbit · scroll or pinch to zoom';
+  $('loadState').textContent = 'Drag to turn the model. Scroll or pinch to zoom.';
   return true;
 }
 
@@ -440,7 +429,7 @@ function update() {
   const nOn = s.on.filter(Boolean).length;
   $('outOn').textContent = String(nOn);
   $('outAmps').textContent = nOn * 2 + ' A';
-  $('outCells').textContent = `${Math.min(ci, cells.length)} / ${cells.length}`;
+  $('outCells').textContent = `${Math.min(ci, cells.length)} of ${cells.length}`;
   showCell(Math.min(ci, cells.length - 1));
   if (!units.length) return;
   s.phi.forEach((f, i) => {

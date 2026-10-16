@@ -197,7 +197,7 @@ input[type="range"] { width: 100%; accent-color: var(--steel); margin: 0; }
 
 <section class="wrap stage" aria-label="Rig in motion">
   <div class="panel viewer" id="viewer">
-    <canvas id="scene" role="img" aria-label="3D model of the test rig. The solenoid hangs below a paper table; a hex standoff carries the steel stylus up through the table into a set-screw die held by the arm above."></canvas>
+    <canvas id="scene" role="img" aria-label="3D model of the test rig. A solenoid under the paper table pushes a steel stylus up through the paper into a metal die."></canvas>
     <div class="viewer-tools">
       <button id="cutaway" type="button" aria-pressed="true">Cutaway</button>
       <button id="viewRig" type="button">Whole rig</button>
@@ -209,30 +209,30 @@ input[type="range"] { width: 100%; accent-color: var(--steel); margin: 0; }
 
   <div class="panel xsec">
     <figure>
-      <svg id="xsec" viewBox="-3.6 -3.2 7.2 5.8" role="img" aria-label="Cross-section through the punch axis, about 7 mm across: the stylus rises through the table skin, lifts the paper to the die face and pushes it into the set-screw socket.">
+      <svg id="xsec" viewBox="-3.6 -3.2 7.2 5.8" role="img" aria-label="Cross-section at the punch point. The stylus rises through the table, lifts the paper to the die, and pushes it into the die socket to form a dot.">
         <g id="xStatic"></g>
         <path id="xNut" class="x-nut"></path>
         <path id="xStylus" class="x-stylus"></path>
         <path id="xPaper" class="x-paper"></path>
         <g id="xLabels"></g>
       </svg>
-      <figcaption>Section through the punch axis, about 7&nbsp;mm across. Geometry only: real paper stretches and compresses, which is what the rig is for.</figcaption>
+      <figcaption>Cross-section of the punch point, about 7&nbsp;mm wide. It shows shapes only. Real paper also stretches and squashes, and testing on the rig shows how much.</figcaption>
     </figure>
     <dl class="readout">
       <div><dt>Dot height</dt><dd id="outH">0.48 mm</dd></div>
-      <div><dt>Dot base</dt><dd id="outBase">≈ 1.50 mm</dd></div>
+      <div><dt>Dot base</dt><dd id="outBase">about 1.50 mm</dd></div>
       <div><dt>Paper reaches die</dt><dd id="outReach">at 9.52 mm</dd></div>
       <div><dt>Room at socket edge</dt><dd id="outRim">0.15 mm</dd></div>
     </dl>
-    <p class="verdict warn" id="verdict">Squeezed at the socket edge.</p>
+    <p class="verdict warn" id="verdict">Tight at the socket edge.</p>
     <div class="knobs">
       <div class="knob">
         <div class="knob-head"><label for="paper">Paper thickness</label><output id="paperOut" for="paper">0.23 mm</output></div>
         <input id="paper" type="range" min="0.10" max="0.40" step="0.01" value="0.23">
         <div class="presets">
-          <button type="button" data-paper="0.23">65 lb cover ≈ 0.23</button>
-          <button type="button" data-paper="0.29">100 lb cover ≈ 0.29</button>
-          <button type="button" data-paper="0.20">160 g/m² ≈ 0.20</button>
+          <button type="button" data-paper="0.23">65 lb cover, about 0.23 mm</button>
+          <button type="button" data-paper="0.29">100 lb cover, about 0.29 mm</button>
+          <button type="button" data-paper="0.20">160 g/m² paper, about 0.20 mm</button>
         </div>
       </div>
       <div class="knob">
@@ -242,12 +242,12 @@ input[type="range"] { width: 100%; accent-color: var(--steel); margin: 0; }
       <div class="knob">
         <div class="knob-head"><span id="sockLabel">Die socket</span></div>
         <div class="seg" role="radiogroup" aria-labelledby="sockLabel">
-          <label><input type="radio" name="sock" value="1.5" checked><span>M3 · 1.5 mm</span></label>
-          <label><input type="radio" name="sock" value="2.0"><span>M4 · 2.0 mm</span></label>
+          <label><input type="radio" name="sock" value="1.5" checked><span>M3 screw, 1.5 mm socket</span></label>
+          <label><input type="radio" name="sock" value="2.0"><span>M4 screw, 2.0 mm socket</span></label>
         </div>
       </div>
       <div class="knob">
-        <div class="knob-head"><span id="tipLabel">Stylus tip radius (filed)</span></div>
+        <div class="knob-head"><span id="tipLabel">Stylus tip radius</span></div>
         <div class="seg" role="radiogroup" aria-labelledby="tipLabel">
           <label><input type="radio" name="tip" value="0.6"><span>0.6 mm</span></label>
           <label><input type="radio" name="tip" value="0.75" checked><span>0.75 mm</span></label>
@@ -262,10 +262,10 @@ input[type="range"] { width: 100%; accent-color: var(--steel); margin: 0; }
     <input id="scrub" type="range" min="0" max="1000" value="450" aria-label="Position in the strike cycle">
     <ol class="phases" id="phases">
       <li data-p="0"><b>1</b>At rest<span class="r">coil off</span></li>
-      <li data-p="1"><b>2</b>Plunger accelerates<span class="r num">0 → 8.75 mm</span></li>
-      <li data-p="2"><b>3</b>Paper lifts to the die<span class="r num" id="ph3">8.75 → 9.52 mm</span></li>
-      <li data-p="3" class="strike"><b>4</b>Dot forms, plunger seats<span class="r num" id="ph4">9.52 → 10.00 mm</span></li>
-      <li data-p="4"><b>5</b>Pulse off, plunger falls<span class="r">gravity + spring</span></li>
+      <li data-p="1"><b>2</b>Plunger accelerates<span class="r num">0 to 8.75 mm</span></li>
+      <li data-p="2"><b>3</b>Paper lifts to the die<span class="r num" id="ph3">8.75 to 9.52 mm</span></li>
+      <li data-p="3" class="strike"><b>4</b>Dot forms, plunger seats<span class="r num" id="ph4">9.52 to 10.00 mm</span></li>
+      <li data-p="4"><b>5</b>Pulse off, plunger falls<span class="r">gravity and spring</span></li>
     </ol>
   </div>
 </section>
@@ -399,28 +399,28 @@ function updateReadouts() {
   const h = dotH();
   const reach = STROKE - h;
   $('outH').textContent = fmt(h);
-  $('outBase').textContent = '≈ ' + s.sock.toFixed(2) + ' mm';
+  $('outBase').textContent = 'about ' + s.sock.toFixed(2) + ' mm';
   $('outReach').textContent = 'at ' + reach.toFixed(2) + ' mm';
-  $('ph3').textContent = `8.75 → ${reach.toFixed(2)} mm`;
-  $('ph4').textContent = `${reach.toFixed(2)} → 10.00 mm`;
+  $('ph3').textContent = `8.75 to ${reach.toFixed(2)} mm`;
+  $('ph4').textContent = `${reach.toFixed(2)} to 10.00 mm`;
   const c = rimClearance();
   $('outRim').textContent = (c < 0 ? '−' : '') + Math.abs(c).toFixed(2) + ' mm';
   const v = $('verdict');
   if (h <= 0.001) {
     v.className = 'verdict bad';
-    v.textContent = 'No dot: the die face is too high for this paper. Turn the knob down.';
+    v.textContent = 'No dot. The die is too high for this paper. Turn the knob to lower it.';
   } else if (c < 0) {
     v.className = 'verdict bad';
-    v.textContent = 'The stylus shoulder reaches the die face. Expect a cut: raise the die or use the M4 socket.';
+    v.textContent = 'The stylus hits the die. Expect a cut in the paper. Raise the die, or use the M4 socket.';
   } else if (c < s.t) {
     v.className = 'verdict warn';
-    v.textContent = `Squeezed: ${c.toFixed(2)} mm of room at the socket edge for ${s.t.toFixed(2)} mm paper. The rim may crack; raise the die, file a finer tip, or try M4.`;
+    v.textContent = `Tight. The paper is ${s.t.toFixed(2)} mm thick, but the socket edge leaves only ${c.toFixed(2)} mm. The dot's edge may crack. Raise the die, file a finer tip, or try the M4 socket.`;
   } else {
     v.className = 'verdict ok';
-    v.textContent = `Clear: ${c.toFixed(2)} mm of room at the socket edge for ${s.t.toFixed(2)} mm paper.`;
+    v.textContent = `Good fit. The paper is ${s.t.toFixed(2)} mm thick, and the socket edge leaves ${c.toFixed(2)} mm.`;
   }
   $('paperOut').textContent = fmt(s.t);
-  $('dieOut').textContent = fmt(s.D) + (Math.abs(s.D - 1) < 0.001 ? '' : `  (${s.D > 1 ? '+' : '−'}${(Math.abs(s.D - 1) / 0.5).toFixed(1)} turn)`);
+  $('dieOut').textContent = fmt(s.D) + (Math.abs(s.D - 1) < 0.001 ? '' : ` (${(Math.abs(s.D - 1) / 0.5).toFixed(1)} turn ${s.D > 1 ? 'up' : 'down'})`);
 }
 
 let lastPhase = -1;
@@ -596,7 +596,7 @@ async function init3D() {
       materials.push(mat);
       (isMoving ? moving : root).add(new THREE.Mesh(geo, mat));
     }
-    $('loadState').textContent = 'Drag to orbit · scroll or pinch to zoom';
+    $('loadState').textContent = 'Drag to turn the model. Scroll or pinch to zoom.';
   } catch (e) {
     $('loadState').textContent = 'The 3D parts did not load. The cross-section still works.';
   }

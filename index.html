@@ -71,7 +71,6 @@ a.card:hover, a.card:focus-visible { border-color: var(--steel); transform: tran
 a.card:focus-visible { outline: 2px solid var(--steel); outline-offset: 2px; }
 .card img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: contain; background: var(--steel-soft); }
 .card .body { padding: 16px 18px 18px; }
-.tag { font-family: var(--font-data); font-size: .75rem; color: var(--steel); text-transform: uppercase; letter-spacing: .06em; }
 .card h2 { font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; margin: 4px 0 6px; }
 .card p { margin: 0; color: var(--muted); font-size: .95rem; }
 footer { margin-top: 40px; color: var(--muted); font-size: .9rem; }
@@ -81,29 +80,27 @@ footer a { color: var(--steel); }
 <body>
 <main class="wrap">
   <h1>Punch Point</h1>
-  <p class="lede">We're a UIUC MedLaunch team building a low-cost, portable braille embosser for Teachers of the Visually Impaired. These 3D viewers run in your browser, with nothing to install.</p>
+  <p class="lede">We are a MedLaunch team at the University of Illinois Urbana-Champaign. We are building a low-cost, portable braille embosser for teachers of blind and low-vision students. These 3D models run in your web browser. You don't need to install anything.</p>
 
   <div class="cards">
     <a class="card" href="concepts/test-rig/viewer/">
-      <img src="concepts/test-rig/media/strike.gif" alt="Rendered model of the single-dot punch test rig">
+      <img src="concepts/test-rig/media/strike.gif" alt="Animation of the test rig: a solenoid pushes a steel stylus up through the paper into a metal die.">
       <div class="body">
-        <div class="tag">Bench test</div>
         <h2>Punch test rig</h2>
-        <p>Watch a single-dot strike. You can change paper thickness, die height, die socket and stylus tip.</p>
+        <p>Watch the rig emboss one dot. Change the paper thickness, die height, die size and stylus tip to see how the dot changes.</p>
       </div>
     </a>
     <a class="card" href="concepts/six-solenoid-head/viewer/">
-      <img src="concepts/six-solenoid-head/six_head_002.png" alt="Rendered model of the six-solenoid embossing head concept">
+      <img src="concepts/six-solenoid-head/media/emboss.gif" alt="Animation of the six-solenoid head: six levers lift six pins to emboss one braille cell at a time.">
       <div class="body">
-        <div class="tag">Concept</div>
         <h2>Six-solenoid head</h2>
-        <p>Type a word and watch the head emboss it one cell at a time.</p>
+        <p>Type a word and watch the head emboss it, one braille cell at a time.</p>
       </div>
     </a>
   </div>
 
   <footer>
-    Source, CAD and printable STLs: <a href="https://github.com/b-47/punch-point">github.com/b-47/punch-point</a> · MIT licensed
+    Design files, print files and code: <a href="https://github.com/b-47/punch-point">github.com/b-47/punch-point</a>. Free to use under the MIT license.
   </footer>
 </main>
 </body>
