@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Six-Solenoid Head</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: same bench-sheet look as the test rig viewer. The head runs on the left; the word,
+   the cell being struck and the live current draw sit beside it; notes follow below. */
+:root {
+  --bg: #F2F4F6;
+  --surface: #FFFFFF;
+  --scene: #E4EAF0;
+  --ink: #17202A;
+  --muted: #5A6774;
+  --rule: #D3DAE1;
+  --steel: #2D6A93;
+  --steel-soft: #DDE9F2;
+  --copper: #B4612F;
+  --strike: #C2410C;
+  --font-display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-data: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1318; --surface: #151C23; --scene: #1B242D; --ink: #E2E8EE; --muted: #97A4B0;
+    --rule: #2B3641; --steel: #7DB3D8; --steel-soft: #1D3243; --copper: #E08A55; --strike: #F28C4C;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E1318; --surface: #151C23; --scene: #1B242D; --ink: #E2E8EE; --muted: #97A4B0;
+  --rule: #2B3641; --steel: #7DB3D8; --steel-soft: #1D3243; --copper: #E08A55; --strike: #F28C4C;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.55; }
+.wrap { max-width: 1180px; margin-inline: auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2 { font-family: var(--font-display); font-stretch: 80%; line-height: 1.1; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(2rem, 5vw, 3.1rem); font-weight: 800; }
+h2 { font-size: 1.5rem; font-weight: 750; }
+p { margin: 0; }
+code { font-family: var(--font-data); font-size: 0.9em; }
+
+.top { padding-block: 28px 18px; display: grid; gap: 12px; }
+.eyebrow { font-family: var(--font-data); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.lede { max-width: 70ch; font-size: 1.05rem; }
+.specs { display: flex; flex-wrap: wrap; gap: 8px 26px; margin: 6px 0 0; }
+.specs div { display: grid; }
+.specs dt { font-size: 0.74rem; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+.specs dd { margin: 0; font-family: var(--font-data); font-size: 1.02rem; font-variant-numeric: tabular-nums; }
+
+.stage { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 14px; padding-block: 6px 8px; }
+.panel { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; min-width: 0; }
+.viewer { position: relative; overflow: hidden; background: var(--scene); min-height: 520px; }
+.viewer canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; touch-action: none; }
+.viewer-tools { position: absolute; top: 10px; left: 10px; right: 10px; display: flex; flex-wrap: wrap; gap: 6px; pointer-events: none; }
+.viewer-tools button { pointer-events: auto; }
+.load-state { position: absolute; left: 12px; bottom: 10px; font-size: 0.82rem; color: var(--muted); font-family: var(--font-data); }
+
+button, .seg label {
+  font: 500 0.84rem/1 var(--font-body); color: var(--ink); background: var(--surface);
+  border: 1px solid var(--rule); border-radius: 4px; padding: 7px 10px; cursor: pointer;
+}
+button:hover, .seg label:hover { border-color: var(--steel); }
+button[aria-pressed="true"] { background: var(--steel-soft); border-color: var(--steel); }
+button.primary { background: var(--steel); border-color: var(--steel); color: var(--surface); }
+button:focus-visible, input:focus-visible, .seg input:focus-visible + span { outline: 2px solid var(--steel); outline-offset: 2px; }
+
+.side { padding: 14px; display: grid; gap: 16px; align-content: start; }
+.field { display: grid; gap: 6px; }
+.field label, .field .lab { font-size: 0.84rem; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; }
+input[type="text"] {
+  flex: 1 1 140px; min-width: 0; font: 400 1rem var(--font-data); color: var(--ink); background: var(--bg);
+  border: 1px solid var(--rule); border-radius: 4px; padding: 7px 9px;
+}
+.seg { display: flex; flex-wrap: wrap; gap: 6px; }
+.seg input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.seg label { position: relative; display: inline-flex; }
+.seg label:has(input:checked) { background: var(--steel-soft); border-color: var(--steel); }
+
+.cell { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 16px; align-items: center; border-top: 1px solid var(--rule); padding-top: 14px; }
+.cell svg { width: 84px; height: auto; display: block; }
+.cell .dot { fill: none; stroke: var(--muted); stroke-width: 1.5; }
+.cell .dot.on { fill: var(--strike); stroke: var(--strike); }
+.cell .num { fill: var(--muted); font: 10px var(--font-data); }
+.cell-letter { font-family: var(--font-display); font-weight: 800; font-size: 2.6rem; line-height: 1; }
+.cell-dots { font-family: var(--font-data); font-size: 0.86rem; color: var(--muted); }
+.readout { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 14px; margin: 0; }
+.readout div { display: grid; }
+.readout dt { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+.readout dd { margin: 0; font-family: var(--font-data); font-variant-numeric: tabular-nums; }
+.readout .hot dd { color: var(--copper); }
+.note { font-size: 0.82rem; color: var(--muted); }
+
+.doc { display: grid; gap: 40px; padding-block: 36px 60px; }
+.doc section { display: grid; gap: 12px; max-width: 72ch; }
+.doc ul { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; }
+.table-wrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 6px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+th { font-size: 0.74rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); font-weight: 600; background: var(--bg); }
+td.n { font-family: var(--font-data); white-space: nowrap; }
+
+@media (max-width: 880px) {
+  .stage { grid-template-columns: minmax(0, 1fr); }
+  .viewer { min-height: 0; aspect-ratio: 4 / 4; }
+}
+</style>
+</head>
+<body>
+
+<header class="wrap top">
+  <p class="eyebrow">Punch Point · concept sketch, not a tested design</p>
+  <h1>Six-Solenoid Head</h1>
+  <p class="lede">One whole braille cell per strike. Six solenoids stand on a ring and pull six levers. The levers pivot
+    near the middle, so their short inner ends lift six steel pins, set 2.5&nbsp;mm apart in a 2&nbsp;×&nbsp;3 grid, up
+    through the paper into a six-pocket die. Dot-matrix printer heads use the same trick to fit big actuators around a
+    tiny grid of pins.</p>
+  <dl class="specs">
+    <div><dt>Lever ratio</dt><dd>3.2 : 1</dd></div>
+    <div><dt>Pin stroke</dt><dd>3.2 mm</dd></div>
+    <div><dt>Pin force</dt><dd>≈ 3 × solenoid</dd></div>
+    <div><dt>Head</dt><dd>≈ 145 mm across</dd></div>
+  </dl>
+</header>
+
+<section class="wrap stage" aria-label="Head in motion">
+  <div class="panel viewer">
+    <canvas id="scene" role="img" aria-label="3D model of the six-solenoid head: six solenoids on a ring under a see-through paper table, six levers meeting under six pins in the middle, and a die on a bridge above the paper."></canvas>
+    <div class="viewer-tools">
+      <button id="vWhole" type="button">Whole head</button>
+      <button id="vPins" type="button">Pins up close</button>
+      <button id="vTop" type="button">From above</button>
+      <button id="hideTable" type="button" aria-pressed="false">Hide table and die</button>
+    </div>
+    <p class="load-state" id="loadState">Loading parts…</p>
+  </div>
+
+  <div class="panel side">
+    <form class="field" id="wordForm">
+      <label for="word">Word to emboss (letters a–z and spaces)</label>
+      <div class="row">
+        <input id="word" type="text" value="punch point" maxlength="24" autocomplete="off" spellcheck="false">
+        <button class="primary" type="submit">Emboss</button>
+        <button id="play" type="button">Pause</button>
+      </div>
+    </form>
+    <div class="field">
+      <span class="lab" id="modeLabel">Firing</span>
+      <div class="seg" role="radiogroup" aria-labelledby="modeLabel">
+        <label><input type="radio" name="mode" value="together" checked><span>All of a cell's dots at once</span></label>
+        <label><input type="radio" name="mode" value="sequence"><span>One dot after another</span></label>
+      </div>
+    </div>
+    <div class="cell">
+      <svg id="cellSvg" viewBox="0 0 84 102" role="img" aria-label="Current cell">
+        <g id="cellDots"></g>
+      </svg>
+      <div>
+        <div class="cell-letter" id="cellLetter">p</div>
+        <div class="cell-dots" id="cellDotsText">dots 1 2 3 4</div>
+      </div>
+    </div>
+    <dl class="readout">
+      <div class="hot"><dt>Solenoids on</dt><dd id="outOn">0</dd></div>
+      <div class="hot"><dt>Current now</dt><dd id="outAmps">0 A</dd></div>
+      <div><dt>Strikes this cell</dt><dd id="outStrikes">1</dd></div>
+      <div><dt>Cells done</dt><dd id="outCells">0 / 11</dd></div>
+    </dl>
+    <p class="note">Slowed down. Each solenoid draws about 2&nbsp;A at 12&nbsp;V while it's on, so firing a whole cell at
+      once needs up to 12&nbsp;A; one after another never needs more than 2&nbsp;A but takes a strike per dot.</p>
+  </div>
+</section>
+
+<main class="wrap doc">
+  <section aria-labelledby="h-takes">
+    <h2 id="h-takes">What a six-pin head takes</h2>
+    <ul>
+      <li><strong>Six levers and pivots.</strong> A solenoid is 22&nbsp;mm wide and the dots are 2.5&nbsp;mm apart, so
+        each one reaches its pin through a lever. The 3.2&nbsp;:&nbsp;1 ratio turns the 10&nbsp;mm solenoid stroke into
+        about 3&nbsp;mm at the pin, at about three times the force, minus pivot friction.</li>
+      <li><strong>A six-pocket metal die.</strong> Each pin needs its own pocket, lined up within a tenth of a millimetre
+        or so. M3 set screws are 3&nbsp;mm wide and can't sit 2.5&nbsp;mm apart, so this is a drilled steel block.</li>
+      <li><strong>Power.</strong> Up to 12&nbsp;A when a full cell fires at once, against 2&nbsp;A for one pin.</li>
+      <li><strong>Size and weight.</strong> About 145&nbsp;mm across with six solenoids, all riding on the carriage.</li>
+      <li><strong>Parts.</strong> The solenoids are cheap (about $3.30 each on the order sheet). The cost is the
+        levers, pivots, pins, die and a bigger supply, plus six channels of the test circuit.</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="h-speed">
+    <h2 id="h-speed">Speed, and pictures</h2>
+    <p>Rough model for a full page of text (25 lines × 31 cells, about 3 dots a cell). These are estimates, not
+      measurements; the test rig's strike time will firm them up.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Head</th><th>Strikes per cell</th><th>Page, roughly</th></tr></thead>
+        <tbody>
+          <tr><td>One pin</td><td>one per dot</td><td class="n">≈ 6 min</td></tr>
+          <tr><td>Six pins, one after another</td><td>one per dot</td><td class="n">≈ 3.5 min</td></tr>
+          <tr><td>Six pins, all at once</td><td>one</td><td class="n">≈ 2 min</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Pictures run at one-pin speed whatever the head has: for a tactile graphic the head uses a single pin and moves
+      it anywhere on the page. Six pins only speed up text.</p>
+  </section>
+</main>
+
+<script src="vendor/three.min.js"></script>
+<script src="vendor/OrbitControls.js"></script>
+<script src="vendor/STLLoader.js"></script>
+<script src="parts.js"></script>
+<script>
+(() => {
+const G = window.SIX && window.SIX.geom;
+const DOTS = window.SIX && window.SIX.dots;
+const PHI = (G ? G.PHI_MAX : 15) * Math.PI / 180;
+const CELL = 6.0;   // cell pitch along the line
+const T = { pull: 0.35, hold: 0.15, release: 0.3, seqPull: 0.22, seqHold: 0.06, seqRelease: 0.17, advance: 0.45, end: 1.8 };
+
+const LETTERS = {
+  a: [1], b: [1, 2], c: [1, 4], d: [1, 4, 5], e: [1, 5], f: [1, 2, 4], g: [1, 2, 4, 5], h: [1, 2, 5], i: [2, 4], j: [2, 4, 5],
+  k: [1, 3], l: [1, 2, 3], m: [1, 3, 4], n: [1, 3, 4, 5], o: [1, 3, 5], p: [1, 2, 3, 4], q: [1, 2, 3, 4, 5], r: [1, 2, 3, 5],
+  s: [2, 3, 4], t: [2, 3, 4, 5], u: [1, 3, 6], v: [1, 2, 3, 6], w: [2, 4, 5, 6], x: [1, 3, 4, 6], y: [1, 3, 4, 5, 6], z: [1, 3, 5, 6],
+};
+
+const $ = (id) => document.getElementById(id);
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let playing = !reduced;
+let mode = 'together';
+let cells = [], ci = 0, ct = 0, endT = 0;
+
+function buildCells(text) {
+  return [...text.toLowerCase()].filter((ch) => ch === ' ' || LETTERS[ch]).slice(0, 24)
+    .map((ch) => ({ ch, dots: ch === ' ' ? [] : LETTERS[ch] }));
+}
+function strikeTime(c) {
+  if (!c.dots.length) return 0;
+  return mode === 'together' ? T.pull + T.hold + T.release : c.dots.length * (T.seqPull + T.seqHold + T.seqRelease);
+}
+const cellTime = (c) => strikeTime(c) + T.advance;
+
+// lever lift for one pulse: rises while the coil pulls, holds, then falls back
+function pulse(t, a, b, r) {
+  if (t < 0) return { v: 0, on: false };
+  if (t < a) { const k = t / a; return { v: k * k, on: true }; }
+  if (t < a + b) return { v: 1, on: true };
+  const k = Math.min(1, (t - a - b) / r);
+  return { v: 1 - k * k, on: false };
+}
+// lever angles, coil states and paper advance for cell c at time t
+function stateAt(c, t) {
+  const phi = [0, 0, 0, 0, 0, 0], on = [false, false, false, false, false, false];
+  const st = strikeTime(c);
+  if (c.dots.length && t < st) {
+    if (mode === 'together') {
+      const p = pulse(t, T.pull, T.hold, T.release);
+      for (const d of c.dots) { phi[d - 1] = p.v; on[d - 1] = p.on; }
+    } else {
+      const per = T.seqPull + T.seqHold + T.seqRelease, k = Math.floor(t / per), d = c.dots[k];
+      const p = pulse(t - k * per, T.seqPull, T.seqHold, T.seqRelease);
+      phi[d - 1] = p.v; on[d - 1] = p.on;
+    }
+  }
+  const adv = Math.min(1, Math.max(0, (t - st) / T.advance));
+  return { phi, on, adv: adv * adv * (3 - 2 * adv) };
+}
+
+// ---------------------------------------------------------------- side panel
+const svgNS = 'http://www.w3.org/2000/svg';
+const cellG = $('cellDots');
+const dotEls = [];
+[[22, 18], [22, 50], [22, 82], [62, 18], [62, 50], [62, 82]].forEach(([x, y], i) => {
+  const c = document.createElementNS(svgNS, 'circle');
+  c.setAttribute('cx', x); c.setAttribute('cy', y); c.setAttribute('r', 11); c.setAttribute('class', 'dot');
+  cellG.appendChild(c); dotEls.push(c);
+  const n = document.createElementNS(svgNS, 'text');
+  n.setAttribute('x', i < 3 ? 4 : 76); n.setAttribute('y', y + 3.5); n.setAttribute('class', 'num');
+  n.textContent = String(i + 1); cellG.appendChild(n);
+});
+let shownCell = -1;
+function showCell(idx) {
+  if (idx === shownCell) return;
+  shownCell = idx;
+  const c = cells[Math.min(idx, cells.length - 1)];
+  if (!c) return;
+  const name = c.ch === ' ' ? 'space' : c.ch;
+  $('cellLetter').textContent = c.ch === ' ' ? '␣' : c.ch;
+  $('cellDotsText').textContent = c.dots.length ? 'dots ' + c.dots.join(' ') : 'no dots, just move on';
+  dotEls.forEach((el, i) => el.setAttribute('class', c.dots.includes(i + 1) ? 'dot on' : 'dot'));
+  $('cellSvg').setAttribute('aria-label', c.dots.length ? `Letter ${name}: dots ${c.dots.join(', ')}` : 'Space: no dots');
+  $('outStrikes').textContent = c.dots.length ? (mode === 'together' ? '1' : String(c.dots.length)) : '0';
+}
+
+// ---------------------------------------------------------------- 3D
+let renderer, scene, camera, controls, root, paper, units = [], tableParts = [], bumps = [];
+let paperMat, strikeMat;
+
+function cssVar(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
+function applyTheme() { if (scene) scene.background = new THREE.Color(cssVar('--scene') || '#E4EAF0'); }
+
+const VIEWS = {
+  whole: { target: [0, -30, 0], pos: [185, 95, 245] },
+  pins: { target: [0, -7, 0], pos: [24, 14, 36] },
+  top: { target: [0, -20, 0], pos: [0, 240, 0.01] },
+};
+function setView(name) {
+  const v = VIEWS[name];
+  controls.target.set(...v.target);
+  camera.position.set(v.target[0] + v.pos[0], v.target[1] + v.pos[1], v.target[2] + v.pos[2]);
+  controls.update();
+}
+function setTableHidden(h) {
+  $('hideTable').setAttribute('aria-pressed', String(h));
+  tableParts.forEach((m) => { m.visible = !h; });
+}
+
+function addBump(cellIdx, d) {
+  const key = cellIdx + ':' + d;
+  if (bumps.some((b) => b.key === key)) return;
+  const [x, y] = DOTS[d - 1];
+  const m = new THREE.Mesh(bumpGeo, strikeMat);
+  m.scale.set(1, 1, 0.6);
+  m.position.set(cellIdx * CELL + x, y, 0.25);
+  paper.add(m);
+  bumps.push({ key, cell: cellIdx, mesh: m });
+}
+let bumpGeo;
+function settleBumps(cellIdx) { bumps.forEach((b) => { if (b.cell === cellIdx) b.mesh.material = paperMat; }); }
+function clearBumps() { bumps.forEach((b) => paper.remove(b.mesh)); bumps = []; }
+
+function init3D() {
+  const canvas = $('scene');
+  try {
+    renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+  } catch (e) {
+    $('loadState').textContent = 'This browser has no WebGL; the panel on the right still runs.';
+    return false;
+  }
+  if (!window.SIX) { $('loadState').textContent = 'parts.js is missing, so there is nothing to show.'; return false; }
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  scene = new THREE.Scene();
+  applyTheme();
+  camera = new THREE.PerspectiveCamera(32, 1, 1, 3000);
+  controls = new THREE.OrbitControls(camera, canvas);
+  controls.enableDamping = true;
+  setView('whole');
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x50606e, 0.95));
+  const key = new THREE.DirectionalLight(0xffffff, 0.85); key.position.set(120, 220, 160); scene.add(key);
+  const rim = new THREE.DirectionalLight(0xffffff, 0.35); rim.position.set(-160, 60, -120); scene.add(rim);
+
+  root = new THREE.Group();
+  root.rotation.x = -Math.PI / 2;   // OpenSCAD z-up to three.js y-up
+  scene.add(root);
+
+  const loader = new THREE.STLLoader();
+  const geo = {};
+  for (const name in window.SIX.stl) {
+    const bytes = Uint8Array.from(atob(window.SIX.stl[name]), (c) => c.charCodeAt(0));
+    geo[name] = loader.parse(bytes.buffer);
+    geo[name].computeVertexNormals();
+  }
+  const mat = (color, opts = {}) => new THREE.MeshStandardMaterial(Object.assign({ color, metalness: 0.2, roughness: 0.55, side: THREE.DoubleSide }, opts));
+  const frameMat = mat(0x3b79a6), tableMat = mat(0xa7c4d9, { transparent: true, opacity: 0.4, depthWrite: false });
+  const dieMat = mat(0x3c4a52, { metalness: 0.4, roughness: 0.4 }), solMat = mat(0x5b6168, { metalness: 0.35 });
+  const steelMat = mat(0xc5cbd1, { metalness: 0.4, roughness: 0.35 }), leverMat = mat(0xd4a72c, { metalness: 0.3, roughness: 0.4 });
+  paperMat = mat(0xffffff, { roughness: 0.9, metalness: 0 });
+  strikeMat = mat(0xe0602a, { roughness: 0.6, metalness: 0 });
+  bumpGeo = new THREE.SphereGeometry(0.75, 20, 12);
+
+  const add = (name, m, parent = root) => { const mesh = new THREE.Mesh(geo[name], m); parent.add(mesh); return mesh; };
+  add('frame', frameMat);
+  tableParts.push(add('table', tableMat), add('bridge', frameMat), add('die', dieMat));
+
+  DOTS.forEach(([x, y, deg]) => {
+    const th = deg * Math.PI / 180, ux = Math.cos(th), uy = Math.sin(th);
+    const sol = new THREE.Group();
+    sol.position.set(x + (G.L1 + G.L2) * ux, y + (G.L1 + G.L2) * uy, G.Z_SOL_TOP);
+    sol.rotation.z = th;
+    root.add(sol);
+    add('sol_frame', solMat, sol);
+    const coilMat = mat(0xb4612f, { roughness: 0.45 });
+    add('sol_coil', coilMat, sol);
+    const plunger = add('plunger', steelMat, sol);
+    const pivot = new THREE.Group();
+    pivot.position.set(x + G.L2 * ux, y + G.L2 * uy, G.Z_AXLE);
+    pivot.rotation.z = th;
+    root.add(pivot);
+    const lever = add('lever', leverMat, pivot);
+    const pin = add('pin', steelMat);
+    pin.position.set(x, y, G.Z_LEVER);
+    units.push({ plunger, lever, pin, coilMat });
+  });
+
+  paper = new THREE.Group();
+  root.add(paper);
+  const sheet = new THREE.Mesh(new THREE.BoxGeometry(200, 30, 0.25), paperMat);
+  sheet.position.set(80, 0, 0.125);
+  paper.add(sheet);
+  tableParts.push(paper);
+
+  const viewer = canvas.parentElement;
+  let lastW = 0, lastH = 0;
+  const fit = () => {
+    const r = viewer.getBoundingClientRect(), w = Math.round(r.width), h = Math.round(r.height);
+    if (w === lastW && h === lastH) return;
+    lastW = w; lastH = h;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / Math.max(1, h);
+    camera.updateProjectionMatrix();
+  };
+  new ResizeObserver(fit).observe(viewer);
+  fit();
+  $('loadState').textContent = 'Drag to orbit · scroll or pinch to zoom';
+  return true;
+}
+
+// ---------------------------------------------------------------- animation
+function restart() {
+  cells = buildCells($('word').value);
+  if (!cells.length) cells = buildCells('punch point');
+  ci = 0; ct = 0; endT = 0; shownCell = -1;
+  if (paper) { clearBumps(); paper.position.x = 0; }
+  showCell(0);
+  update();
+}
+
+function update() {
+  const done = ci >= cells.length;
+  const c = done ? null : cells[ci];
+  const s = c ? stateAt(c, ct) : { phi: [0, 0, 0, 0, 0, 0], on: [false, false, false, false, false, false], adv: 0 };
+  const nOn = s.on.filter(Boolean).length;
+  $('outOn').textContent = String(nOn);
+  $('outAmps').textContent = nOn * 2 + ' A';
+  $('outCells').textContent = `${Math.min(ci, cells.length)} / ${cells.length}`;
+  showCell(Math.min(ci, cells.length - 1));
+  if (!units.length) return;
+  s.phi.forEach((f, i) => {
+    const a = f * PHI, u = units[i];
+    u.lever.rotation.y = a;
+    u.plunger.position.z = -G.L1 * Math.sin(a);
+    u.pin.position.z = G.Z_LEVER + G.L2 * Math.sin(a);
+    u.coilMat.emissive.setHex(s.on[i] ? 0x8a3200 : 0x000000);
+    if (c && f > 0.97) addBump(ci, i + 1);
+  });
+  paper.position.x = -CELL * (Math.min(ci, cells.length) + (c ? s.adv : 0));
+}
+
+function step(dt) {
+  if (ci >= cells.length) {
+    endT += dt;
+    if (endT > T.end) restart();
+    return;
+  }
+  ct += dt;
+  while (ci < cells.length && ct >= cellTime(cells[ci])) {
+    ct -= cellTime(cells[ci]);
+    if (units.length) settleBumps(ci);
+    ci++;
+  }
+}
+
+// ---------------------------------------------------------------- controls
+$('wordForm').addEventListener('submit', (e) => { e.preventDefault(); restart(); setPlaying(true); });
+const playBtn = $('play');
+function setPlaying(p) { playing = p; playBtn.textContent = p ? 'Pause' : 'Play'; }
+playBtn.addEventListener('click', () => setPlaying(!playing));
+document.querySelectorAll('input[name="mode"]').forEach((r) => r.addEventListener('change', () => { mode = r.value; restart(); }));
+$('vWhole').addEventListener('click', () => { if (controls) { setTableHidden(false); setView('whole'); } });
+$('vPins').addEventListener('click', () => { if (controls) { setTableHidden(false); setView('pins'); } });
+$('vTop').addEventListener('click', () => { if (controls) { setTableHidden(true); setView('top'); } });
+$('hideTable').addEventListener('click', () => setTableHidden($('hideTable').getAttribute('aria-pressed') !== 'true'));
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyTheme);
+new MutationObserver(applyTheme).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+let last = performance.now();
+function tick(now) {
+  const dt = Math.min(0.1, (now - last) / 1000); last = now;
+  if (playing) { step(dt); update(); }
+  if (controls) controls.update();
+  if (renderer) renderer.render(scene, camera);
+  requestAnimationFrame(tick);
+}
+
+setPlaying(playing);
+init3D();
+restart();
+requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>
