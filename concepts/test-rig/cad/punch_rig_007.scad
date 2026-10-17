@@ -7,7 +7,8 @@
 //   stylus = M3 x 16 dog-point set screw, tip filed round, locked in an
 //            M3 x 18 hex standoff that rides in a close-fit printed hex bore
 //   die    = hex socket of an M3 x 25 set screw (socket end down), threaded
-//            into the arm; an acorn nut glued on top sets the dot height
+//            into the arm; a nut and an acorn nut locked together on top turn it
+//            to set the dot height
 // The solenoid sits below the paper and pushes up, so dots come out facing up
 // and gravity resets the plunger. Strike loads close inside one C-frame.
 //
@@ -358,6 +359,7 @@ module die_screw() {
 module die_nuts() {
     top = ARM_Z0 + ARM_T;
     translate([0, 0, top]) cylinder(d = hexd(NUT_AF), h = NUT_T, $fn = 6);                    // lock nut
+    translate([0, 0, GAP + DIE_LEN - 3 - NUT_T]) cylinder(d = hexd(NUT_AF), h = NUT_T, $fn = 6);  // nut locked under the acorn nut
     translate([0, 0, GAP + DIE_LEN - 3]) cylinder(d = hexd(NUT_AF), h = 3.2, $fn = 6);        // acorn nut
     translate([0, 0, GAP + DIE_LEN + 0.2]) scale([1, 1, 0.9]) sphere(d = 5.5);
 }

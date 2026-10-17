@@ -37,7 +37,7 @@ Three choices shape the design:
 | --- | --- | --- |
 | Frame | Holds the solenoid, the table and the die arm | The solenoid sits on two ledges, which take each strike. Two screws through the back wall go into the solenoid's own threaded holes. Two small lips above it stop it from jumping if those screws are out. It prints upright with no supports. |
 | Table, two versions | Holds the paper flat and guides the stylus. Tick marks every 2.5 mm and 6.0 mm show dot and cell spacing. | A hex tube under the table keeps the standoff from turning and the stylus on the die. Printers make small holes slightly off size, so we print a tight fit (5.8) and a loose fit (6.0). |
-| Die arm | Holds the die over the paper. The knob on top moves the die 0.5 mm per turn. | Its screw holes are bigger than the screws, so it slides about 1 mm to line the die up with the stylus. An M4 version, with a 2.0 mm socket for thick cardstock, is in `print/`. |
+| Die arm | Holds the die over the paper. Two nuts locked together on top of the die screw turn it, 0.5 mm per turn. | Its screw holes are bigger than the screws, so it slides about 1 mm to line the die up with the stylus. An M4 version, with a 2.0 mm socket for thick cardstock, is in `print/`. |
 | Fence shims | Move the paper exactly 2.5, 5 or 10 mm from the fence | That is one dot, two dots or one line of braille, for spacing tests. |
 | Stroke spacer | Sets the plunger's stroke back to 10 mm | The standoff replaces the solenoid's acorn nut, which used to stop the plunger at rest. See step 3 of the build guide. |
 
@@ -49,7 +49,7 @@ Three choices shape the design:
 | The solenoid's two threaded holes are where the drawing shows them. | The seller's dimension drawing | Two of the four slots in the back wall line up with them. |
 | The plunger moves 10 mm and pushes hardest near the end of its stroke. | The seller's listing, and how solenoids work | We set the stylus to reach the paper in the last part of the stroke. |
 | 12 V and 2 A push hard enough to emboss 65 lb cardstock. | BrailleRAP uses the same kind of 12 V, 2 A solenoid. Sellers rate it at about 20 N. | Test 1. If it can't, we try longer pulses, a 24 V solenoid or a lever. |
-| The paper is about 0.25 mm thick. | 65 lb cover stock is about 0.23 mm. | We measure each paper. The knob adjusts for the rest. |
+| The paper is about 0.25 mm thick. | 65 lb cover stock is about 0.23 mm. | We measure each paper. Raising or lowering the die covers the rest. |
 | A good dot is about 0.5 mm high and 1.5 mm across. | The Library of Congress braille specification, [Specification 800](https://www.brailleauthority.org/node/63), calls for 0.48 mm high and 1.44 mm across. | We measure test dots, and Addison reads them. |
 | Dots are 2.5 mm apart, cells 6.0 mm, and lines 10 mm. | Addison's message | The table's tick marks and the shims |
 | The socket of an M3 set screw, 1.5 mm across, makes the right dot size. | BrailleRAP | Test dots. If they're too small, we try the M4 die. |
@@ -97,6 +97,7 @@ Three choices shape the design:
 - The lips above the solenoid are small fixed stops.
 - The slots in the back wall are 4 mm wide, for 0.5 mm of room side to side.
 - The fence shims print as three separate pieces.
+- No glue: two nuts locked together replace the glued knob on the die screw, and the standoff needs no thread locker.
 - There is no fit coupon. The sizes come from the seller's drawing, and the pocket has 0.5 mm of room on each side.
 
 Older versions are in [`cad/iterations/`](cad/iterations/).

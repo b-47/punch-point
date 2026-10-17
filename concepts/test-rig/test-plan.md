@@ -17,7 +17,7 @@ The [design notes](design-notes.md) explain why each test matters.
 ## Before each session
 
 1. Write down the date, who is testing, and which solenoid, table and die you are using.
-2. Check that the arm screws, the table screws, the two back-wall screws and the nut under the knob are tight.
+2. Check that the arm screws, the table screws, the two back-wall screws and the nut on top of the arm are tight.
 3. Unplug the 12 V adapter whenever your fingers are near the stylus or the die.
 
 ## How to judge a dot
@@ -33,9 +33,10 @@ The [design notes](design-notes.md) explain why each test matters.
 
 Find a die height that makes a good dot. Every later test starts from it.
 1. Use 65 lb cardstock and 25 ms pulses.
-2. Fire with `f 25`. If there is no dot, turn the knob a quarter turn clockwise and fire on fresh paper.
-3. Stop at the first setting that makes a full, round dot without tearing.
-4. Write down how many turns the knob is from where the die first touches the paper.
+2. Loosen the nut on top of the arm.
+3. Fire with `f 25`. If there is no dot, turn the acorn nut a quarter turn clockwise to lower the die, and fire on fresh paper.
+4. Stop at the first setting that makes a full, round dot without tearing. Tighten the nut on top of the arm.
+5. Write down how many turns the die is from where it first touches the paper.
 
 ### 2. Pulse length
 
@@ -129,7 +130,7 @@ Each row of [`test-log.csv`](test-log.csv) is one test strip or one run. The col
 | `table` | 5.8 or 6.0 |
 | `die` | M3 or M4 |
 | `paper` | For example, 65 lb cardstock |
-| `knob_turns` | Turns from where the die first touches the paper |
+| `die_turns` | Turns from where the die first touches the paper |
 | `pulse_ms` | Pulse length in milliseconds |
 | `gap_ms` | Time from one pulse to the next, for runs |
 | `strikes` | How many pulses |

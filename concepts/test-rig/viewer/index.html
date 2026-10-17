@@ -425,7 +425,7 @@ function updateReadouts() {
   const v = $('verdict');
   if (h <= 0.001) {
     v.className = 'verdict bad';
-    v.textContent = 'No dot. The die is too high for this paper. Turn the knob to lower it.';
+    v.textContent = 'No dot. The die is too high for this paper. Lower the die.';
   } else if (c < 0) {
     v.className = 'verdict bad';
     v.textContent = 'The stylus hits the die. Expect a cut in the paper. Raise the die, or use the M4 socket.';

@@ -41,13 +41,11 @@ Solenoid and stylus:
 - 1 M3 x 18 hex standoff: threaded inside all the way through, 5.5 mm across its flat sides, in steel. A standoff is a hex spacer, like a long nut.
 - 2 or 3 M3 x 16 dog-point set screws. A set screw has no head, and a dog-point set screw has a narrow tip. You file one tip round to make the stylus, the steel pin that presses the dot. Get spares in case the filing goes wrong.
 - 1 M3 nut, to lock the stylus.
-- Blue thread locker, the medium-strength kind.
 
 Die (the metal socket that shapes the dot):
 - 1 M3 x 25 set screw. An M3 x 30 also works.
-- 1 M3 nut.
-- The solenoid's acorn nut. It becomes the knob that sets the die height.
-- Super glue.
+- 2 M3 nuts.
+- The solenoid's acorn nut.
 
 Frame:
 - 2 M3 x 6 socket head screws and 2 M3 washers. They go through the back wall into the solenoid's own threaded holes.
@@ -68,7 +66,7 @@ Electronics:
 
 - Calipers.
 - Hex keys: 1.5 mm, 2 mm and 2.5 mm. A 2.5 mm key with a ball end helps.
-- A 5.5 mm wrench, or small pliers.
+- A 5.5 mm wrench and small pliers, to tighten two nuts against each other.
 - An M3 tap with a tap wrench. A tap cuts a thread in a hole. If you don't have one, step 6 gives another way.
 - A fine file or a sharpening stone.
 - A drill, if you have one, to spin the stylus while you file it.
@@ -99,15 +97,15 @@ The acorn nut on the solenoid also stops the plunger at rest, so it sets how far
 
 ![The solenoid with its plunger pushed in. The orange stroke spacer sits on top of the solenoid around the push rod, under the standoff.](media/build/1-stroke-spacer.png)
 
-1. Unscrew the acorn nut from the push rod, the thin threaded rod on top of the solenoid. Keep the nut for the knob. Take off any washer under it too.
-2. Put one drop of blue thread locker on the push rod's thread.
-3. Screw the standoff onto the push rod by a few turns.
-4. Stand the solenoid on the bench on its spring end. Press down on the solenoid, so the plunger slides all the way in and the push rod sticks up as far as it goes.
-5. Keep pressing. Slide the stroke spacer onto the push rod, flat on the solenoid.
-6. Turn the standoff down until it touches the spacer.
-7. Let go and take out the spacer.
-8. Push the plunger in and out. The standoff should move about 10 mm.
-9. Leave the thread locker to set for 10 minutes.
+1. Unscrew the acorn nut from the push rod, the thin threaded rod on top of the solenoid. Keep the nut for the die. Take off any washer under it too.
+2. Screw the standoff onto the push rod by a few turns.
+3. Stand the solenoid on the bench on its spring end. Press down on the solenoid, so the plunger slides all the way in and the push rod sticks up as far as it goes.
+4. Keep pressing. Slide the stroke spacer onto the push rod, flat on the solenoid.
+5. Turn the standoff down until it touches the spacer.
+6. Let go and take out the spacer.
+7. Push the plunger in and out. The standoff should move about 10 mm.
+
+Nothing locks the standoff onto the push rod. Once the table is on, its hex guide stops the standoff from turning, so the setting holds.
 
 ## 4. Fit the solenoid in the frame
 
@@ -141,19 +139,23 @@ If the standoff sticks in the tube, use the table marked 6.0 instead.
 
 ## 6. Fit the die arm
 
-![The die arm, shown in orange, lifted above the table. The die screw and knob go through its round end.](media/build/5-arm.png)
+![The die arm, shown in orange, lifted above the table. The die screw goes through its round end.](media/build/5-arm.png)
 
 1. Cut an M3 thread through the hole in the round end of the arm, from the top, with the M3 tap. If you don't have a tap, drive an ordinary M3 screw through the hole to cut the thread, then take it out.
 2. Screw the M3 x 25 set screw in from the top, socket end first. The hex socket in its end is the die.
 3. Stop when the end of the set screw is level with the lowest point of the arm, just under the hole.
-4. Screw an M3 nut onto the set screw, down to the arm. Leave it loose.
-5. Screw the acorn nut onto the top of the set screw and glue it there. It is now the knob. Turn it clockwise to lower the die, 0.5 mm per turn.
-6. Put the arm on top of the tower, the block that rises beside the table. Fix it with the two M3 x 16 socket head screws and washers, but leave the screws loose.
-7. Push the plunger up and hold it there.
-8. Turn the knob clockwise until the die rests on the stylus tip.
-9. Slide the arm until the tip drops into the die's hex socket.
-10. Tighten the two arm screws. Then let go of the plunger.
-11. Turn the knob one turn counterclockwise, to raise the die 0.5 mm.
+4. Screw an M3 nut onto the set screw, down to the arm. Leave it loose. Later it locks the die height.
+5. Screw a second M3 nut onto the top of the set screw, then the acorn nut above it.
+6. Hold the second nut with pliers, and tighten the acorn nut down hard against it with the wrench. Locked together, the two nuts turn the set screw:
+   - Turn the acorn nut clockwise to lower the die.
+   - Turn the nut under it counterclockwise to raise the die.
+   - Each turn moves the die 0.5 mm.
+7. Put the arm on top of the tower, the block that rises beside the table. Fix it with the two M3 x 16 socket head screws and washers, but leave the screws loose.
+8. Push the plunger up and hold it there.
+9. Turn the acorn nut clockwise until the die rests on the stylus tip.
+10. Slide the arm until the tip drops into the die's hex socket.
+11. Tighten the two arm screws. Then let go of the plunger.
+12. Turn the nut under the acorn nut one turn counterclockwise, to raise the die 0.5 mm.
 
 ## 7. Wire the electronics
 
@@ -195,9 +197,9 @@ Keep your fingers away from the stylus and die while the 12 V adapter has power.
 1. Plug in the 12 V adapter.
 2. Lay a strip of 65 lb cardstock on the table, with its edge against the fence. The fence is the side of the tower that faces the table.
 3. In the Serial Monitor, type `f 25` and press Enter. The solenoid should click once.
-4. Look at the paper. If there is no dot, turn the knob a quarter turn clockwise and fire again.
+4. Look at the paper. If there is no dot, turn the acorn nut a quarter turn clockwise and fire again.
 5. Stop when the dot is round and firm and the paper isn't torn.
-6. Tighten the nut under the knob to hold the setting.
+6. Tighten the nut on top of the arm to hold the setting.
 
 Commands:
 
@@ -222,11 +224,11 @@ Now run the [test plan](test-plan.md).
 | The solenoid stays on. | Check the 10k ohm resistor from the gate to ground, and the MOSFET pins. |
 | The plunger sticks partway up. | Loosen the table screws and move the table until the plunger slides freely. If that doesn't help, use the table marked 6.0. |
 | The stylus doesn't reach the paper. | Check the stroke (step 3) and that the stylus sticks out 7.0 mm (step 2). |
-| In step 3, the standoff stops before it touches the spacer. | The push rod has reached the stylus inside the standoff. Leave the standoff where it stopped. Later, raise the die with the knob to match the higher tip. |
-| The paper drags under the die. | Turn the knob counterclockwise to raise the die. |
+| In step 3, the standoff stops before it touches the spacer. | The push rod has reached the stylus inside the standoff. Leave the standoff where it stopped. Later, raise the die to match the higher tip. |
+| The paper drags under the die. | Raise the die. Loosen the nut on top of the arm, then turn the nut under the acorn nut counterclockwise. |
 | The paper tears. | Raise the die, or file the stylus tip rounder. |
 | Dots are faint. | Lower the die a quarter turn at a time, or use a longer pulse. |
-| Dots get fainter during a session. | Tighten the nut under the knob, the arm screws and the two screws in the back wall. |
+| Dots get fainter during a session. | Tighten the nut on top of the arm, the arm screws and the two screws in the back wall. Check the stroke with the spacer (step 3). |
 
 ## Change the model
 
