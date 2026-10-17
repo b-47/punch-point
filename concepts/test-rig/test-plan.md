@@ -34,7 +34,7 @@ The [design notes](design-notes.md) explain why each test matters.
 Find a die height that makes a good dot. Every later test starts from it.
 1. Use 65 lb cardstock and 25 ms pulses.
 2. Loosen the nut on top of the arm.
-3. Fire with `f 25`. If there is no dot, turn the acorn nut a quarter turn clockwise to lower the die, and fire on fresh paper.
+3. Fire with `f 25`. If there is no dot, turn the top nut on the die screw a quarter turn clockwise to lower the die, and fire on fresh paper.
 4. Stop at the first setting that makes a full, round dot without tearing. Tighten the nut on top of the arm.
 5. Write down how many turns the die is from where it first touches the paper.
 
@@ -95,7 +95,7 @@ Repeat test 2 with solenoid 2, to see whether two solenoids of the same kind beh
 ## Later tests
 
 These need parts we don't have yet:
-- **M4 die:** a bigger socket, 2.0 mm across, for thick cardstock. It needs the M4 arm in `print/`, an M4 set screw, nut and acorn nut, and an M4 tap.
+- **M4 die:** a bigger socket, 2.0 mm across, for thick cardstock. It needs the M4 arm in `print/`, an M4 set screw, three M4 nuts and an M4 tap.
 - **Groove die:** file a groove 1.5 mm wide across the end of a spare set screw. This shows whether a fixed bar with a groove could replace a moving die in the full machine.
 - **Perkins die:** the die from a Perkins brailler costs $8.95 from Perkins. It needs its own arm, which we can design once we can measure one.
 - **24 V solenoid:** a 24 V version of the same solenoid, run at 20 V from a USB-C charger.
