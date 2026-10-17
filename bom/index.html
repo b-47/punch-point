@@ -43,8 +43,7 @@ tfoot th, tfoot td { font-weight: 600; border-bottom: none; }
 <body>
 <main>
   <h1>Bill of materials</h1>
-  <p>Parts for the Punch Point braille embosser. There are two designs, each with its own quantity column. One has a single stylus that moves across the page. The other has six styli that emboss a whole braille cell at once.</p>
-  <p>Prices are in US dollars. A price without a store link is an estimate.</p>
+  <p>Quantities are for the two designs: one stylus or six styli. Prices are in US dollars. A price without a store link is an estimate.</p>
   <div class="wrap">
     <table>
       <thead>
@@ -115,8 +114,7 @@ tfoot th, tfoot td { font-weight: 600; border-bottom: none; }
       document.getElementById('totalSix').textContent = money.format(six);
       const latest = parts.map((p) => p.checked).filter(Boolean).sort().pop();
       const when = latest ? new Date(latest + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : '';
-      document.getElementById('note').innerHTML = (when ? `Prices checked ${when}. ` : '') +
-        'The list comes from <a href="https://github.com/b-47/punch-point/blob/main/bom/parts.csv">parts.csv</a>.';
+      document.getElementById('note').textContent = when ? `Prices checked ${when}.` : '';
     })
     .catch(() => {
       document.getElementById('note').innerHTML = 'The parts list did not load. It is in <a href="https://github.com/b-47/punch-point/blob/main/bom/parts.csv">parts.csv</a>.';
