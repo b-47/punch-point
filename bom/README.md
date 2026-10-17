@@ -21,7 +21,7 @@
 | `unit` | `each`, `set`, `g`, `m`, `drops` or `ream`. |
 | `pack_price` | What one pack costs, in US dollars, without the dollar sign. |
 | `pack_qty` | How many units come in that pack. Use 1 for a single part. |
-| `counts` | `part` counts toward the cost of a build. `tool` counts only toward "buy everything". `optional` counts toward neither. |
+| `counts` | `part` counts toward the cost of a build. `tool`, `reused` (test gear we keep using, like the ESP32) and `supply` (used up in testing, like paper) count only toward "buy everything". `optional` counts toward neither. |
 | `price_from` | `order sheet`, `store page` or `estimate`. |
 | `checked` | The date you saw the price, as year-month-day, such as 2026-10-16. |
 | `link` | Where to buy it, if we know. |

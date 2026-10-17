@@ -1,28 +1,28 @@
 build,section,item,details,qty,unit,pack_price,pack_qty,counts,price_from,checked,link,notes
-test-rig,Printed parts,Rig plate,"Frame, two tables, die arm, fence shims and stroke spacer",56,g,35.99,1000,part,store page,2026-10-16,https://www.printedsolid.com/products/prusament-pla-1-75mm-1kg-pristine-white,Prusament PLA. Other PLA costs less.
+test-rig,Printed parts,Rig plate,"Frame, two tables, die arm, fence shims and stroke spacer",56,g,12.00,1000,part,estimate,2026-10-16,,"Our usual PLA, about $12 per kg."
 test-rig,Solenoid and stylus,Solenoid,"JF-0826B, 12 V, 2 A, 10 mm stroke",1,each,3.30,1,part,order sheet,2026-10-16,https://www.alibaba.com/product-detail/JF-0826B-DC-12V-24V-2A_1600634368825.html,US store pages list it for about $6 to $10.
-test-rig,Solenoid and stylus,Hex standoff,"M3 x 18, threaded through, 5.5 mm across flats, stainless steel",1,each,5.91,1,part,store page,2026-10-16,https://accu-components.com/us/threaded-standoffs/464742-HHTPS-M3-5-5-18-SS,Packs of 10 cost less per standoff.
+test-rig,Solenoid and stylus,Hex standoff,"M3 x 18, threaded through, 5.5 mm across flats, stainless steel",1,each,9.00,10,part,estimate,2026-10-16,,
 test-rig,Solenoid and stylus,Dog-point set screws,"M3 x 16, steel; one becomes the stylus, one is a spare",2,each,9.00,25,part,estimate,2026-10-16,https://amazon.com/Point-Screws-Socket-Tensile-Black/dp/B07ZZ5YQC3,
 test-rig,Solenoid and stylus,Thread locker,"Blue, medium strength",2,drops,6.00,100,part,estimate,2026-10-16,,
-test-rig,Die,Set screw for the die,"M3 x 25 (M3 x 30 also works)",1,each,6.00,10,part,estimate,2026-10-16,,
+test-rig,Die,Set screw for the die,M3 x 25 (M3 x 30 also works),1,each,6.00,10,part,estimate,2026-10-16,,
 test-rig,Die,Super glue,To fix the acorn nut on as a knob,1,drops,4.00,100,part,estimate,2026-10-16,,
 test-rig,Frame hardware,M3 screw kit,"Socket head and button head screws, nuts and washers; the rig uses 14 pieces",14,each,12.00,340,part,estimate,2026-10-16,https://bulkman3d.com/product/m3-hex-socket-cap-head-screws-and-nuts-340pcs-set/,
-test-rig,Electronics,ESP32 board,Small programmable board that times the pulses,1,each,16.99,1,part,order sheet,2026-10-16,https://www.amazon.com/dp/B08D5ZD528,The order sheet doesn't say how many boards this buys. Single boards cost about $4 to $11 elsewhere.
-test-rig,Electronics,MOSFET,"IRLB8721 or IRLZ44N, the switch for the solenoid",1,each,6.55,10,part,store page,2026-10-16,https://www.ebay.com/itm/285820523559,Cheap copies may not switch fully at 3.3 V. A known distributor is safer.
-test-rig,Electronics,Diode,1N4007,1,each,5.00,100,part,estimate,2026-10-16,,
-test-rig,Electronics,Resistors,One 100 ohm and one 10k ohm,2,each,8.00,600,part,estimate,2026-10-16,,
-test-rig,Electronics,Capacitor,"1000 µF, 25 V or more",1,each,6.00,10,part,estimate,2026-10-16,,
-test-rig,Electronics,Breadboard and jumper wires,830 points,1,each,12.95,1,part,store page,2026-10-16,https://www.jameco.com/z/PROTO-KIT-830-Point-Breadboard-with-70-Piece-Jumper-Wire-Kit_2134993.html,
-test-rig,Electronics,Barrel jack adapter,"5.5 x 2.1 mm socket to screw terminals",1,each,3.75,1,part,store page,2026-10-16,https://www.sparkfun.com/dc-barrel-jack-adapter-female.html,
-test-rig,Power,12 V wall adapter,"Sealed, 3 A or more, 5.5 x 2.1 mm plug, UL listed",1,each,12.95,1,part,store page,2026-10-16,https://www.coolerguys.com/products/110-240v-ac-to-3a-12v-power-supply-with-barrel-connector-2-1mm-x-5-5mm,
-test-rig,Tools and supplies,M3 tap and drill,"M3 x 0.5 tap with a 2.5 mm drill",1,each,9.96,1,tool,store page,2026-10-16,https://www.ebay.com/itm/356797328656,
+test-rig,Electronics,ESP32 board,Small programmable board that times the pulses,1,each,16.99,1,reused,order sheet,2026-10-16,https://www.amazon.com/dp/B08D5ZD528,The order sheet doesn't say how many boards this buys. Single boards cost about $4 to $11 elsewhere.
+test-rig,Electronics,MOSFET,"IRLB8721 or IRLZ44N, the switch for the solenoid",1,each,6.55,10,reused,store page,2026-10-16,https://www.ebay.com/itm/285820523559,Cheap copies may not switch fully at 3.3 V. A known distributor is safer.
+test-rig,Electronics,Diode,1N4007,1,each,5.00,100,reused,estimate,2026-10-16,,
+test-rig,Electronics,Resistors,One 100 ohm and one 10k ohm,2,each,8.00,600,reused,estimate,2026-10-16,,
+test-rig,Electronics,Capacitor,"1000 µF, 25 V or more",1,each,6.00,10,reused,estimate,2026-10-16,,
+test-rig,Electronics,Breadboard and jumper wires,830 points,1,each,12.95,1,reused,store page,2026-10-16,https://www.jameco.com/z/PROTO-KIT-830-Point-Breadboard-with-70-Piece-Jumper-Wire-Kit_2134993.html,
+test-rig,Electronics,Barrel jack adapter,5.5 x 2.1 mm socket to screw terminals,1,each,3.75,1,reused,store page,2026-10-16,https://www.sparkfun.com/dc-barrel-jack-adapter-female.html,
+test-rig,Power,12 V wall adapter,"Sealed, 3 A or more, 5.5 x 2.1 mm plug, UL listed",1,each,12.95,1,reused,store page,2026-10-16,https://www.coolerguys.com/products/110-240v-ac-to-3a-12v-power-supply-with-barrel-connector-2-1mm-x-5-5mm,
+test-rig,Tools and supplies,M3 tap and drill,M3 x 0.5 tap with a 2.5 mm drill,1,each,9.96,1,tool,store page,2026-10-16,https://www.ebay.com/itm/356797328656,
 test-rig,Tools and supplies,Tap wrench,Holds the tap,1,each,8.00,1,tool,estimate,2026-10-16,,
 test-rig,Tools and supplies,Calipers,Digital,1,each,15.00,1,tool,estimate,2026-10-16,,
 test-rig,Tools and supplies,Hex keys,"1.5 mm, 2 mm and 2.5 mm",1,set,8.00,1,tool,estimate,2026-10-16,,
 test-rig,Tools and supplies,Wrench,5.5 mm,1,each,5.00,1,tool,estimate,2026-10-16,,
 test-rig,Tools and supplies,Fine file or sharpening stone,To round the stylus tip,1,each,8.00,1,tool,estimate,2026-10-16,,
 test-rig,Tools and supplies,Infrared thermometer,For the heat test,1,each,15.00,1,tool,estimate,2026-10-16,,
-test-rig,Tools and supplies,65 lb cardstock,For test dots,1,ream,12.00,1,tool,estimate,2026-10-16,,
+test-rig,Tools and supplies,65 lb cardstock,For test dots,1,ream,12.00,1,supply,estimate,2026-10-16,,
 test-rig,Optional,Second solenoid,For comparing two solenoids (test 8),1,each,3.30,1,optional,order sheet,2026-10-16,https://www.alibaba.com/product-detail/JF-0826B-DC-12V-24V-2A_1600634368825.html,We already have two.
 test-rig,Optional,Perkins brailler die,Part 40-0062-0-0; needs its own arm,1,each,8.95,1,optional,store page,2026-10-16,https://brailler.perkins.org/products/die-braille,
 test-rig,Optional,M4 die parts,"M4 set screw, nut, acorn nut and tap",1,set,15.00,1,optional,estimate,2026-10-16,,
@@ -47,7 +47,7 @@ design-a,Electronics,Solenoid driver parts,"MOSFET, diode, 2 resistors, capacito
 design-a,Electronics,Circuit board and connectors,Perfboard and plug-in connectors,1,set,5.00,1,part,estimate,2026-10-16,,
 design-a,Electronics,Wire,,1,set,3.00,1,part,estimate,2026-10-16,,
 design-a,Power,12 V wall adapter,"Sealed, 5 A, for the motors and the solenoid",1,each,16.00,1,part,estimate,2026-10-16,,
-design-a,Frame and case,Printed parts,"Frame, carriage, paper guides and cover",500,g,37.99,1000,part,store page,2026-10-16,https://www.printedsolid.com/products/prusament-petg-jet-black-1kg-nfc,The amount of plastic is our estimate.
+design-a,Frame and case,Printed parts,"Frame, carriage, paper guides and cover",500,g,12.00,1000,part,estimate,2026-10-16,,Our usual PLA price. The amount of plastic is our estimate.
 design-a,Frame and case,Screws and nuts,,1,set,5.00,1,part,estimate,2026-10-16,,
 design-b-extra,Punch head,More solenoids,"5 more JF-0826B, for 6 in all",5,each,3.30,1,part,order sheet,2026-10-16,https://www.alibaba.com/product-detail/JF-0826B-DC-12V-24V-2A_1600634368825.html,
 design-b-extra,Punch head,Steel pins,One per solenoid,6,each,5.00,20,part,estimate,2026-10-16,,

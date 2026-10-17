@@ -132,7 +132,7 @@ footer { margin-top: 48px; color: var(--muted); font-size: .9rem; max-width: 70c
     <h2 id="how">How we count costs</h2>
     <ul>
       <li><b>Cost per build</b> counts only the part of each pack that one build uses. For example, 16 screws from a kit of 340 count as 16/340 of the kit's price.</li>
-      <li><b>Buy everything</b> is what someone starting with nothing would spend: whole packs, plus tools.</li>
+      <li><b>Buy everything</b> is what someone starting with nothing would spend: whole packs, plus tools, supplies and the test electronics. We reuse the test electronics, so they don't count toward the cost per rig.</li>
       <li>Each price shows where it came from. <b>Order sheet</b> means the price on our team's order sheet. <b>Store page</b> means a price we saw on a store's page on the date shown. <b>Estimate</b> means our guess, to replace with a real price.</li>
       <li>The embosser designs aren't finished, so their costs are early estimates.</li>
     </ul>
@@ -156,6 +156,7 @@ footer { margin-top: 48px; color: var(--muted); font-size: .9rem; max-width: 70c
   const money = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
   const whole = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
   const SOURCE = { 'order sheet': 'Order sheet', 'store page': 'Store page', 'estimate': 'Estimate' };
+  const NOT_PER_BUILD = { tool: 'Tool', reused: 'Reused', supply: 'Supply', optional: 'Optional' };
 
   function parseCSV(text) {
     const rows = []; let row = [], field = '', quoted = false;
@@ -202,7 +203,7 @@ footer { margin-top: 48px; color: var(--muted); font-size: .9rem; max-width: 70c
     let per = 0, buy = 0;
     for (const r of rows) {
       if (r.counts === 'part') per += perBuild(r);
-      if (r.counts === 'part' || r.counts === 'tool') buy += buyIn(r);
+      if (r.counts !== 'optional') buy += buyIn(r);
     }
     return { per, buy };
   }
@@ -259,7 +260,7 @@ footer { margin-top: 48px; color: var(--muted); font-size: .9rem; max-width: 70c
         if (r.notes) det.append(el('span', { class: 'note' }, r.notes));
             const cell = (cls, label, text) => el('td', { class: cls, role: 'cell', 'data-label': label }, text);
         const cost = r.counts === 'part' ? cell('num', 'Cost per build', money.format(perBuild(r)))
-          : cell('num muted', 'Cost per build', r.counts === 'tool' ? 'Tool' : 'Optional');
+          : cell('num muted', 'Cost per build', NOT_PER_BUILD[r.counts] || r.counts);
         const src = cell('src', 'Price from', SOURCE[r.price_from] || r.price_from);
         if (r.price_from !== 'estimate' && r.checked) src.append(el('span', { class: 'when' }, longDate(r.checked)));
         tr.append(name, det, cell('num', 'Amount', amount(r)), cost, cell('num', 'Pack price', pack(r)), src);
@@ -292,7 +293,7 @@ footer { margin-top: 48px; color: var(--muted); font-size: .9rem; max-width: 70c
       const b = { per: a.per + totals(byBuild['design-b-extra'] || []).per };
       const summary = document.getElementById('summary');
       summary.append(
-        card('Test rig', money.format(rig.per), [`in parts per rig, or ${whole.format(rig.buy)} to buy everything from scratch, with tools`]),
+        card('Test rig', money.format(rig.per), [`in parts per rig, or ${whole.format(rig.buy)} to buy everything from scratch, with tools and test electronics`]),
         card('Embosser, design A', 'about ' + whole.format(a.per), ['early estimate, one stylus', `goal: under ${whole.format(GOAL)}`], { value: a.per }),
         card('Embosser, design B', 'about ' + whole.format(b.per), ['early estimate, six styli', `goal: under ${whole.format(GOAL)}`], { value: b.per }),
       );
