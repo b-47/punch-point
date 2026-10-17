@@ -285,7 +285,7 @@ module arm(tap = DIE_TAP) {
 // two dot rows, one braille line) away from it.
 SHIMS = [2.5, 5, 10];
 module shims() {
-    for (k = [0:len(SHIMS) - 1]) translate([0, k*14, 0]) cube([SHIMS[k], 40, 2]);
+    for (k = [0:len(SHIMS) - 1]) translate([k*14, 0, 0]) cube([SHIMS[k], 40, 2]);   // side by side, 14 mm apart
 }
 
 // ================================================================ stroke spacer
