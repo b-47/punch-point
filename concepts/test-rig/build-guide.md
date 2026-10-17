@@ -111,7 +111,7 @@ Nothing locks the standoff onto the push rod. Once the table is on, its hex guid
 ![The solenoid slides into the frame from the front, push rod up.](media/build/2-slide-in.png)
 
 1. Find the side of the solenoid with two threaded holes. It is one of its two flat steel sides.
-2. Slide the solenoid in from the front, push rod up, with that side toward the back wall. The stylus passes through the slot in the deck, the flat top of the frame.
+2. Slide the solenoid in from the front, push rod up, with that side toward the back wall. The stylus ends up under the slot in the deck, the flat top of the frame.
 3. Push the solenoid back until it touches the back wall. Its bottom plate rests on two ledges inside the side walls.
 4. Look through the four slots in the back wall. Two of them line up with the solenoid's holes.
 5. Put an M3 x 6 socket head screw with a washer through each of those two slots. Tighten them with the 2.5 mm hex key. Use 6 mm screws, because longer ones can poke past the steel toward the coil.
@@ -141,8 +141,8 @@ If the standoff sticks in the tube, use the table marked 6.0 instead.
 ![The die arm, shown in orange, lifted above the table. The die screw goes through its round end.](media/build/5-arm.png)
 
 1. Cut an M3 thread through the hole in the round end of the arm, from the top, with the M3 tap. If you don't have a tap, drive an ordinary M3 screw through the hole to cut the thread, then take it out.
-2. Screw the M3 x 25 set screw in from the top, socket end first. The hex socket in its end is the die.
-3. Stop when the end of the set screw is level with the lowest point of the arm, just under the hole.
+2. Screw the M3 x 25 set screw up into the hole from below, plain end first. Turn it with the 1.5 mm hex key in its socket. That hex socket is the die.
+3. Stop when the socket end is level with the lowest point of the arm, just under the hole.
 4. Screw an M3 nut onto the set screw, down to the arm. Leave it loose. Later it locks the die height.
 5. Screw two more M3 nuts onto the top of the set screw.
 6. Hold the lower one with pliers, and tighten the top one down hard against it with the wrench. Locked together, the two nuts turn the set screw:
@@ -194,7 +194,7 @@ To move to a newer ESP32 toolkit later, change the release number in the `platfo
 Keep your fingers away from the stylus and die while the 12 V adapter has power.
 
 1. Plug in the 12 V adapter.
-2. Lay a strip of 65 lb cardstock on the table, with its edge against the fence. The fence is the side of the tower that faces the table.
+2. Lay a strip of 65 lb cardstock on the table, with its edge against the fence. The fence is the side of the tower that faces the table. A strip about 30 mm wide leaves the tick marks on the table in view.
 3. In the Serial Monitor, type `f 25` and press Enter. The solenoid should click once.
 4. Look at the paper. If there is no dot, turn the top nut a quarter turn clockwise and fire again.
 5. Stop when the dot is round and firm and the paper isn't torn.
