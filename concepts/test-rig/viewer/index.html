@@ -279,7 +279,7 @@ input[type="range"] { width: 100%; accent-color: var(--steel); margin: 0; }
 <script>
 (() => {
 
-// ---------------------------------------------------------------- geometry (mm, from punch_rig_006.scad)
+// ---------------------------------------------------------------- geometry (mm, from punch_rig_007.scad)
 const STROKE = 10, TIP_FULL = 1.25, NOSE_Z = 1.6, SKIN = 1.2, HOLE_R = 1.7, NUT_BORE_R = 3.45;
 const DOG_R = 1.0, DOG_L = 1.5, THREAD_R = 1.5, SCREW_R = 1.5, SOCKET_DEPTH = 1.5;
 const s = { t: 0.23, D: 1.0, sock: 1.5, R: 0.75 };
@@ -489,7 +489,7 @@ const PARTS = [
   ['sol_coil', 0xb4612f, 0.3, 0.45, false],
   ['die_screw', 0x464d55, 0.7, 0.35, false],
   ['die_nuts', 0xc5cbd1, 0.8, 0.3, false],
-  ['jack_screws', 0x464d55, 0.7, 0.35, false],
+  ['back_screws', 0x464d55, 0.7, 0.35, false],
   ['spring', 0xc5cbd1, 0.8, 0.3, 'spring'],
   ['plunger', 0xc5cbd1, 0.8, 0.3, true],
   ['standoff', 0xc9a24a, 0.8, 0.3, true],
@@ -638,6 +638,7 @@ async function init3D() {
     const stl = window.RIG_PARTS;
     if (!stl) throw new Error('parts.js missing');
     for (const [name, color, metal, rough, isMoving] of PARTS) {
+      if (!stl[name]) continue;   // an older cached parts.js may lack a part; show the rest
       const bytes = Uint8Array.from(atob(stl[name]), (c) => c.charCodeAt(0));
       const geo = loader.parse(bytes.buffer);
       geo.computeVertexNormals();

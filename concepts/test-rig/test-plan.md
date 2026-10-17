@@ -17,7 +17,7 @@ The [design notes](design-notes.md) explain why each test matters.
 ## Before each session
 
 1. Write down the date, who is testing, and which solenoid, table and die you are using.
-2. Check that the arm screws, the table screws and the nut under the knob are tight.
+2. Check that the arm screws, the table screws, the two back-wall screws and the nut under the knob are tight.
 3. Unplug the 12 V adapter whenever your fingers are near the stylus or the die.
 
 ## How to judge a dot

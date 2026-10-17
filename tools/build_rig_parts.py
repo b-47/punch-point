@@ -12,7 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 RIG = ROOT / "concepts" / "test-rig"
 MODEL = sorted((RIG / "cad").glob("punch_rig_*.scad"))[-1]
-PARTS = ["frame", "table", "arm", "sol_frame", "sol_coil", "plunger", "spring", "jack_screws",
+PARTS = ["frame", "table", "arm", "sol_frame", "sol_coil", "plunger", "spring", "back_screws",
          "standoff", "nut", "stylus", "die_screw", "die_nuts"]
 
 

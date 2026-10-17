@@ -14,9 +14,8 @@ This rig embosses one braille dot at a time. We use it to test dots before we bu
 
 | File | What it is |
 | --- | --- |
-| `cad/punch_rig_006.scad` | The 3D model, in OpenSCAD. Older versions are in `cad/iterations/`. |
-| `print/rig_plate.3mf` | All the printed parts on one plate for a Prusa Core One: about 58 g of PLA, a common 3D printing plastic. It takes about 2 hours 40 minutes, with no supports. |
-| `print/coupon.3mf` | A small test print of the solenoid pocket: 3.3 g, 11 minutes. Print it first. |
+| `cad/punch_rig_007.scad` | The 3D model, in OpenSCAD. Older versions are in `cad/iterations/`. |
+| `print/rig_plate.3mf` | All the printed parts on one plate for a Prusa Core One: about 56 g of PLA, a common 3D printing plastic. It takes about 2 hours 40 minutes, with no supports. |
 | `print/*.stl` | Each printed part, as an STL file, the usual 3D printing format. |
 | `print/*.scad` | One small file per printed part. Open one in OpenSCAD and export it to remake that STL. |
 | `firmware/punch_test/` | Code for the ESP32, the small programmable board that fires the solenoid. |

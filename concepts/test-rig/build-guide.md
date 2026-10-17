@@ -1,7 +1,7 @@
 # Build the punch test rig
 
 This guide takes you from the print files to the first embossed dot. You will:
-1. Print the parts. This takes about 3 hours of printer time.
+1. Print the parts. This takes about 2 hours 40 minutes of printer time.
 2. Buy the hardware. The [parts and costs page](https://b-47.github.io/punch-point/bom/) has prices and links.
 3. Put the rig together. This takes about an hour.
 4. Wire the electronics and load the code.
@@ -19,10 +19,9 @@ Print these in PLA, a common 3D printing plastic. We use PLA for the first test 
 
 | File | What it holds | Plastic and time |
 | --- | --- | --- |
-| `coupon.3mf` | A small slice of the frame, to check the solenoid fits | 3.3 g, 11 minutes |
-| `rig_plate.3mf` | The frame, two tables, the die arm, three fence shims and the stroke spacer | 58 g, about 2 hours 40 minutes |
+| `rig_plate.3mf` | The frame, two tables, the die arm, three fence shims and the stroke spacer | 56 g, about 2 hours 40 minutes |
 
-Both files hold settings for a Prusa Core One with a 0.4 mm high-flow nozzle:
+The file holds settings for a Prusa Core One with a 0.4 mm high-flow nozzle:
 - Prusament PLA
 - 0.2 mm layers
 - 3 perimeters
@@ -51,11 +50,9 @@ Die (the metal socket that shapes the dot):
 - Super glue.
 
 Frame:
-- 2 M3 x 12 socket head screws. These are the jack screws that hold the solenoid down.
+- 2 M3 x 6 socket head screws and 2 M3 washers. They go through the back wall into the solenoid's own threaded holes.
 - 4 M3 x 6 button head screws, for the table.
 - 2 M3 x 16 socket head screws and 2 M3 washers, for the arm.
-- 2 zip ties, up to 4 mm wide and at least 150 mm long.
-- Optional: 2 M3 x 6 screws and 2 washers, into the solenoid's own threaded holes.
 
 Electronics:
 - 1 ESP32 board and a USB cable that carries data. The ESP32 is a small board you can program.
@@ -77,18 +74,10 @@ Electronics:
 - A drill, if you have one, to spin the stylus while you file it.
 - A US dime, as a height gauge.
 
-## 1. Print the parts and check the fit
+## 1. Print the parts
 
-1. Print the coupon.
-2. Hold the coupon in your hand with its open side toward you.
-3. Hold the solenoid upright, spring end down. Slide it into the coupon from the open side, so its bottom plate rests on the two ledges inside the walls. The plunger hangs down below the coupon.
-4. Check that the solenoid slides in without forcing.
-5. Check that it sits flat on both ledges inside the walls.
-6. Push the plunger in and out. Check that the spring and the plunger don't touch the ledges.
-7. Print the rig plate.
-8. Peel off the brim. Check that every screw hole is clear.
-
-If the solenoid won't go into the coupon, don't print the plate yet. Measure how much wider the gap needs to be, and add that to `SIDE_CLR` in the model.
+1. Print the rig plate.
+2. Peel off the brim. Check that every screw hole is clear.
 
 ## 2. Make the stylus
 
@@ -124,18 +113,16 @@ The acorn nut on the solenoid also stops the plunger at rest, so it sets how far
 
 ![The solenoid slides into the frame from the front, push rod up.](media/build/2-slide-in.png)
 
-1. Find the two lips that stick out from the side walls inside the frame, about 20 mm below its top. Each has a hole.
-2. Put an M3 x 12 socket head screw in each hole, from above. The gap at the front of the deck, the flat top of the frame, gives you room.
-3. Turn each screw with the 2.5 mm hex key until its tip pokes out under the lip. This cuts a thread in the plastic.
-4. Turn each screw back out until the tip no longer shows under the lip.
-5. Slide the solenoid in from the front, push rod up. It fits only one way round. The stylus passes through the slot in the deck.
-6. Push the solenoid back until it touches the back wall.
-7. Turn both jack screws down until they touch the solenoid. Then turn each a quarter turn more.
-8. Thread a zip tie through each pair of slots at the front of the frame. Run it across the front of the solenoid and around the back of the frame. Pull it tight and cut off the tail.
-9. Lead the solenoid's two wires out through a window in a side wall.
-10. Optional: the back wall has slots for the solenoid's own M3 holes. If two slots line up with the holes, add M3 x 6 screws with washers. Use screws no longer than 6 mm, because a longer screw can reach the coil.
+1. Find the side of the solenoid with two threaded holes. It is one of its two flat steel sides.
+2. Slide the solenoid in from the front, push rod up, with that side toward the back wall. The stylus passes through the slot in the deck, the flat top of the frame.
+3. Push the solenoid back until it touches the back wall. Its bottom plate rests on two ledges inside the side walls.
+4. Look through the four slots in the back wall. Two of them line up with the solenoid's holes.
+5. Put an M3 x 6 socket head screw with a washer through each of those two slots. Tighten them with the 2.5 mm hex key. Use 6 mm screws, because longer ones can poke past the steel toward the coil.
+6. Lead the solenoid's two wires out through a window in a side wall.
 
-![The frame from above, with the table off. The two jack screw heads, in orange, sit in the open gap at the front of the deck.](media/build/3-jack-screws.png)
+![The frame from behind. Two screws, in orange, go through two of the four slots in the back wall.](media/build/3-back-screws.png)
+
+If no slot lines up with a hole, you can still run the first tests. Two small lips above the solenoid stop it from jumping, and the table holds it in place once it is on. Measure where the holes really are, so we can move the slots to match.
 
 ## 5. Fit the table
 
@@ -239,11 +226,11 @@ Now run the [test plan](test-plan.md).
 | The paper drags under the die. | Turn the knob counterclockwise to raise the die. |
 | The paper tears. | Raise the die, or file the stylus tip rounder. |
 | Dots are faint. | Lower the die a quarter turn at a time, or use a longer pulse. |
-| Dots get fainter during a session. | Tighten the nut under the knob, the arm screws and the jack screws. |
+| Dots get fainter during a session. | Tighten the nut under the knob, the arm screws and the two screws in the back wall. |
 
 ## Change the model
 
-The model is [`cad/punch_rig_006.scad`](cad/punch_rig_006.scad), in OpenSCAD. After you change it:
+The model is [`cad/punch_rig_007.scad`](cad/punch_rig_007.scad), in OpenSCAD. After you change it:
 1. Open each file in `print/` with OpenSCAD and export its STL, or run `openscad -o print/frame.stl print/frame.scad` for each part.
 2. Slice the plate again.
 3. Run `python3 tools/build_rig_parts.py` from the top of the repository to update the 3D viewer.

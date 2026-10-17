@@ -35,8 +35,7 @@ Three choices shape the design:
 
 | Part | What it does | Why it looks this way |
 | --- | --- | --- |
-| Coupon | Checks that the solenoid fits | It is a slice of the frame around the solenoid's ledges. It prints in 11 minutes, so a bad fit costs minutes, not a 3-hour print. |
-| Frame | Holds the solenoid, the table and the die arm | The solenoid sits on two ledges, which take each strike. Two jack screws hold it down, and zip ties hold it against the back wall. It fits solenoids 25 to 28 mm long, in case a batch differs from the drawing. It prints upright with no supports. |
+| Frame | Holds the solenoid, the table and the die arm | The solenoid sits on two ledges, which take each strike. Two screws through the back wall go into the solenoid's own threaded holes. Two small lips above it stop it from jumping if those screws are out. It prints upright with no supports. |
 | Table, two versions | Holds the paper flat and guides the stylus. Tick marks every 2.5 mm and 6.0 mm show dot and cell spacing. | A hex tube under the table keeps the standoff from turning and the stylus on the die. Printers make small holes slightly off size, so we print a tight fit (5.8) and a loose fit (6.0). |
 | Die arm | Holds the die over the paper. The knob on top moves the die 0.5 mm per turn. | Its screw holes are bigger than the screws, so it slides about 1 mm to line the die up with the stylus. An M4 version, with a 2.0 mm socket for thick cardstock, is in `print/`. |
 | Fence shims | Move the paper exactly 2.5, 5 or 10 mm from the fence | That is one dot, two dots or one line of braille, for spacing tests. |
@@ -46,7 +45,8 @@ Three choices shape the design:
 
 | What we assume | Where it comes from | How we will know |
 | --- | --- | --- |
-| The solenoid frame is 22 x 25 x 27 mm, with an M3 push rod. | The seller's dimension drawing | The coupon print |
+| The solenoid frame is 22 x 25 x 27 mm, with an M3 push rod. | The seller's dimension drawing | It slides into the frame. |
+| The solenoid's two threaded holes are where the drawing shows them. | The seller's dimension drawing | Two of the four slots in the back wall line up with them. |
 | The plunger moves 10 mm and pushes hardest near the end of its stroke. | The seller's listing, and how solenoids work | We set the stylus to reach the paper in the last part of the stroke. |
 | 12 V and 2 A push hard enough to emboss 65 lb cardstock. | BrailleRAP uses the same kind of 12 V, 2 A solenoid. Sellers rate it at about 20 N. | Test 1. If it can't, we try longer pulses, a 24 V solenoid or a lever. |
 | The paper is about 0.25 mm thick. | 65 lb cover stock is about 0.23 mm. | We measure each paper. The knob adjusts for the rest. |
@@ -70,15 +70,16 @@ Three choices shape the design:
 
 ### Check these on the real parts
 
-- **Frame length.** The stylus length in step 2 of the build guide depends on it. For a 27 mm frame, the stylus sticks out 7.0 mm above the standoff. Use 6 mm for 28 mm, 8 mm for 26 mm, or 9 mm for 25 mm.
+- **Frame length.** The stylus length in step 2 of the build guide depends on it. For a 27 mm frame, the stylus sticks out 7.0 mm above the standoff. Use 8 mm for a 26 mm frame, or 9 mm for 25 mm.
+- **The lips.** They leave room for a solenoid frame up to about 27.3 mm long.
 - **The push rod's thread.** The stroke spacer sets the stroke whatever the thread length. A very long rod could still reach the stylus inside the standoff.
 - **The hex fit.** This depends on our printer. It is why there are two tables.
-- **The mounting holes.** The slots in the back wall follow the drawing. Use them only if they line up.
+- **The mounting holes.** The two screws in the back wall are the main hold. The slots give 1 mm of room up and down and 0.5 mm side to side.
 
 ## What we checked in the 3D model
 
-- The parts fit together, and nothing collides through the whole stroke. We checked solenoids 25, 27 and 28 mm long.
-- A 2.5 mm hex key reaches the jack screws from above.
+- The parts fit together, and nothing collides through the whole stroke. We checked solenoids 25, 26 and 27 mm long.
+- The back-wall screws pass through their slots into the solenoid's holes.
 - With a 27 mm solenoid, the stylus's lock nut stays 2.2 mm clear of the table at the top of the stroke.
 - Every part prints without supports, and every print file passes a geometry check.
 
@@ -89,14 +90,13 @@ Three choices shape the design:
 - A whole page, or months of use.
 - Tactile graphics, which need the stylus placed anywhere on the page.
 
-## Changes in version 006
+## Changes in version 007
 
-- The deck now stops short of the jack screws, so a hex key reaches them from above. In version 005, they sat under the deck with 12 mm of room above them. A standard 2.5 mm key needs about 18 mm.
-- The jack screws moved 0.75 mm inward, so their heads clear the side walls.
-- The table screws moved behind the deck's new front edge.
-- The table is 1.2 mm thick around the stylus hole, down from 1.6 mm, which gives the stylus's lock nut more room.
-- The holes in the back wall now match the seller's drawing, and they are slots.
-- The stroke spacer is new.
-- The tables and the arm have their size marked underneath.
+- Two screws through the back wall, into the solenoid's own threaded holes, now hold the solenoid. The jack screws, the zip ties and the zip-tie slots are gone.
+- The deck is whole again, because nothing under it needs a tool.
+- The lips above the solenoid are small fixed stops.
+- The slots in the back wall are 4 mm wide, for 0.5 mm of room side to side.
+- The fence shims print as three separate pieces.
+- There is no fit coupon. The sizes come from the seller's drawing, and the pocket has 0.5 mm of room on each side.
 
 Older versions are in [`cad/iterations/`](cad/iterations/).

@@ -1,14 +1,12 @@
 build,section,item,details,qty,unit,pack_price,pack_qty,counts,price_from,checked,link,notes
-test-rig,Printed parts,Rig plate,"Frame, two tables, die arm, fence shims and stroke spacer",58,g,35.99,1000,part,store page,2026-10-16,https://www.printedsolid.com/products/prusament-pla-1-75mm-1kg-pristine-white,Prusament PLA. Other PLA costs less.
-test-rig,Printed parts,Fit coupon,A slice of the frame to check the solenoid fits,3.3,g,35.99,1000,part,store page,2026-10-16,https://www.printedsolid.com/products/prusament-pla-1-75mm-1kg-pristine-white,
+test-rig,Printed parts,Rig plate,"Frame, two tables, die arm, fence shims and stroke spacer",56,g,35.99,1000,part,store page,2026-10-16,https://www.printedsolid.com/products/prusament-pla-1-75mm-1kg-pristine-white,Prusament PLA. Other PLA costs less.
 test-rig,Solenoid and stylus,Solenoid,"JF-0826B, 12 V, 2 A, 10 mm stroke",1,each,3.30,1,part,order sheet,2026-10-16,https://www.alibaba.com/product-detail/JF-0826B-DC-12V-24V-2A_1600634368825.html,US store pages list it for about $6 to $10.
 test-rig,Solenoid and stylus,Hex standoff,"M3 x 18, threaded through, 5.5 mm across flats, stainless steel",1,each,5.91,1,part,store page,2026-10-16,https://accu-components.com/us/threaded-standoffs/464742-HHTPS-M3-5-5-18-SS,Packs of 10 cost less per standoff.
 test-rig,Solenoid and stylus,Dog-point set screws,"M3 x 16, steel; one becomes the stylus, one is a spare",2,each,9.00,25,part,estimate,2026-10-16,https://amazon.com/Point-Screws-Socket-Tensile-Black/dp/B07ZZ5YQC3,
 test-rig,Solenoid and stylus,Thread locker,"Blue, medium strength",2,drops,6.00,100,part,estimate,2026-10-16,,
 test-rig,Die,Set screw for the die,"M3 x 25 (M3 x 30 also works)",1,each,6.00,10,part,estimate,2026-10-16,,
 test-rig,Die,Super glue,To fix the acorn nut on as a knob,1,drops,4.00,100,part,estimate,2026-10-16,,
-test-rig,Frame hardware,M3 screw kit,"Socket head and button head screws, nuts and washers; the rig uses 16 pieces",16,each,12.00,340,part,estimate,2026-10-16,https://bulkman3d.com/product/m3-hex-socket-cap-head-screws-and-nuts-340pcs-set/,
-test-rig,Frame hardware,Zip ties,Up to 4 mm wide and at least 150 mm long,2,each,5.00,100,part,estimate,2026-10-16,,
+test-rig,Frame hardware,M3 screw kit,"Socket head and button head screws, nuts and washers; the rig uses 14 pieces",14,each,12.00,340,part,estimate,2026-10-16,https://bulkman3d.com/product/m3-hex-socket-cap-head-screws-and-nuts-340pcs-set/,
 test-rig,Electronics,ESP32 board,Small programmable board that times the pulses,1,each,16.99,1,part,order sheet,2026-10-16,https://www.amazon.com/dp/B08D5ZD528,The order sheet doesn't say how many boards this buys. Single boards cost about $4 to $11 elsewhere.
 test-rig,Electronics,MOSFET,"IRLB8721 or IRLZ44N, the switch for the solenoid",1,each,6.55,10,part,store page,2026-10-16,https://www.ebay.com/itm/285820523559,Cheap copies may not switch fully at 3.3 V. A known distributor is safer.
 test-rig,Electronics,Diode,1N4007,1,each,5.00,100,part,estimate,2026-10-16,,
