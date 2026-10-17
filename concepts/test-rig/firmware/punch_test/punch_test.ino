@@ -1,6 +1,6 @@
-// Punch Point test rig v3: fire the solenoids with set pulse lengths.
+// Punch Point test rig: fire the solenoids with set pulse lengths.
 //
-// Wiring, once per solenoid (see the rig page for the diagram):
+// Wiring, once per solenoid (diagram: ../../media/circuit.svg):
 //   GPIO -> 100 ohm -> MOSFET gate (IRLB8721 or IRLZ44N), 10 kohm gate to GND
 //   +12 V -> solenoid -> MOSFET drain; MOSFET source -> GND
 //   1N4007 across the solenoid, cathode (stripe) to +12 V

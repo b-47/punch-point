@@ -1,3 +1,3 @@
 // Frame, printed upright as modelled. PETG, no supports.
-include <../cad/punch_rig_005.scad>
+include <../cad/punch_rig_006.scad>
 PART = "frame_print";

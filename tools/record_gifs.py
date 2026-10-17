@@ -1,13 +1,14 @@
 """Record the README GIFs from the two offline viewers.
 
     pip install websocket-client pillow
-    python3 tools/record_gifs.py
+    python3 tools/record_gifs.py          # both
+    python3 tools/record_gifs.py rig      # or only one: rig or six
 
 Needs Google Chrome (or Chromium) and ffmpeg. Drives each viewer frame by frame
 through the Chrome DevTools protocol, so every frame is exact, then encodes
 concepts/test-rig/media/strike.gif and concepts/six-solenoid-head/media/emboss.gif.
 """
-import base64, io, json, shutil, socket, subprocess, tempfile, time, urllib.request
+import base64, io, json, shutil, socket, subprocess, sys, tempfile, time, urllib.request
 from pathlib import Path
 
 import websocket
@@ -117,9 +118,10 @@ def six(c, fps=10):
 
 
 if __name__ == "__main__":
+    which = sys.argv[1:] or ["rig", "six"]
     c = Chrome()
     try:
-        rig(c)
-        six(c)
+        for name in which:
+            {"rig": rig, "six": six}[name](c)
     finally:
         c.close()

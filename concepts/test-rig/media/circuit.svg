@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 580" width="1040" height="580" role="img" aria-labelledby="t d">
+  <title id="t">Test rig circuit for one solenoid</title>
+  <desc id="d">A 12 volt wall adapter feeds a 12 volt rail and a ground rail. A 1000 microfarad capacitor sits across the two rails. The solenoid runs from the 12 volt rail to the drain of a MOSFET. A 1N4007 diode sits across the solenoid with its stripe toward 12 volts. The MOSFET source goes to ground. GPIO 4 on the ESP32 drives the MOSFET gate through a 100 ohm resistor, and a 10 kilohm resistor ties the gate to ground. The ESP32 ground connects to the adapter ground. The ESP32 is powered by USB from a computer.</desc>
+  <rect width="1040" height="580" fill="#ffffff"/>
+  <g fill="none" stroke="#17202a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- rails -->
+    <path d="M500 90 H940"/>
+    <path d="M230 470 H940"/>
+    <!-- solenoid L1 -->
+    <path d="M500 90 V130 a12.5 12.5 0 0 1 0 25 a12.5 12.5 0 0 1 0 25 a12.5 12.5 0 0 1 0 25 a12.5 12.5 0 0 1 0 25 V300 H470"/>
+    <!-- diode D1, stripe up -->
+    <path d="M620 90 V150"/>
+    <path d="M606 150 H634"/>
+    <path d="M620 150 L606 180 H634 Z"/>
+    <path d="M620 180 V250 H500"/>
+    <!-- capacitor C1 -->
+    <path d="M770 90 V258"/>
+    <path d="M750 258 H790"/>
+    <path d="M750 276 Q770 266 790 276"/>
+    <path d="M770 271 V470"/>
+    <!-- MOSFET Q1 -->
+    <path d="M470 292 V308 M470 322 V338 M470 352 V368"/>
+    <path d="M456 296 V364"/>
+    <path d="M470 330 H500 V360 H470"/>
+    <path d="M500 360 V470"/>
+    <!-- gate drive: GPIO 4, R1, gate node, R2 -->
+    <path d="M210 330 H250 l5 -9 l10 18 l10 -18 l10 18 l10 -18 l10 18 l5 -9 H456"/>
+    <path d="M360 330 V380 l-9 5 l18 10 l-18 10 l18 10 l-18 10 l18 10 l-9 5 V470"/>
+    <!-- ESP32 ground -->
+    <path d="M210 420 H230 V470"/>
+    <!-- adapter -->
+    <path d="M940 90 V210"/>
+    <path d="M940 350 V470"/>
+    <rect x="880" y="210" width="120" height="140" rx="8"/>
+    <!-- ESP32 board -->
+    <rect x="40" y="250" width="170" height="200" rx="8"/>
+    <!-- MOSFET pin view -->
+    <rect x="70" y="490" width="80" height="34" rx="3"/>
+    <path d="M85 524 V552 M110 524 V552 M135 524 V552"/>
+    <circle cx="110" cy="503" r="5"/>
+  </g>
+  <!-- body arrow, pointing in: N-channel -->
+  <path d="M472 330 L484 324 V336 Z" fill="#17202a"/>
+  <g fill="#17202a">
+    <circle cx="500" cy="250" r="4.5"/>
+    <circle cx="620" cy="90" r="4.5"/>
+    <circle cx="770" cy="90" r="4.5"/>
+    <circle cx="360" cy="330" r="4.5"/>
+    <circle cx="360" cy="470" r="4.5"/>
+    <circle cx="500" cy="470" r="4.5"/>
+    <circle cx="770" cy="470" r="4.5"/>
+  </g>
+  <g font-family="IBM Plex Sans, Arial, Helvetica, sans-serif" font-size="17" fill="#17202a">
+    <text x="560" y="78" font-weight="600">+12 V</text>
+    <text x="560" y="500" font-weight="600">GND</text>
+    <text x="485" y="170" text-anchor="end" font-weight="600">L1 solenoid</text>
+    <text x="485" y="191" text-anchor="end">JF-0826B, 12 V</text>
+    <text x="644" y="164" font-weight="600">D1 1N4007</text>
+    <text x="644" y="185">stripe to +12 V</text>
+    <text x="745" y="252" text-anchor="end">+</text>
+    <text x="800" y="262" font-weight="600">C1</text>
+    <text x="800" y="283">1000 µF</text>
+    <text x="800" y="304">25 V</text>
+    <text x="528" y="322" font-weight="600">Q1 MOSFET</text>
+    <text x="528" y="343">IRLB8721 or</text>
+    <text x="528" y="364">IRLZ44N</text>
+    <text x="440" y="318" text-anchor="end">G</text>
+    <text x="508" y="294">D</text>
+    <text x="508" y="392">S</text>
+    <text x="280" y="312" text-anchor="middle" font-weight="600">R1 100 Ω</text>
+    <text x="380" y="420" font-weight="600">R2</text>
+    <text x="380" y="441">10 kΩ</text>
+    <text x="940" y="262" text-anchor="middle" font-weight="600">12 V, 3 A</text>
+    <text x="940" y="284" text-anchor="middle">wall adapter</text>
+    <text x="952" y="228">+</text>
+    <text x="952" y="344">−</text>
+    <text x="125" y="282" text-anchor="middle" font-weight="600">ESP32 board</text>
+    <text x="125" y="304" text-anchor="middle" font-size="14">USB to a computer</text>
+    <text x="200" y="336" text-anchor="end">GPIO 4</text>
+    <text x="200" y="426" text-anchor="end">GND</text>
+    <text x="40" y="478" font-size="14">Q1 pins, label toward you</text>
+    <text x="85" y="572" text-anchor="middle" font-size="15">G</text>
+    <text x="110" y="572" text-anchor="middle" font-size="15">D</text>
+    <text x="135" y="572" text-anchor="middle" font-size="15">S</text>
+    <text x="230" y="548" font-size="15">Solenoid 2: build a second copy of L1, D1, Q1, R1 and R2 on GPIO 13.</text>
+  </g>
+</svg>
