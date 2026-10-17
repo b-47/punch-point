@@ -7,7 +7,6 @@ This rig embosses one braille dot at a time. We use it to test dots before we bu
 - [Build guide](build-guide.md): print, buy, assemble, wire and fire the first dot.
 - [Design notes](design-notes.md): what the rig tests, what each part is for, and the numbers the design assumes.
 - [Test plan](test-plan.md): the tests to run, how to judge a dot, and what the results decide.
-- [Parts and costs](https://b-47.github.io/punch-point/bom/): every part, with prices and links.
 - [3D viewer](https://b-47.github.io/punch-point/concepts/test-rig/viewer/): watch one strike, and change the paper, die and stylus.
 
 ## Files

@@ -3,160 +3,64 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Parts and Costs</title>
-<meta name="description" content="Every part of the Punch Point test rig and our running cost estimate for a low-cost braille embosser.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<title>Bill of Materials</title>
+<meta name="description" content="Parts and costs for the Punch Point braille embosser.">
 <style>
 :root {
-  --bg: #F2F4F6;
-  --surface: #FFFFFF;
-  --ink: #17202A;
-  --muted: #5A6774;
-  --rule: #D3DAE1;
-  --steel: #2D6A93;
-  --steel-soft: #DDE9F2;
-  --track: #E3E8ED;
-  --over: #A4372B;
-  --font-display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
-  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-data: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --bg: #ffffff;
+  --ink: #1b1f24;
+  --muted: #59636e;
+  --rule: #d6dbe0;
+  --head: #f1f3f5;
+  --link: #1f5f8b;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0E1318; --surface: #151C23; --ink: #E2E8EE; --muted: #97A4B0;
-    --rule: #2B3641; --steel: #7DB3D8; --steel-soft: #1D3243; --track: #23303B; --over: #E58B7F;
+    --bg: #111418; --ink: #e3e7eb; --muted: #9aa5b0; --rule: #2c343c; --head: #1a2027; --link: #8cc0e3;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #0E1318; --surface: #151C23; --ink: #E2E8EE; --muted: #97A4B0;
-  --rule: #2B3641; --steel: #7DB3D8; --steel-soft: #1D3243; --track: #23303B; --over: #E58B7F;
+  --bg: #111418; --ink: #e3e7eb; --muted: #9aa5b0; --rule: #2c343c; --head: #1a2027; --link: #8cc0e3;
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--ink);
-  font-family: var(--font-body);
-  font-size: 16px;
-  line-height: 1.55;
-}
-a { color: var(--steel); }
-a:focus-visible { outline: 2px solid var(--steel); outline-offset: 2px; }
-.wrap {
-  max-width: 1040px;
-  margin-inline: auto;
-  padding: 48px 16px 64px;
-}
-h1 {
-  font-family: var(--font-display);
-  font-stretch: 112%;
-  font-weight: 800;
-  font-size: clamp(2rem, 6vw, 3rem);
-  line-height: 1.05;
-  margin: 12px 0 12px;
-}
-h2 {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.5rem;
-  margin: 48px 0 6px;
-}
-.lede { color: var(--muted); max-width: 62ch; margin: 0 0 28px; }
-.cards { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
-.card {
-  background: var(--surface);
-  border: 1px solid var(--rule);
-  border-radius: 10px;
-  padding: 18px 20px 20px;
-}
-.card h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; margin: 0 0 8px; }
-.big { font-family: var(--font-data); font-weight: 500; font-size: 2rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
-.card p { margin: 6px 0 0; color: var(--muted); font-size: .95rem; }
-.bar { height: 10px; border-radius: 5px; background: var(--track); margin-top: 14px; overflow: hidden; }
-.bar span { display: block; height: 100%; background: var(--steel); border-radius: 5px; }
-.bar.over span { background: var(--over); }
-.notes { max-width: 70ch; }
-.notes ul { padding-left: 1.2em; }
-.notes li { margin: 4px 0; }
-.intro { color: var(--muted); margin: 0 0 14px; max-width: 70ch; }
-.table-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; }
-table { border-collapse: collapse; width: 100%; min-width: 720px; font-size: .95rem; }
-th, td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--rule); }
-thead th { font-weight: 600; color: var(--muted); font-size: .85rem; white-space: nowrap; }
-tbody th.group {
-  font-family: var(--font-display);
-  font-weight: 700;
-  background: var(--steel-soft);
-  padding-top: 7px; padding-bottom: 7px;
-}
-td.num, th.num { text-align: right; font-family: var(--font-data); font-variant-numeric: tabular-nums; white-space: nowrap; }
-td .note { display: block; color: var(--muted); font-size: .85rem; margin-top: 2px; }
-td.src { white-space: nowrap; }
-td.src .when { display: block; color: var(--muted); font-size: .85rem; }
-td.muted { color: var(--muted); }
-thead th.num { font-family: var(--font-body); }
-tfoot td, tfoot th { font-weight: 600; border-bottom: none; }
-tfoot th { text-align: right; }
-/* phones: each part becomes a small block, every value with its label */
-@media (max-width: 640px) {
-  table { min-width: 0; }
-  thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
-  tr { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 14px; padding: 10px 12px; border-bottom: 1px solid var(--rule); }
-  tr.grouprow { padding: 0; }
-  th, td { display: block; padding: 0; border: none; }
-  td.num, th.num { text-align: left; }
-  tbody th[scope="row"], td.details, th.group { grid-column: 1 / -1; }
-  th.group { padding: 7px 12px; }
-  td.details { margin-bottom: 4px; }
-  td[data-label]::before { content: attr(data-label); display: block; font-family: var(--font-body); font-size: .75rem; color: var(--muted); }
-  tfoot tr { grid-template-columns: 1fr auto; }
-  tfoot th { text-align: left; }
-  tfoot td:empty { display: none; }
-}
-.status { margin-top: 24px; color: var(--muted); }
-footer { margin-top: 48px; color: var(--muted); font-size: .9rem; max-width: 70ch; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+main { max-width: 960px; margin: 0 auto; padding: 32px 16px 48px; }
+h1 { font-size: 1.8rem; margin: 0 0 8px; }
+p { margin: 0 0 16px; max-width: 70ch; }
+a { color: var(--link); }
+.wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+th, td { text-align: left; vertical-align: top; padding: 7px 10px; border-bottom: 1px solid var(--rule); }
+thead th { background: var(--head); font-weight: 600; }
+.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.est { display: block; color: var(--muted); font-size: .8rem; }
+tfoot th, tfoot td { font-weight: 600; border-bottom: none; }
+.note { color: var(--muted); font-size: .9rem; margin-top: 16px; }
 </style>
 </head>
 <body>
-<main class="wrap">
-  <h1>Parts and costs</h1>
-  <p class="lede">This page lists every part of our braille punch test rig, with prices and links. It also shows our running estimate for the full embosser. Our goal is an embosser that costs less than $200 in parts.</p>
-
-  <div class="cards" id="summary" aria-live="polite"></div>
-
-  <section class="notes" aria-labelledby="how">
-    <h2 id="how">How we count costs</h2>
-    <ul>
-      <li><b>Cost per build</b> counts only the part of each pack that one build uses. For example, 16 screws from a kit of 340 count as 16/340 of the kit's price.</li>
-      <li><b>Buy everything</b> is what someone starting with nothing would spend: whole packs, plus tools, supplies and the test electronics. We reuse the test electronics, so they don't count toward the cost per rig.</li>
-      <li>Each price shows where it came from. <b>Order sheet</b> means the price on our team's order sheet. <b>Store page</b> means a price we saw on a store's page on the date shown. <b>Estimate</b> means our guess, to replace with a real price.</li>
-      <li>The embosser designs aren't finished, so their costs are early estimates.</li>
-    </ul>
-  </section>
-
-  <div id="builds"></div>
-  <p class="status" id="status">Loading the parts list.</p>
-
-  <footer>
-    The list comes from <a href="https://github.com/b-47/punch-point/blob/main/bom/parts.csv">parts.csv</a>. To change a price or add a part, edit that file. The <a href="https://github.com/b-47/punch-point/blob/main/bom/README.md">instructions</a> explain each column.
-  </footer>
+<main>
+  <h1>Bill of materials</h1>
+  <p>Parts for the Punch Point braille embosser. There are two designs, each with its own quantity column. One has a single stylus that moves across the page. The other has six styli that emboss a whole braille cell at once.</p>
+  <p>Prices are in US dollars. A price without a store link is an estimate.</p>
+  <div class="wrap">
+    <table>
+      <thead>
+        <tr><th scope="col">Part</th><th scope="col">Details</th><th scope="col" class="num">Unit cost</th><th scope="col" class="num">One stylus</th><th scope="col" class="num">Six styli</th></tr>
+      </thead>
+      <tbody id="rows"></tbody>
+      <tfoot>
+        <tr><th scope="row" colspan="3">Total</th><td class="num" id="totalOne"></td><td class="num" id="totalSix"></td></tr>
+      </tfoot>
+    </table>
+  </div>
+  <p class="note" id="note">Loading the parts list.</p>
 </main>
 <script>
 (function () {
-  const BUILDS = {
-    'test-rig': { title: 'Test rig', intro: 'The rig we are building now: one solenoid, one stylus and one die, for testing dots. The build guide is in the project files.' },
-    'design-a': { title: 'Embosser, design A: one stylus', intro: 'One stylus on a carriage that moves across the page, and rollers that feed the paper. An early estimate.' },
-    'design-b-extra': { title: 'Design B: what six styli add', intro: 'Design B is design A with six styli, which strike a whole braille cell at once. These are the extra parts.' },
-  };
-  const GOAL = 200;
   const money = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
-  const whole = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
-  const SOURCE = { 'order sheet': 'Order sheet', 'store page': 'Store page', 'estimate': 'Estimate' };
-  const NOT_PER_BUILD = { tool: 'Tool', reused: 'Reused', supply: 'Supply', optional: 'Optional' };
 
   function parseCSV(text) {
     const rows = []; let row = [], field = '', quoted = false;
@@ -181,129 +85,41 @@ footer { margin-top: 48px; color: var(--muted); font-size: .9rem; max-width: 70c
     return rows.map((r) => Object.fromEntries(head.map((h, i) => [h, (r[i] || '').trim()])));
   }
 
-  function longDate(iso) {
-    if (!iso) return '';
-    const d = new Date(iso + 'T12:00:00');
-    return isNaN(d) ? iso : d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-  }
-  function amount(r) {
-    const q = Number(r.qty);
-    if (r.unit === 'each') return String(q);
-    return `${q} ${q === 1 && r.unit.endsWith('s') ? r.unit.slice(0, -1) : r.unit}`;
-  }
-  function pack(r) {
-    const n = Number(r.pack_qty);
-    if (n === 1 && (r.unit === 'each' || r.unit === 'set' || r.unit === 'ream')) return money.format(Number(r.pack_price));
-    return `${money.format(Number(r.pack_price))} for ${n}${r.unit === 'each' ? '' : ' ' + r.unit}`;
-  }
-  const perBuild = (r) => Number(r.qty) * Number(r.pack_price) / Number(r.pack_qty);
-  const buyIn = (r) => Math.ceil(Number(r.qty) / Number(r.pack_qty) - 1e-9) * Number(r.pack_price);
-
-  function totals(rows) {
-    let per = 0, buy = 0;
-    for (const r of rows) {
-      if (r.counts === 'part') per += perBuild(r);
-      if (r.counts !== 'optional') buy += buyIn(r);
-    }
-    return { per, buy };
-  }
-
-  function el(tag, attrs = {}, text) {
+  function cell(tag, text, cls) {
     const n = document.createElement(tag);
-    for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v);
+    if (cls) n.className = cls;
     if (text !== undefined) n.textContent = text;
     return n;
-  }
-
-  function card(title, value, lines, goal) {
-    const c = el('div', { class: 'card' });
-    c.append(el('h3', {}, title), el('div', { class: 'big' }, value));
-    for (const l of lines) c.append(el('p', {}, l));
-    if (goal) {
-      const share = goal.value / GOAL;
-      const bar = el('div', { class: 'bar' + (share > 1 ? ' over' : ''), role: 'img',
-        'aria-label': `${whole.format(goal.value)} of the ${whole.format(GOAL)} goal` });
-      const fill = el('span'); fill.style.width = Math.min(100, share * 100).toFixed(1) + '%';
-      bar.append(fill); c.append(bar);
-    }
-    return c;
-  }
-
-  function table(key, rows) {
-    const sec = el('section', { 'aria-labelledby': 'h-' + key });
-    const info = BUILDS[key] || { title: key, intro: '' };
-    sec.append(el('h2', { id: 'h-' + key }, info.title));
-    if (info.intro) sec.append(el('p', { class: 'intro' }, info.intro));
-    const wrap = el('div', { class: 'table-wrap', tabindex: '0', role: 'region', 'aria-labelledby': 'h-' + key });
-    const t = el('table', { role: 'table' });
-    const head = el('thead', { role: 'rowgroup' }); const hr = el('tr', { role: 'row' });
-    [['Part', ''], ['Details', ''], ['Amount', 'num'], ['Cost per build', 'num'], ['Pack price', 'num'], ['Price from', '']]
-      .forEach(([h, cls]) => hr.append(el('th', { scope: 'col', class: cls, role: 'columnheader' }, h)));
-    head.append(hr); t.append(head);
-
-    const sections = [];
-    for (const r of rows) {
-      let s = sections.find((x) => x.name === r.section);
-      if (!s) sections.push(s = { name: r.section, rows: [] });
-      s.rows.push(r);
-    }
-    for (const s of sections) {
-      const body = el('tbody', { role: 'rowgroup' });
-      const gr = el('tr', { role: 'row', class: 'grouprow' });
-      gr.append(el('th', { scope: 'colgroup', colspan: '6', class: 'group', role: 'columnheader' }, s.name)); body.append(gr);
-      for (const r of s.rows) {
-        const tr = el('tr', { role: 'row' });
-        const name = el('th', { scope: 'row', role: 'rowheader' });
-        if (r.link) { const a = el('a', { href: r.link }, r.item); name.append(a); } else name.textContent = r.item;
-        name.style.fontWeight = '500';
-        const det = el('td', { class: 'details', role: 'cell' }, r.details);
-        if (r.notes) det.append(el('span', { class: 'note' }, r.notes));
-            const cell = (cls, label, text) => el('td', { class: cls, role: 'cell', 'data-label': label }, text);
-        const cost = r.counts === 'part' ? cell('num', 'Cost per build', money.format(perBuild(r)))
-          : cell('num muted', 'Cost per build', NOT_PER_BUILD[r.counts] || r.counts);
-        const src = cell('src', 'Price from', SOURCE[r.price_from] || r.price_from);
-        if (r.price_from !== 'estimate' && r.checked) src.append(el('span', { class: 'when' }, longDate(r.checked)));
-        tr.append(name, det, cell('num', 'Amount', amount(r)), cost, cell('num', 'Pack price', pack(r)), src);
-        body.append(tr);
-      }
-      t.append(body);
-    }
-    const { per, buy } = totals(rows);
-    const foot = el('tfoot', { role: 'rowgroup' });
-    const total = (label, value) => {
-      const tr = el('tr', { role: 'row' });
-      tr.append(el('th', { scope: 'row', colspan: '3', role: 'rowheader' }, label), el('td', { class: 'num', role: 'cell' }, money.format(value)), el('td', { colspan: '2', role: 'cell' }));
-      return tr;
-    };
-    const f1 = total('Cost per build', per);
-    const f2 = total('Buy everything, with tools and whole packs', buy);
-    foot.append(f1, f2); t.append(foot);
-    wrap.append(t); sec.append(wrap);
-    return sec;
   }
 
   fetch('parts.csv', { cache: 'no-cache' })
     .then((res) => { if (!res.ok) throw new Error(res.status); return res.text(); })
     .then((text) => {
-      const rows = parseCSV(text);
-      const byBuild = {};
-      for (const r of rows) (byBuild[r.build] = byBuild[r.build] || []).push(r);
-      const rig = totals(byBuild['test-rig'] || []);
-      const a = totals(byBuild['design-a'] || []);
-      const b = { per: a.per + totals(byBuild['design-b-extra'] || []).per };
-      const summary = document.getElementById('summary');
-      summary.append(
-        card('Test rig', money.format(rig.per), [`in parts per rig, or ${whole.format(rig.buy)} to buy everything from scratch, with tools and test electronics`]),
-        card('Embosser, design A', 'about ' + whole.format(a.per), ['early estimate, one stylus', `goal: under ${whole.format(GOAL)}`], { value: a.per }),
-        card('Embosser, design B', 'about ' + whole.format(b.per), ['early estimate, six styli', `goal: under ${whole.format(GOAL)}`], { value: b.per }),
-      );
-      const builds = document.getElementById('builds');
-      for (const key of Object.keys(byBuild)) builds.append(table(key, byBuild[key]));
-      const latest = rows.map((r) => r.checked).filter(Boolean).sort().pop();
-      document.getElementById('status').textContent = latest ? `Prices last checked ${longDate(latest)}. Store prices change, so check a store page before you order.` : '';
+      const parts = parseCSV(text);
+      let one = 0, six = 0;
+      const body = document.getElementById('rows');
+      for (const p of parts) {
+        const unit = Number(p.unit_cost), q1 = Number(p.qty_one_stylus), q6 = Number(p.qty_six_styli);
+        one += unit * q1; six += unit * q6;
+        const tr = document.createElement('tr');
+        const name = cell('th');
+        name.scope = 'row';
+        name.style.fontWeight = 'normal';
+        if (p.link) { const a = cell('a', p.part); a.href = p.link; name.append(a); } else name.textContent = p.part;
+        const price = cell('td', money.format(unit), 'num');
+        if (!p.link) price.append(cell('span', 'estimate', 'est'));
+        tr.append(name, cell('td', p.details), price, cell('td', q1 ? String(q1) : '', 'num'), cell('td', q6 ? String(q6) : '', 'num'));
+        body.append(tr);
+      }
+      document.getElementById('totalOne').textContent = money.format(one);
+      document.getElementById('totalSix').textContent = money.format(six);
+      const latest = parts.map((p) => p.checked).filter(Boolean).sort().pop();
+      const when = latest ? new Date(latest + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : '';
+      document.getElementById('note').innerHTML = (when ? `Prices checked ${when}. ` : '') +
+        'The list comes from <a href="https://github.com/b-47/punch-point/blob/main/bom/parts.csv">parts.csv</a>.';
     })
     .catch(() => {
-      document.getElementById('status').innerHTML = 'The parts list did not load. Open this page from the <a href="https://b-47.github.io/punch-point/bom/">project website</a>. To view it from your own copy of the files, start a local web server in this folder first.';
+      document.getElementById('note').innerHTML = 'The parts list did not load. It is in <a href="https://github.com/b-47/punch-point/blob/main/bom/parts.csv">parts.csv</a>.';
     });
 })();
 </script>

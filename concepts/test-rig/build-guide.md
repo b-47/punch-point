@@ -2,7 +2,7 @@
 
 This guide takes you from the print files to the first embossed dot. You will:
 1. Print the parts. This takes about 2 hours 40 minutes of printer time.
-2. Buy the hardware. The [parts and costs page](https://b-47.github.io/punch-point/bom/) has prices and links.
+2. Buy the hardware on the list below.
 3. Put the rig together. This takes about an hour.
 4. Wire the electronics and load the code.
 5. Fire the first dot.
