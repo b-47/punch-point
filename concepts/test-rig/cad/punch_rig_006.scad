@@ -25,7 +25,7 @@
 // Coordinates (mm): punch axis x 0, y 0. z 0 = top of the paper table.
 // A paper strip slides along y with its edge on the fence at x = FENCE_X.
 //
-// Printed parts (PETG):  frame, table (hex fit variants), arm (M3 or M4 die),
+// Printed parts (PLA for the first test):  frame, table (hex fit variants), arm (M3 or M4 die),
 // fence shims, stroke spacer, and a coupon for checking the solenoid fit first.
 // PART selects what is rendered; the default is the assembly.
 

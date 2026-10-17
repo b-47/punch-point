@@ -55,7 +55,7 @@ Three choices shape the design:
 | The socket of an M3 set screw, 1.5 mm across, makes the right dot size. | BrailleRAP | Test dots. If they're too small, we try the M4 die. |
 | The standoff is 5.5 mm across its flat sides and threaded all the way through. | What we ordered | The table fit check |
 | The plastic is stiff enough. | The steel parts take the impact, and the plastic parts are 3 to 10 mm thick. | Test 6: the dot height stays the same over 500 strikes. |
-| The coil doesn't overheat. | The code limits pulses to 100 ms and keeps the coil off at least 3 times as long as it was on. | Test 5 |
+| The coil stays cool enough for the PLA frame. | The code limits pulses to 100 ms and keeps the coil off at least 3 times as long as it was on. PLA starts to soften at about 55 °C. | Test 5. For long runs, reprint the frame in PETG. |
 | Moving the paper by hand is accurate to about 0.3 mm. | Our estimate | Good enough to judge dots. Not good enough to test exact spacing. |
 
 ### Solenoid sizes from the seller's drawing

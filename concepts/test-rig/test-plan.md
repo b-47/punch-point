@@ -71,7 +71,7 @@ The code keeps the coil off for at least 3 times as long as each pulse. With 25 
 Check that the coil stays cool enough at full speed.
 1. Type `r 200 <working pulse> <shortest gap from test 4>`, and pull the paper through as before.
 2. When it finishes, measure the coil's temperature with an infrared or probe thermometer. Don't touch the coil, because it may be hot.
-3. Stop and slow down if the coil is above 70 °C. That limit is our own margin, not a number from the seller.
+3. Stop and slow down if the coil is above 50 °C. The frame is PLA, which starts to soften at about 55 °C. The 50 °C limit is our own margin, not a number from the seller.
 
 ### 6. Wear
 

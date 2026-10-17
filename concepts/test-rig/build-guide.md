@@ -15,14 +15,15 @@ The [design notes](design-notes.md) explain why the rig looks the way it does. A
 
 ### Printed parts
 
-Print these in PETG, a common 3D printing plastic. The files are in [`print/`](print/).
+Print these in PLA, a common 3D printing plastic. We use PLA for the first test print because it bridges cleanly and strings less. The files are in [`print/`](print/).
 
 | File | What it holds | Plastic and time |
 | --- | --- | --- |
-| `coupon.3mf` | A small slice of the frame, to check the solenoid fits | 3.4 g, 11 minutes |
-| `rig_plate.3mf` | The frame, two tables, the die arm, three fence shims and the stroke spacer | 59 g, about 2 hours 50 minutes |
+| `coupon.3mf` | A small slice of the frame, to check the solenoid fits | 3.3 g, 11 minutes |
+| `rig_plate.3mf` | The frame, two tables, the die arm, three fence shims and the stroke spacer | 58 g, about 2 hours 40 minutes |
 
 Both files hold settings for a Prusa Core One with a 0.4 mm high-flow nozzle:
+- Prusament PLA
 - 0.2 mm layers
 - 3 perimeters
 - 4 top and 4 bottom layers

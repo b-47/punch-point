@@ -1,6 +1,6 @@
 build,section,item,details,qty,unit,pack_price,pack_qty,counts,price_from,checked,link,notes
-test-rig,Printed parts,Rig plate,"Frame, two tables, die arm, fence shims and stroke spacer",59,g,37.99,1000,part,store page,2026-10-16,https://www.printedsolid.com/products/prusament-petg-jet-black-1kg-nfc,Prusament PETG. Other PETG costs less.
-test-rig,Printed parts,Fit coupon,A slice of the frame to check the solenoid fits,3.4,g,37.99,1000,part,store page,2026-10-16,https://www.printedsolid.com/products/prusament-petg-jet-black-1kg-nfc,
+test-rig,Printed parts,Rig plate,"Frame, two tables, die arm, fence shims and stroke spacer",58,g,35.99,1000,part,store page,2026-10-16,https://www.printedsolid.com/products/prusament-pla-1-75mm-1kg-pristine-white,Prusament PLA. Other PLA costs less.
+test-rig,Printed parts,Fit coupon,A slice of the frame to check the solenoid fits,3.3,g,35.99,1000,part,store page,2026-10-16,https://www.printedsolid.com/products/prusament-pla-1-75mm-1kg-pristine-white,
 test-rig,Solenoid and stylus,Solenoid,"JF-0826B, 12 V, 2 A, 10 mm stroke",1,each,3.30,1,part,order sheet,2026-10-16,https://www.alibaba.com/product-detail/JF-0826B-DC-12V-24V-2A_1600634368825.html,US store pages list it for about $6 to $10.
 test-rig,Solenoid and stylus,Hex standoff,"M3 x 18, threaded through, 5.5 mm across flats, stainless steel",1,each,5.91,1,part,store page,2026-10-16,https://accu-components.com/us/threaded-standoffs/464742-HHTPS-M3-5-5-18-SS,Packs of 10 cost less per standoff.
 test-rig,Solenoid and stylus,Dog-point set screws,"M3 x 16, steel; one becomes the stylus, one is a spare",2,each,9.00,25,part,estimate,2026-10-16,https://amazon.com/Point-Screws-Socket-Tensile-Black/dp/B07ZZ5YQC3,
