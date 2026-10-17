@@ -1,3 +1,3 @@
 // Fence shims 2.5 / 5 / 10 mm.
-include <../cad/punch_rig_007.scad>
+include <../cad/punch_rig_008.scad>
 PART = "shims";

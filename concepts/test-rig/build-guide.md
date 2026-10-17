@@ -1,7 +1,7 @@
 # Build the punch test rig
 
 This guide takes you from the print files to the first embossed dot. You will:
-1. Print the parts. This takes about 2 hours 40 minutes of printer time.
+1. Print the parts. This takes about 3 hours 40 minutes of printer time.
 2. Buy the hardware on the list below.
 3. Put the rig together. This takes about an hour.
 4. Wire the electronics and load the code.
@@ -19,14 +19,14 @@ Print these in PLA, a common 3D printing plastic. We use PLA for the first test 
 
 | File | What it holds | Plastic and time |
 | --- | --- | --- |
-| `rig_plate.3mf` | The frame, two tables, the die arm, three fence shims and the stroke spacer | 56 g, about 2 hours 40 minutes |
+| `rig_plate.3mf` | The frame, two tables, the die arm, three fence shims and the stroke spacer | 65 g, about 3 hours 40 minutes |
 
 The file holds settings for a Prusa Core One with a 0.4 mm high-flow nozzle:
 - Prusament PLA
-- 0.2 mm layers
-- 3 perimeters
-- 4 top and 4 bottom layers
-- 15% gyroid infill
+- the 0.20 mm Structural profile
+- 4 perimeters
+- 5 top and 5 bottom layers
+- 25% gyroid infill
 - a 5 mm brim
 - no supports
 
@@ -231,7 +231,8 @@ Now run the [test plan](test-plan.md).
 
 ## Change the model
 
-The model is [`cad/punch_rig_007.scad`](cad/punch_rig_007.scad), in OpenSCAD. After you change it:
+The model is [`cad/punch_rig_008.scad`](cad/punch_rig_008.scad), in OpenSCAD. After you change it:
 1. Open each file in `print/` with OpenSCAD and export its STL, or run `openscad -o print/frame.stl print/frame.scad` for each part.
 2. Slice the plate again.
-3. Run `python3 tools/build_rig_parts.py` from the top of the repository to update the 3D viewer.
+3. Run `python3 tools/print_check.py` from the top of the repository. It must end with PRINT CHECK PASSED.
+4. Run `python3 tools/build_rig_parts.py` to update the 3D viewer.

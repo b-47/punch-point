@@ -81,7 +81,7 @@ Three choices shape the design:
 - The parts fit together, and nothing collides through the whole stroke. We checked solenoids 25, 26 and 27 mm long.
 - The back-wall screws pass through their slots into the solenoid's holes.
 - With a 27 mm solenoid, the stylus's lock nut stays 2.2 mm clear of the table at the top of the stroke.
-- Every part prints without supports, and every print file passes a geometry check.
+- Every part prints without supports. A layer-by-layer check, `tools/print_check.py`, finds no material over thin air, no bridge that ends in mid-air and nothing thinner than one 0.4 mm line.
 
 ## What the rig can't test
 
@@ -89,6 +89,12 @@ Three choices shape the design:
 - Six styli striking at once.
 - A whole page, or months of use.
 - Tactile graphics, which need the stylus placed anywhere on the page.
+
+## Changes in version 008
+
+- The deck has a slope under it along each side wall. The deck beside the boss slot now prints on the slope instead of hanging over the solenoid pocket. The back end of the slot is square, so the deck behind it bridges straight across.
+- Each table counterbore has a stepped bridge over it, so no bridge line hangs into the screw hole. The screw holes are 4.2 mm wide, so the table moves about 0.6 mm each way to line up.
+- The plate prints with 4 perimeters, 5 top and 5 bottom layers and 25% gyroid infill, on the Structural profile.
 
 ## Changes in version 007
 

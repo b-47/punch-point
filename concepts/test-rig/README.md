@@ -13,8 +13,8 @@ This rig embosses one braille dot at a time.
 
 | File | What it is |
 | --- | --- |
-| `cad/punch_rig_007.scad` | The 3D model, in OpenSCAD. Older versions are in `cad/iterations/`. |
-| `print/rig_plate.3mf` | All the printed parts on one plate for a Prusa Core One: about 56 g of PLA and 2 hours 40 minutes. |
+| `cad/punch_rig_008.scad` | The 3D model, in OpenSCAD. Older versions are in `cad/iterations/`. |
+| `print/rig_plate.3mf` | All the printed parts on one plate for a Prusa Core One: about 65 g of PLA and 3 hours 40 minutes. |
 | `print/*.stl` | Each printed part. |
 | `print/*.scad` | One file per printed part, to export its STL. |
 | `firmware/punch_test/` | Code for the ESP32 that fires the solenoid. |
