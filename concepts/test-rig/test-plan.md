@@ -95,7 +95,7 @@ Repeat test 2 with solenoid 2, to see whether two solenoids of the same kind beh
 ## Later tests
 
 These need parts we don't have yet:
-- **M4 die:** a bigger socket, 2.0 mm across, for thick cardstock. It needs the M4 arm in `print/`, an M4 set screw, three M4 nuts and an M4 tap.
+- **M4 die:** a bigger socket, 2.0 mm across, for thick cardstock. It needs the M4 arm in `print/`, an M4 x 30 set screw, three M4 nuts and an M4 tap.
 - **Groove die:** file a groove 1.5 mm wide across the end of a spare set screw. This shows whether a fixed bar with a groove could replace a moving die in the full machine.
 - **Perkins die:** the die from a Perkins brailler costs $8.95 from Perkins. It needs its own arm, which we can design once we can measure one.
 - **24 V solenoid:** a 24 V version of the same solenoid, run at 20 V from a USB-C charger.
