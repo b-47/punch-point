@@ -81,7 +81,11 @@ Three choices shape the design:
 - The parts fit together, and nothing collides through the whole stroke. We checked solenoids 25, 26 and 27 mm long.
 - The back-wall screws pass through their slots into the solenoid's holes.
 - With a 27 mm solenoid, the stylus's lock nut stays 2.2 mm clear of the table at the top of the stroke.
-- Every part prints without supports. A layer-by-layer check, `tools/print_check.py`, finds no material over thin air, no bridge that ends in mid-air and nothing thinner than one 0.4 mm line.
+- Every part prints without supports. A layer-by-layer check, `tools/print_check.py`, finds none of these:
+  - material over thin air
+  - a bridge longer than 12 mm, or one that ends in mid-air
+  - anything thinner than one 0.4 mm line
+- The same check confirms the plate's G-code has the right walls and a brim.
 
 ## What the rig can't test
 
@@ -89,6 +93,12 @@ Three choices shape the design:
 - Six styli striking at once.
 - A whole page, or months of use.
 - Tactile graphics, which need the stylus placed anywhere on the page.
+
+## Changes in version 009
+
+- The gusset under the tower's platform is solid across its full width, so nothing bridges under it. The old one left a 16 mm bridge, and PrusaSlicer flags PLA bridges past 16 mm.
+- A slope under the deck behind the boss slot means no part of the deck bridges.
+- The brim now prints. Earlier plates set a brim width but left the brim turned off.
 
 ## Changes in version 008
 

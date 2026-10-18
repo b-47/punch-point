@@ -9,9 +9,13 @@ flatter than about 51 degrees, and bridges that land on material at both ends pa
 on slivers narrower than one 0.4 mm line, on loose specks, and on how it stands on the
 bed (centre of mass over the first layer, nothing tall on a narrow base).
 
-The checks are copied from pc-case/tools/build.py, where they caught real print faults.
+It also reads the plate's G-code and fails unless it has the walls the rig needs and a
+brim that actually prints.
+
+The layer checks are copied from pc-case/tools/build.py, where they caught real print faults.
 """
 import concurrent.futures as cf
+import re
 import sys
 from pathlib import Path
 
@@ -24,7 +28,7 @@ PRINT = ROOT / "concepts" / "test-rig" / "print"
 LAYER = 0.2
 OVERHANG_OK = 1.2      # mm a layer may reach past the one below
 SLOPE_SPAN = 5         # layers: no more than OVERHANG_OK + ~51 deg past the layer this far down
-BRIDGE_MAX = 32.0      # mm between anchors
+BRIDGE_MAX = 12.0      # mm between anchors: PrusaSlicer's stability check flags PLA bridges past 16
 MIN_FEATURE = 0.4      # mm: anything narrower in a layer is thinner than one nozzle line
 SLENDER_MAX = 4.0      # height / narrowest width of the first layer
 ISLAND_MIN = 6.0       # mm2: a first-layer island smaller than this gets knocked off
@@ -194,6 +198,26 @@ def check(path):
                 stance=stance_bad, notes=notes, print=printability(m))
 
 
+# What the plate's G-code must say: the walls, and a brim that is really there.
+GCODE_WANT = {"perimeters": "4", "top_solid_layers": "5", "bottom_solid_layers": "5",
+              "fill_density": "25%", "fill_pattern": "gyroid", "brim_width": "5"}
+
+
+def gcode_audit(path):
+    """Settings the plate's G-code was really sliced with. A brim width alone prints nothing:
+    the Core One presets have brim_type = no_brim, so the brim lines themselves are counted."""
+    if not path.exists():
+        return [f"{path.name} is missing: slice the plate"]
+    text = path.read_text(errors="replace")
+    conf = dict(re.findall(r"^; (\w+) = (.*)$", text, re.M))
+    bad = [f"{k} is {conf.get(k, 'missing')}, should be {v}" for k, v in GCODE_WANT.items() if conf.get(k) != v]
+    if conf.get("brim_type", "no_brim") == "no_brim" or ";TYPE:Skirt/Brim" not in text:
+        bad.append(f"no brim prints (brim_type = {conf.get('brim_type', 'missing')})")
+    if re.search(r"^;TYPE:.*[Ss]upport", text, re.M):
+        bad.append("the plate prints support material")
+    return bad
+
+
 def main():
     stls = sorted(PRINT.glob("*.stl"))
     ok = True
@@ -213,6 +237,12 @@ def main():
                 print(f"  {f}")
             for n in r["notes"]:
                 print(f"  note: {n}")
+    plate = PRINT / "rig_plate.gcode"
+    g = gcode_audit(plate)
+    ok &= not g
+    print(f"{plate.name}: {'ok' if not g else 'FAIL'}")
+    for f in g:
+        print(f"  {f}")
     print("PRINT CHECK", "PASSED" if ok else "FAILED")
     return ok
 
