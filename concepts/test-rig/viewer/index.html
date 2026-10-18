@@ -506,9 +506,13 @@ const VIEWS = {
 };
 function setView(name) {
   const v = VIEWS[name];
+  // spend any spin left over from a drag first; with damping on it would carry the camera off the view
+  controls.enableDamping = false;
+  controls.update();
   controls.target.set(...v.target);
   camera.position.set(v.target[0] + v.pos[0], v.target[1] + v.pos[1], v.target[2] + v.pos[2]);
   controls.update();
+  controls.enableDamping = true;
 }
 
 // a disc of rings around one dot; its heights are set by setDisc
