@@ -1,6 +1,6 @@
 # Punch Point
 
-A low-cost, portable braille embosser for teachers of blind and low-vision students.
+A low-cost, portable braille embosser.
 
 - [Test rig viewer](https://b-47.github.io/punch-point/concepts/test-rig/viewer/)
 
