@@ -94,6 +94,12 @@ Three choices shape the design:
 - A whole page, or months of use.
 - Tactile graphics, which need the stylus placed anywhere on the page.
 
+## Changes in version 010
+
+- The arm screws go into captive M3 nuts instead of cutting their own thread in the tower. Threads cut in PLA wear out when the arm comes off and goes back on. The nuts slide into two slots in the tower's outer face.
+- The arm screws are now M3 x 20, long enough to pass all the way through the nuts.
+- The ceiling of each nut slot is a stepped bridge around the screw hole, like the table's counterbores.
+
 ## Changes in version 009
 
 - The gusset under the tower's platform is solid across its full width, so nothing bridges under it. The old one left a 16 mm bridge, and PrusaSlicer flags PLA bridges past 16 mm.

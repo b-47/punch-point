@@ -49,7 +49,7 @@ Die (the metal socket that shapes the dot):
 Frame:
 - 2 M3 x 6 socket head screws and 2 M3 washers. They go through the back wall into the solenoid's own threaded holes.
 - 4 M3 x 6 button head screws, for the table.
-- 2 M3 x 16 socket head screws and 2 M3 washers, for the arm.
+- 2 M3 x 20 socket head screws, 2 M3 washers and 2 M3 nuts, for the arm.
 
 Electronics:
 - 1 ESP32 board and a USB cable that carries data. The ESP32 is a small board you can program.
@@ -149,12 +149,13 @@ If the standoff sticks in the tube, use the table marked 6.0 instead.
    - Turn the top nut clockwise to lower the die.
    - Turn the nut just under it counterclockwise to raise the die.
    - Each turn moves the die 0.5 mm.
-7. Put the arm on top of the tower, the block that rises beside the table. Fix it with the two M3 x 16 socket head screws and washers, but leave the screws loose.
-8. Push the plunger up and hold it there.
-9. Turn the top nut clockwise until the die rests on the stylus tip.
-10. Slide the arm until the tip drops into the die's hex socket.
-11. Tighten the two arm screws. Then let go of the plunger.
-12. Turn the nut just under the top nut one turn counterclockwise, to raise the die 0.5 mm.
+7. Push an M3 nut into each of the two slots in the outer face of the tower, the block that rises beside the table. Push each nut in flat until it stops under its screw hole.
+8. Put the arm on top of the tower. Fix it with the two M3 x 20 socket head screws and washers, but leave the screws loose.
+9. Push the plunger up and hold it there.
+10. Turn the top nut clockwise until the die rests on the stylus tip.
+11. Slide the arm until the tip drops into the die's hex socket.
+12. Tighten the two arm screws. Then let go of the plunger.
+13. Turn the nut just under the top nut one turn counterclockwise, to raise the die 0.5 mm.
 
 ## 7. Wire the electronics
 
@@ -231,7 +232,7 @@ Now run the [test plan](test-plan.md).
 
 ## Change the model
 
-The model is [`cad/punch_rig_009.scad`](cad/punch_rig_009.scad), in OpenSCAD. After you change it:
+The model is [`cad/punch_rig_010.scad`](cad/punch_rig_010.scad), in OpenSCAD. After you change it:
 1. Open each file in `print/` with OpenSCAD and export its STL, or run `openscad -o print/frame.stl print/frame.scad` for each part.
 2. Slice the plate again.
 3. Run `python3 tools/print_check.py` from the top of the repository. It must end with PRINT CHECK PASSED.
