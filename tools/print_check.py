@@ -237,12 +237,13 @@ def main():
                 print(f"  {f}")
             for n in r["notes"]:
                 print(f"  note: {n}")
-    plate = PRINT / "rig_plate.gcode"
-    g = gcode_audit(plate)
-    ok &= not g
-    print(f"{plate.name}: {'ok' if not g else 'FAIL'}")
-    for f in g:
-        print(f"  {f}")
+    # one plate per printer: rig_plate (Core One) and rig_plate_mk4
+    for plate in sorted(PRINT.glob("rig_plate*.gcode")) or [PRINT / "rig_plate.gcode"]:
+        g = gcode_audit(plate)
+        ok &= not g
+        print(f"{plate.name}: {'ok' if not g else 'FAIL'}")
+        for f in g:
+            print(f"  {f}")
     print("PRINT CHECK", "PASSED" if ok else "FAILED")
     return ok
 

@@ -19,11 +19,14 @@ Print these in PLA, a common 3D printing plastic. We use PLA for the first test 
 
 | File | What it holds | Plastic and time |
 | --- | --- | --- |
-| `rig_plate.3mf` | The frame, two tables, the die arm, three fence shims and the stroke spacer | 63 g, about 3 hours |
+| `rig_plate.3mf` | The frame, two tables, the die arm, three fence shims and the stroke spacer, for a Prusa Core One | 63 g, about 3 hours |
+| `rig_plate_mk4.3mf` | The same parts, for a Prusa MK4 | 63 g, about 3 hours |
 
-The file holds settings for a Prusa Core One with a 0.4 mm high-flow nozzle:
+Use the file for your printer. Both use these settings:
 - Prusament PLA
-- the 0.20 mm Balanced profile
+- 0.20 mm layers
+- on the Core One, the Balanced profile and a 0.4 mm high-flow nozzle
+- on the MK4, the Speed profile and a standard 0.4 mm nozzle. It prints at about the same speeds as Balanced.
 - 3 perimeters
 - 4 top and 4 bottom layers
 - 15% gyroid infill
