@@ -37,7 +37,7 @@ Three choices shape the design:
 | --- | --- | --- |
 | Frame | Holds the solenoid, the table and the die arm | The solenoid sits on two ledges, which take each strike. Two screws through the back wall go into the solenoid's own threaded holes. Two small lips above it stop it from jumping if those screws are out. It prints upright with no supports. |
 | Table, two versions | Holds the paper flat and guides the stylus. Tick marks every 2.5 mm and 6.0 mm show dot and cell spacing. | A hex tube under the table keeps the standoff from turning and the stylus on the die. Printers make small holes slightly off size, so we print a tight fit (5.8) and a loose fit (6.0). |
-| Die arm | Holds the die over the paper. Two nuts locked together on top of the die screw turn it, 0.5 mm per turn. | Its screw holes are bigger than the screws, so it slides about 1 mm to line the die up with the stylus. An M4 version, with a 2.0 mm socket for thick cardstock, is in `print/`. |
+| Die arm | Holds the die over the paper. Two nuts locked together on top of the die screw turn it, 0.5 mm per turn. | The die screw threads through a nut in a slot. The arm's screw holes are bigger than the screws, so it slides about 1 mm to line the die up with the stylus. An M4 version, for thick cardstock, is in `print/`. |
 | Fence shims | Move the paper exactly 2.5, 5 or 10 mm from the fence | That is one dot, two dots or one line of braille, for spacing tests. |
 | Stroke spacer | Sets the plunger's stroke back to 10 mm | The standoff replaces the solenoid's acorn nut, which used to stop the plunger at rest. See step 3 of the build guide. |
 
@@ -93,6 +93,14 @@ Three choices shape the design:
 - Six styli striking at once.
 - A whole page, or months of use.
 - Tactile graphics, which need the stylus placed anywhere on the page.
+
+## Changes in version 011
+
+- No screw cuts its own thread in the plastic any more. The die screw threads through an M3 nut held in a slot in the arm's round end. Each strike pushes the nut up against 3 mm of arm above it.
+- The table screws go into four M3 nuts held in slots just under the deck. The front two slots open on the front of the frame and the back two on the back, clear of the tower.
+- The table screws are now M3 x 8, long enough to pass through the nuts. The table itself is the same.
+- The side walls are 4 mm thick instead of 3, so they stay solid outside the nut slots.
+- The blocks under the deck along the side walls start 3 mm lower, so the front nuts sit in solid plastic.
 
 ## Changes in version 010
 

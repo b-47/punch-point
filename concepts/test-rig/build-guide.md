@@ -1,7 +1,7 @@
 # Build the punch test rig
 
 This guide takes you from the print files to the first embossed dot. You will:
-1. Print the parts. This takes about 3 hours 50 minutes of printer time.
+1. Print the parts. This takes about 4 hours of printer time.
 2. Buy the hardware on the list below.
 3. Put the rig together. This takes about an hour.
 4. Wire the electronics and load the code.
@@ -19,7 +19,7 @@ Print these in PLA, a common 3D printing plastic. We use PLA for the first test 
 
 | File | What it holds | Plastic and time |
 | --- | --- | --- |
-| `rig_plate.3mf` | The frame, two tables, the die arm, three fence shims and the stroke spacer | 68 g, about 3 hours 50 minutes |
+| `rig_plate.3mf` | The frame, two tables, the die arm, three fence shims and the stroke spacer | 72 g, about 4 hours |
 
 The file holds settings for a Prusa Core One with a 0.4 mm high-flow nozzle:
 - Prusament PLA
@@ -44,11 +44,11 @@ Solenoid and stylus:
 
 Die (the metal socket that shapes the dot):
 - 1 M3 x 25 set screw. An M3 x 30 also works.
-- 3 M3 nuts.
+- 4 M3 nuts.
 
 Frame:
 - 2 M3 x 6 socket head screws and 2 M3 washers. They go through the back wall into the solenoid's own threaded holes.
-- 4 M3 x 6 button head screws, for the table.
+- 4 M3 x 8 button head screws and 4 M3 nuts, for the table.
 - 2 M3 x 20 socket head screws, 2 M3 washers and 2 M3 nuts, for the arm.
 
 Electronics:
@@ -66,7 +66,6 @@ Electronics:
 - Calipers.
 - Hex keys: 1.5 mm, 2 mm and 2.5 mm. A 2.5 mm key with a ball end helps.
 - A 5.5 mm wrench and small pliers, to tighten two nuts against each other.
-- An M3 tap with a tap wrench. A tap cuts a thread in a hole. If you don't have one, step 6 gives another way.
 - A fine file or a sharpening stone.
 - A drill, if you have one, to spin the stylus while you file it.
 - A US dime, as a height gauge.
@@ -125,14 +124,15 @@ If no slot lines up with a hole, you can still run the first tests. Two small li
 
 ![The table, shown in orange, lifted above the frame. The tube under it slides down over the stylus and standoff.](media/build/4-table.png)
 
-1. Take the table marked 5.8 underneath.
-2. Lower it onto the deck, so the tube under it slides down over the stylus, nut and standoff.
-3. Put in the 4 M3 x 6 button head screws, loosely.
-4. Reach through the window in the back wall, under the solenoid, and push the plunger up as far as it goes.
-5. Check the stylus tip. It should stand about 1.3 mm above the table, about as high as a dime is thick.
-6. Move the table until the plunger slides up and down freely.
-7. Tighten the 4 screws.
-8. Let go of the plunger. It should drop back by itself, and the tip should sink below the table surface.
+1. Push an M3 nut into each of the four slots just under the deck. Two open on the front of the frame and two on the back. Push each nut in flat with a hex key until it stops under its screw hole.
+2. Take the table marked 5.8 underneath.
+3. Lower it onto the deck, so the tube under it slides down over the stylus, nut and standoff.
+4. Put in the 4 M3 x 8 button head screws, loosely.
+5. Reach through the window in the back wall, under the solenoid, and push the plunger up as far as it goes.
+6. Check the stylus tip. It should stand about 1.3 mm above the table, about as high as a dime is thick.
+7. Move the table until the plunger slides up and down freely.
+8. Tighten the 4 screws.
+9. Let go of the plunger. It should drop back by itself, and the tip should sink below the table surface.
 
 If the standoff sticks in the tube, use the table marked 6.0 instead.
 
@@ -140,8 +140,8 @@ If the standoff sticks in the tube, use the table marked 6.0 instead.
 
 ![The die arm, shown in orange, lifted above the table. The die screw goes through its round end.](media/build/5-arm.png)
 
-1. Cut an M3 thread through the hole in the round end of the arm, from the top, with the M3 tap. If you don't have a tap, drive an ordinary M3 screw through the hole to cut the thread, then take it out.
-2. Screw the M3 x 25 set screw up into the hole from below, plain end first. Turn it with the 1.5 mm hex key in its socket. That hex socket is the die.
+1. Push an M3 nut into the slot in the round end of the arm. Push it in flat until it stops under the hole.
+2. Screw the M3 x 25 set screw up into the hole from below, plain end first, so it threads through the nut. Turn it with the 1.5 mm hex key in its socket. That hex socket is the die.
 3. Stop when the socket end is level with the lowest point of the arm, just under the hole.
 4. Screw an M3 nut onto the set screw, down to the arm. Leave it loose. Later it locks the die height.
 5. Screw two more M3 nuts onto the top of the set screw.
@@ -232,7 +232,7 @@ Now run the [test plan](test-plan.md).
 
 ## Change the model
 
-The model is [`cad/punch_rig_010.scad`](cad/punch_rig_010.scad), in OpenSCAD. After you change it:
+The model is [`cad/punch_rig_011.scad`](cad/punch_rig_011.scad), in OpenSCAD. After you change it:
 1. Open each file in `print/` with OpenSCAD and export its STL, or run `openscad -o print/frame.stl print/frame.scad` for each part.
 2. Slice the plate again.
 3. Run `python3 tools/print_check.py` from the top of the repository. It must end with PRINT CHECK PASSED.

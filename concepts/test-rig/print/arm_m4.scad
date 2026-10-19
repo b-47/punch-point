@@ -1,4 +1,4 @@
-// Die arm for an M4 set-screw die (2.0 mm socket), for thick cardstock. Tap M4 through.
-include <../cad/punch_rig_010.scad>
+// Die arm for an M4 set-screw die (2.0 mm socket), for thick cardstock. The die screw threads through a captive M4 nut.
+include <../cad/punch_rig_011.scad>
 PART = "arm_print";
-DIE_TAP = 3.3;
+DIE_M = 4;
