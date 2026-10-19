@@ -66,6 +66,7 @@ Electronics:
 - Calipers.
 - Hex keys: 1.5 mm, 2 mm and 2.5 mm. A 2.5 mm key with a ball end helps.
 - A 5.5 mm wrench and small pliers, to tighten two nuts against each other.
+- Tweezers, to place two of the nuts.
 - A fine file or a sharpening stone.
 - A drill, if you have one, to spin the stylus while you file it.
 - A US dime, as a height gauge.
@@ -109,12 +110,15 @@ Nothing locks the standoff onto the push rod. Once the table is on, its hex guid
 
 ![The solenoid slides into the frame from the front, push rod up.](media/build/2-slide-in.png)
 
-1. Find the side of the solenoid with two threaded holes. It is one of its two flat steel sides.
-2. Slide the solenoid in from the front, push rod up, with that side toward the back wall. The stylus ends up under the slot in the deck, the flat top of the frame.
-3. Push the solenoid back until it touches the back wall. Its bottom plate rests on two ledges inside the side walls.
-4. Look through the four slots in the back wall. Two of them line up with the solenoid's holes.
-5. Put an M3 x 6 socket head screw with a washer through each of those two slots. Tighten them with the 2.5 mm hex key. Use 6 mm screws, because longer ones can poke past the steel toward the coil.
-6. Lead the solenoid's two wires out through a window in a side wall.
+1. Put the four table nuts in first, while the slot in the deck is empty. The deck is the flat top of the frame.
+   - Two slots open on the back of the frame, just under the deck. Push an M3 nut into each with a hex key until it stops.
+   - The other two open into the slot in the middle of the deck, one on each side, just under the deck. Hold an M3 nut flat with tweezers and set it in the mouth of one slot. It falls through if you let go early. Push it outward with a hex key until it stops.
+2. Find the side of the solenoid with two threaded holes. It is one of its two flat steel sides.
+3. Slide the solenoid in from the front, push rod up, with that side toward the back wall. The stylus ends up under the slot in the deck.
+4. Push the solenoid back until it touches the back wall. Its bottom plate rests on two ledges inside the side walls.
+5. Look through the four slots in the back wall. Two of them line up with the solenoid's holes.
+6. Put an M3 x 6 socket head screw with a washer through each of those two slots. Tighten them with the 2.5 mm hex key. Use 6 mm screws, because longer ones can poke past the steel toward the coil.
+7. Lead the solenoid's two wires out through a window in a side wall.
 
 ![The frame from behind. Two screws, in orange, go through two of the four slots in the back wall.](media/build/3-back-screws.png)
 
@@ -124,15 +128,14 @@ If no slot lines up with a hole, you can still run the first tests. Two small li
 
 ![The table, shown in orange, lifted above the frame. The tube under it slides down over the stylus and standoff.](media/build/4-table.png)
 
-1. Push an M3 nut into each of the four slots just under the deck. Two open on the front of the frame and two on the back. Push each nut in flat with a hex key until it stops under its screw hole.
-2. Take the table marked 5.8 underneath.
-3. Lower it onto the deck, so the tube under it slides down over the stylus, nut and standoff.
-4. Put in the 4 M3 x 8 socket head screws, loosely. Their heads sink below the table surface.
-5. Reach through the window in the back wall, under the solenoid, and push the plunger up as far as it goes.
-6. Check the stylus tip. It should stand about 1.3 mm above the table, about as high as a dime is thick.
-7. Move the table until the plunger slides up and down freely.
-8. Tighten the 4 screws.
-9. Let go of the plunger. It should drop back by itself, and the tip should sink below the table surface.
+1. Take the table marked 5.8 underneath.
+2. Lower it onto the deck, so the tube under it slides down over the stylus, nut and standoff.
+3. Put in the 4 M3 x 8 socket head screws, loosely. Their heads sink below the table surface.
+4. Reach through the window in the back wall, under the solenoid, and push the plunger up as far as it goes.
+5. Check the stylus tip. It should stand about 1.3 mm above the table, about as high as a dime is thick.
+6. Move the table until the plunger slides up and down freely.
+7. Tighten the 4 screws.
+8. Let go of the plunger. It should drop back by itself, and the tip should sink below the table surface.
 
 If the standoff sticks in the tube, use the table marked 6.0 instead.
 
@@ -232,7 +235,7 @@ Now run the [test plan](test-plan.md).
 
 ## Change the model
 
-The model is [`cad/punch_rig_012.scad`](cad/punch_rig_012.scad), in OpenSCAD. After you change it:
+The model is [`cad/punch_rig_013.scad`](cad/punch_rig_013.scad), in OpenSCAD. After you change it:
 1. Open each file in `print/` with OpenSCAD and export its STL, or run `openscad -o print/frame.stl print/frame.scad` for each part.
 2. Slice the plate again.
 3. Run `python3 tools/print_check.py` from the top of the repository. It must end with PRINT CHECK PASSED.

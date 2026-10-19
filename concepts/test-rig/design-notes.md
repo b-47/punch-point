@@ -94,6 +94,10 @@ Three choices shape the design:
 - A whole page, or months of use.
 - Tactile graphics, which need the stylus placed anywhere on the page.
 
+## Changes in version 013
+
+- The two front table nuts slide in from the slot in the middle of the deck, not from the front of the frame. Their slots used to run 14 mm to the front face. PrusaSlicer warned of floating bridge anchors over those long slots, because the bridge lines turn over empty space. Now every nut slot is about 5 mm long.
+
 ## Changes in version 012
 
 - The table screws are socket head screws, which have 3 mm tall heads. The table is 4.5 mm thick instead of 3, so the heads sink below the paper. The deck sits 1.5 mm lower to match. The paper, stylus and die stay where they were.
