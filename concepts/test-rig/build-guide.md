@@ -1,7 +1,7 @@
 # Build the punch test rig
 
 This guide takes you from the print files to the first embossed dot. You will:
-1. Print the parts. This takes about 4 hours of printer time.
+1. Print the parts. This takes about 3 hours of printer time.
 2. Buy the hardware on the list below.
 3. Put the rig together. This takes about an hour.
 4. Wire the electronics and load the code.
@@ -19,14 +19,14 @@ Print these in PLA, a common 3D printing plastic. We use PLA for the first test 
 
 | File | What it holds | Plastic and time |
 | --- | --- | --- |
-| `rig_plate.3mf` | The frame, two tables, the die arm, three fence shims and the stroke spacer | 72 g, about 4 hours |
+| `rig_plate.3mf` | The frame, two tables, the die arm, three fence shims and the stroke spacer | 63 g, about 3 hours |
 
 The file holds settings for a Prusa Core One with a 0.4 mm high-flow nozzle:
 - Prusament PLA
-- the 0.20 mm Structural profile
-- 4 perimeters
-- 5 top and 5 bottom layers
-- 25% gyroid infill
+- the 0.20 mm Balanced profile
+- 3 perimeters
+- 4 top and 4 bottom layers
+- 15% gyroid infill
 - a 5 mm brim
 - no supports
 
@@ -48,7 +48,7 @@ Die (the metal socket that shapes the dot):
 
 Frame:
 - 2 M3 x 6 socket head screws and 2 M3 washers. They go through the back wall into the solenoid's own threaded holes.
-- 4 M3 x 8 button head screws and 4 M3 nuts, for the table.
+- 4 M3 x 8 socket head screws and 4 M3 nuts, for the table. M3 x 10 also works.
 - 2 M3 x 20 socket head screws, 2 M3 washers and 2 M3 nuts, for the arm.
 
 Electronics:
@@ -127,7 +127,7 @@ If no slot lines up with a hole, you can still run the first tests. Two small li
 1. Push an M3 nut into each of the four slots just under the deck. Two open on the front of the frame and two on the back. Push each nut in flat with a hex key until it stops under its screw hole.
 2. Take the table marked 5.8 underneath.
 3. Lower it onto the deck, so the tube under it slides down over the stylus, nut and standoff.
-4. Put in the 4 M3 x 8 button head screws, loosely.
+4. Put in the 4 M3 x 8 socket head screws, loosely. Their heads sink below the table surface.
 5. Reach through the window in the back wall, under the solenoid, and push the plunger up as far as it goes.
 6. Check the stylus tip. It should stand about 1.3 mm above the table, about as high as a dime is thick.
 7. Move the table until the plunger slides up and down freely.
@@ -232,7 +232,7 @@ Now run the [test plan](test-plan.md).
 
 ## Change the model
 
-The model is [`cad/punch_rig_011.scad`](cad/punch_rig_011.scad), in OpenSCAD. After you change it:
+The model is [`cad/punch_rig_012.scad`](cad/punch_rig_012.scad), in OpenSCAD. After you change it:
 1. Open each file in `print/` with OpenSCAD and export its STL, or run `openscad -o print/frame.stl print/frame.scad` for each part.
 2. Slice the plate again.
 3. Run `python3 tools/print_check.py` from the top of the repository. It must end with PRINT CHECK PASSED.

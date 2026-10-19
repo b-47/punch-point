@@ -94,11 +94,17 @@ Three choices shape the design:
 - A whole page, or months of use.
 - Tactile graphics, which need the stylus placed anywhere on the page.
 
+## Changes in version 012
+
+- The table screws are socket head screws, which have 3 mm tall heads. The table is 4.5 mm thick instead of 3, so the heads sink below the paper. The deck sits 1.5 mm lower to match. The paper, stylus and die stay where they were.
+- The table screw holes are deep enough for M3 x 8 or M3 x 10 screws.
+- The plate prints on the Balanced profile with 3 perimeters, 4 top and 4 bottom layers and 15% gyroid infill, plus the brim. That takes about 3 hours instead of 4. The stronger settings in version 008 didn't fix any slicer warning, and the rig's forces are small.
+
 ## Changes in version 011
 
 - No screw cuts its own thread in the plastic any more. The die screw threads through an M3 nut held in a slot in the arm's round end. Each strike pushes the nut up against 3 mm of arm above it.
 - The table screws go into four M3 nuts held in slots just under the deck. The front two slots open on the front of the frame and the back two on the back, clear of the tower.
-- The table screws are now M3 x 8, long enough to pass through the nuts. The table itself is the same.
+- The table screws are now M3 x 8, long enough to pass through the nuts.
 - The side walls are 4 mm thick instead of 3, so they stay solid outside the nut slots.
 - The blocks under the deck along the side walls start 3 mm lower, so the front nuts sit in solid plastic.
 

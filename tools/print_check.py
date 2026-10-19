@@ -199,8 +199,8 @@ def check(path):
 
 
 # What the plate's G-code must say: the walls, and a brim that is really there.
-GCODE_WANT = {"perimeters": "4", "top_solid_layers": "5", "bottom_solid_layers": "5",
-              "fill_density": "25%", "fill_pattern": "gyroid", "brim_width": "5"}
+GCODE_WANT = {"perimeters": "3", "top_solid_layers": "4", "bottom_solid_layers": "4",
+              "fill_density": "15%", "fill_pattern": "gyroid", "brim_width": "5"}
 
 
 def gcode_audit(path):
