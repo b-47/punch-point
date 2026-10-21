@@ -18,8 +18,9 @@ Print these in PLA, a common 3D printing plastic. We use PLA for the first test 
 
 | File | What it holds | Plastic and time |
 | --- | --- | --- |
-| `rig_plate.3mf` | The frame, two tables, the die arm, three fence shims and the stroke spacer, for a Prusa Core One | 63 g, about 3 hours |
+| `rig_plate.3mf` | The frame, two tables, the die arm, three fence shims, the stroke spacer and the washers, for a Prusa Core One | 63 g, about 3 hours |
 | `rig_plate_mk4.3mf` | The same parts, for a Prusa MK4 | 63 g, about 3 hours |
+| `rig_plate_fix.3mf`, `rig_plate_fix_mk4.3mf` | Only the parts that changed in version 015: the table marked 5.8 and the printed washers. Print this if you printed the full plate before version 015. | 12 g, about 41 minutes |
 
 Use the file for your printer. Both use these settings:
 - Prusament PLA
@@ -34,24 +35,20 @@ Use the file for your printer. Both use these settings:
 
 For another printer, use the STL files in the same folder with the same settings. STL is the usual 3D printing format.
 
-The plate has two tables. They differ only in how tightly the stylus guide fits. A number underneath tells them apart: 5.8 is the tighter one, and 6.0 is the looser one.
+The plate has two tables. They differ only in how tightly the tube under them fits the nuts on the push rod. A number underneath tells them apart: 5.8 is the tighter one, and 6.0 is the looser one.
 
 ### Hardware
 
-Solenoid and stylus:
+Solenoid, die and pin. The rig uses only M3 socket head screws and nuts, with no steel washers, set screws or standoff:
 - 1 JF-0826B solenoid, 12 V. A solenoid is an electromagnet with a steel rod inside, the plunger. The plunger jumps 10 mm when you switch the power on.
-- 1 M3 x 18 hex standoff: threaded inside all the way through, 5.5 mm across its flat sides, in steel. A standoff is a hex spacer, like a long nut.
-- 2 or 3 M3 x 16 dog-point set screws. A set screw has no head, and a dog-point set screw has a narrow tip. One becomes the stylus, the steel pin that presses the dot. Get a spare.
-- 1 M3 nut, to lock the stylus.
-
-Die (the metal socket that shapes the dot):
-- 1 M3 x 25 set screw. An M3 x 30 also works.
-- 4 M3 nuts.
+- 1 M3 x 16 socket head screw: the die. It rides on the plunger, head up, and the hex socket in its head shapes the dot.
+- 1 M3 x 20 socket head screw: the pin. It points down through the arm, and its tip presses the paper into the die.
+- 4 M3 nuts: a stop nut and a joining nut on the plunger's push rod, the captive nut in the arm, and a lock nut on top of the arm.
 
 Frame:
-- 2 M3 x 6 socket head screws and 2 M3 washers. They go through the back wall into the solenoid's own threaded holes.
+- 2 M3 x 6 socket head screws. They go through the back wall into the solenoid's own threaded holes.
 - 4 M3 x 8 socket head screws and 4 M3 nuts, for the table. M3 x 10 also works.
-- 2 M3 x 20 socket head screws, 2 M3 washers and 2 M3 nuts, for the arm.
+- 2 M3 x 20 socket head screws and 2 M3 nuts, for the arm, with the 2 printed washers.
 
 Electronics:
 - 1 ESP32 board and a USB cable that carries data. The ESP32 is a small board you can program.
@@ -66,10 +63,10 @@ Electronics:
 ### Tools
 
 - Calipers.
-- Hex keys: 1.5 mm, 2 mm and 2.5 mm. A 2.5 mm key with a ball end helps.
-- A 5.5 mm wrench and small pliers, to tighten two nuts against each other.
+- A 2.5 mm hex key. One with a ball end helps.
+- Small pliers or a 5.5 mm wrench, to hold nuts.
 - Tweezers, to place two of the nuts.
-- Sandpaper, a diamond nail file or a fine file, to round the stylus tip. Optional, but the dots come out cleaner.
+- Sandpaper or a diamond nail file, to round the pin's tip. Optional, but the dots come out cleaner.
 - A US dime, as a height gauge.
 
 ## 1. Print the parts
@@ -77,35 +74,25 @@ Electronics:
 1. Print the rig plate.
 2. Peel off the brim. Check that every screw hole is clear.
 
-## 2. Make the stylus
+## 2. Round the pin
 
-1. If you can, round the narrow tip of one dog-point set screw.
-   - Rub it on sandpaper or a diamond nail file, rolling the set screw as you go, until the sharp edge is gone. A sharp edge tends to cut the paper instead of pressing it.
-   - If you have nothing to round it with, skip this step.
-2. Screw an M3 nut onto the set screw from the socket end. Stop a few millimeters from the tip.
-3. Screw the set screw into the top of the standoff, socket end first. Turn it with the 1.5 mm hex key from the bottom of the standoff.
-4. Measure from the bottom of the standoff to the tip, with the outside jaws of the calipers. Turn the set screw until this is the standoff's length plus 7.4 mm: 25.4 mm for an 18.0 mm standoff. Measuring the whole stack is easier, because the nut covers the top of the standoff.
-5. Turn the nut down onto the standoff.
-6. Hold the standoff with the wrench and tighten the nut. Stop when the nut's flat sides line up with the standoff's flat sides. The table slides over both, so they must line up.
-7. Measure again. Within 0.2 mm of your target is fine.
+1. Take the M3 x 20 screw. If you can, round its tip: rub it on sandpaper or a diamond nail file, rolling the screw as you go, until the end is a smooth dome. A sharp end tends to cut the paper instead of pressing it.
+2. If you have nothing to round it with, skip this step.
 
-The 7.4 mm suits our solenoids, which measure 26.6 mm long. For a 27 mm solenoid, as in the seller's drawing, use 7.0 mm. For other lengths, see the [design notes](design-notes.md#check-these-on-the-real-parts).
+## 3. Fit the die to the solenoid and set the stroke
 
-## 3. Fit the standoff and set the stroke
+The acorn nut on the solenoid also stops the plunger at rest, so it sets how far the plunger moves. That distance is the stroke. A stop nut replaces it, and the stroke spacer sets it.
 
-The acorn nut on the solenoid also stops the plunger at rest, so it sets how far the plunger moves. That distance is the stroke. The standoff replaces the acorn nut, so you set the stroke again with the stroke spacer.
-
-![The solenoid with its plunger pushed in. The orange stroke spacer sits on top of the solenoid around the push rod, under the standoff.](media/build/1-stroke-spacer.png)
-
-1. Unscrew the acorn nut and any washer under it from the push rod, the thin threaded rod on top of the solenoid. You won't need them.
-2. Screw the standoff onto the push rod by a few turns.
+1. Unscrew the acorn nut and the black rubber washer from the push rod, the thin threaded rod on top of the solenoid. You won't need them. Hold the plunger while they're off, or it can slide out of the spring end.
+2. Screw an M3 nut, the stop nut, onto the push rod by a few turns.
 3. Stand the solenoid on the bench on its spring end. Press down on the solenoid, so the plunger slides all the way in and the push rod sticks up as far as it goes.
 4. Keep pressing. Slide the stroke spacer onto the push rod, flat on the solenoid.
-5. Turn the standoff down until it touches the spacer.
-6. Let go and take out the spacer.
-7. Push the plunger in and out. The standoff should move about 10 mm.
+5. Turn the stop nut down until it touches the spacer. Let go and take out the spacer.
+6. Screw a second M3 nut, the joining nut, onto the top of the push rod by 2 or 3 turns, so the rod's end is about halfway into it.
+7. Screw the M3 x 16 screw into the top of the joining nut, head up, until it stops against the end of the push rod. Tighten it with the 2.5 mm hex key while you hold the joining nut with pliers. The screw and the rod now butt end to end inside the nut.
+8. Push the plunger in and out. The screw head should move about 10 mm.
 
-Nothing locks the standoff onto the push rod. Once the table is on, its hex guide stops the standoff from turning, so the setting holds.
+The hex socket in that screw head is the die.
 
 ## 4. Fit the solenoid in the frame
 
@@ -115,10 +102,10 @@ Nothing locks the standoff onto the push rod. Once the table is on, its hex guid
    - Two slots open on the back of the frame, just under the deck. Push an M3 nut into each with a hex key until it stops.
    - The other two open into the slot in the middle of the deck, one on each side, just under the deck. Hold an M3 nut flat with tweezers and set it in the mouth of one slot. It falls through if you let go early. Push it outward with a hex key until it stops.
 2. Find the side of the solenoid with two threaded holes. It is one of its two flat steel sides.
-3. Slide the solenoid in from the front, push rod up, with that side toward the back wall. The stylus ends up under the slot in the deck.
+3. Slide the solenoid in from the front, push rod up, with that side toward the back wall. The die screw ends up under the slot in the deck.
 4. Push the solenoid back until it touches the back wall. Its bottom plate rests on two ledges inside the side walls.
 5. Look through the four slots in the back wall. Two of them line up with the solenoid's holes.
-6. Put an M3 x 6 socket head screw with a washer through each of those two slots. Tighten them with the 2.5 mm hex key. Use 6 mm screws, because longer ones can poke past the steel toward the coil.
+6. Put an M3 x 6 socket head screw through each of those two slots. Tighten them with the 2.5 mm hex key. Use 6 mm screws, because longer ones can poke past the steel toward the coil.
 7. Lead the solenoid's two wires out through a window in a side wall.
 
 ![The frame from behind. Two screws, in orange, go through two of the four slots in the back wall.](media/build/3-back-screws.png)
@@ -127,39 +114,36 @@ If no slot lines up with a hole, you can still run the first tests. Two small li
 
 ## 5. Fit the table
 
-![The table, shown in orange, lifted above the frame. The tube under it slides down over the stylus and standoff.](media/build/4-table.png)
+![The table, shown in orange, lifted above the frame. The tube under it slides down over the parts on the push rod.](media/build/4-table.png)
 
-1. Take the table marked 5.8 underneath.
-2. Lower it onto the deck, so the tube under it slides down over the stylus, nut and standoff.
+1. Take the table marked 5.8 underneath. It needs the 6.2 mm hole in its top from version 015, which the die's screw head rises through. A table with a 3.4 mm hole is from an earlier version.
+2. Lower it onto the deck, so the tube under it slides down over the die screw and the two nuts.
 3. Put in the 4 M3 x 8 socket head screws, loosely. Their heads sink below the table surface.
 4. Reach through the window in the back wall, under the solenoid, and push the plunger up as far as it goes.
-5. Check the stylus tip. It should stand about 1.3 mm above the table, about as high as a dime is thick.
+5. Check the die screw's head. It should rise to about level with the table surface, centered in the hole.
 6. Move the table until the plunger slides up and down freely.
 7. Tighten the 4 screws.
-8. Let go of the plunger. It should drop back by itself, and the tip should sink below the table surface.
+8. Let go of the plunger. It should drop back by itself, and the screw head should sink well below the table surface.
 
-If the standoff sticks in the tube, use the table marked 6.0 instead.
+If the nuts stick in the tube, use the table marked 6.0 instead.
 
-## 6. Fit the die arm
+## 6. Fit the arm and the pin
 
-![The die arm, shown in orange, lifted above the table. The die screw goes through its round end.](media/build/5-arm.png)
+![The die arm, shown in orange, lifted above the table.](media/build/5-arm.png)
 
 1. Push an M3 nut into the slot in the round end of the arm. Push it in flat until it stops under the hole.
-2. Screw the M3 x 25 set screw up into the hole from below, plain end first, so it threads through the nut. Turn it with the 1.5 mm hex key in its socket. That hex socket is the die.
-3. Stop when the socket end is level with the lowest point of the arm, just under the hole.
-4. Screw an M3 nut onto the set screw, down to the arm. Leave it loose. Later it locks the die height.
-5. Screw two more M3 nuts onto the top of the set screw.
-6. Hold the lower one with pliers, and tighten the top one down hard against it with the wrench. Locked together, the two nuts turn the set screw:
-   - Turn the top nut clockwise to lower the die.
-   - Turn the nut just under it counterclockwise to raise the die.
-   - Each turn moves the die 0.5 mm.
-7. Push an M3 nut into each of the two slots in the outer face of the tower, the block that rises beside the table. Push each nut in flat until it stops under its screw hole.
-8. Put the arm on top of the tower. Fix it with the two M3 x 20 socket head screws and washers, but leave the screws loose.
-9. Push the plunger up and hold it there.
-10. Turn the top nut clockwise until the die rests on the stylus tip.
-11. Slide the arm until the tip drops into the die's hex socket.
-12. Tighten the two arm screws. Then let go of the plunger.
-13. Turn the nut just under the top nut one turn counterclockwise, to raise the die 0.5 mm.
+2. Screw the M3 x 20 pin into the hole from the top, rounded tip first, so it threads down through the nut. Turn it with the 2.5 mm hex key in its head.
+3. Stop when the tip is level with the lowest point of the arm, under the hole.
+4. Screw an M3 nut onto the pin from the top, down to the arm. Leave it loose. Later it locks the pin's height.
+5. Push an M3 nut into each of the two slots in the outer face of the tower, the block that rises beside the table. Push each nut in flat until it stops under its screw hole.
+6. Put the arm on top of the tower. Fix it with the two M3 x 20 socket head screws, each through a printed washer, but leave the screws loose.
+7. Push the plunger up and hold it there.
+8. Turn the pin clockwise, down, until its tip rests in the hex socket of the die screw's head.
+9. Slide the arm until the tip sits centered in the socket.
+10. Tighten the two arm screws. Then let go of the plunger.
+11. Turn the pin one turn counterclockwise, to raise it 0.5 mm.
+
+Turning the pin clockwise lowers it, and each turn moves it 0.5 mm.
 
 ## 7. First dot by hand, without the electronics
 
@@ -168,15 +152,17 @@ You can fire the solenoid without the circuit by touching its wires to a 12 V su
 - a universal adapter set to 12 V, rated 2 A or more at 12 V
 - a bench power supply set to 12 V, with a 2.5 A current limit
 
-Keep your fingers away from the stylus and die while the supply is on.
+Keep your fingers away from the pin and die while the supply is on.
 
 1. With the supply unplugged, connect one solenoid wire to one side of the supply. On a barrel plug, the center is usually + and the outer metal is −. The solenoid works either way round.
    - Without a screw terminal adapter: fold the bare end of the wire over to make it thicker and push it into the plug's center hole. Wrap a bare spare wire tightly around the plug's outer metal. Tape the whole plug so the two can't touch.
 2. If the supply has a voltage dial, set it to 12 V before you plug it in.
 3. Lay a strip of 65 lb cardstock on the table, with its edge against the fence, the side of the tower that faces the table.
 4. Plug in the supply. Fire by touching the free wire to the solenoid's other wire for less than half a second. The solenoid clicks once.
-5. If there is no dot, turn the top nut on the arm a quarter turn clockwise and fire again. If the paper tears, turn it back.
-6. Stop when the dot is round and firm. Tighten the nut on top of the arm to hold the setting.
+5. If there is no dot, turn the pin a quarter turn clockwise and fire again. If the paper tears, turn it back.
+6. Stop when the dot is round and firm. Tighten the lock nut on top of the arm to hold the setting.
+
+The dot forms on the underside of the paper, so turn the paper over to feel it.
 
 Wait a few seconds between taps, and stop if the solenoid gets warm. Holding the wires together longer doesn't push harder, it only heats the coil. The settings, speed and wear tests in the test plan need the electronics, which time each pulse.
 
@@ -215,14 +201,14 @@ To move to a newer ESP32 toolkit later, change the release number in the `platfo
 
 ## 10. Fire the first dot with the electronics
 
-Keep your fingers away from the stylus and die while the 12 V adapter has power.
+Keep your fingers away from the pin and die while the 12 V adapter has power.
 
 1. Plug in the 12 V adapter.
 2. Lay a strip of 65 lb cardstock on the table, with its edge against the fence. The fence is the side of the tower that faces the table. A strip about 30 mm wide leaves the tick marks on the table in view.
 3. In the Serial Monitor, type `f 25` and press Enter. The solenoid should click once.
-4. Look at the paper. If there is no dot, turn the top nut a quarter turn clockwise and fire again.
+4. Look at the underside of the paper. If there is no dot, turn the pin a quarter turn clockwise and fire again.
 5. Stop when the dot is round and firm and the paper isn't torn.
-6. Tighten the nut on top of the arm to hold the setting.
+6. Tighten the lock nut on top of the arm to hold the setting.
 
 Commands:
 
@@ -246,16 +232,15 @@ Now run the [test plan](test-plan.md).
 | The adapter cuts out when you fire. | Unplug it. The diode is probably in backwards. |
 | The solenoid stays on. | Check the 10k ohm resistor from the gate to ground, and the MOSFET pins. |
 | The plunger sticks partway up. | Loosen the table screws and move the table until the plunger slides freely. If that doesn't help, use the table marked 6.0. |
-| The stylus doesn't reach the paper. | Check the stroke (step 3) and the stylus height (step 2). |
-| In step 3, the standoff stops before it touches the spacer. | The push rod has reached the stylus inside the standoff. Leave the standoff where it stopped. Later, raise the die to match the higher tip. |
-| The paper drags under the die. | Raise the die. Loosen the nut on top of the arm, then turn the nut just under the top nut counterclockwise. |
-| The paper tears. | Raise the die, or round the stylus tip more. |
-| Dots are faint. | Lower the die a quarter turn at a time, or use a longer pulse. |
-| Dots get fainter during a session. | Tighten the nut on top of the arm, the arm screws and the two screws in the back wall. Check the stroke with the spacer (step 3). |
+| The die doesn't reach the paper. | Check the stroke (step 3) and that the M3 x 16 screw is screwed down against the push rod. |
+| The paper drags under the pin. | Raise the pin. Loosen the lock nut on top of the arm, then turn the pin counterclockwise. |
+| The paper tears. | Raise the pin, or round its tip more. |
+| Dots are faint. | Lower the pin a quarter turn at a time, or use a longer pulse. |
+| Dots get fainter during a session. | Tighten the lock nut on top of the arm, the arm screws and the two screws in the back wall. Check the stroke with the spacer (step 3). |
 
 ## Change the model
 
-The model is [`cad/punch_rig_014.scad`](cad/punch_rig_014.scad), in OpenSCAD. After you change it:
+The model is [`cad/punch_rig_015.scad`](cad/punch_rig_015.scad), in OpenSCAD. After you change it:
 1. Open each file in `print/` with OpenSCAD and export its STL, or run `openscad -o print/frame.stl print/frame.scad` for each part.
 2. Slice the plate again.
 3. Run `python3 tools/print_check.py` from the top of the repository. It must end with PRINT CHECK PASSED.

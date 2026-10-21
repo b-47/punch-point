@@ -94,6 +94,14 @@ Three choices shape the design:
 - A whole page, or months of use.
 - Tactile graphics, which need the stylus placed anywhere on the page.
 
+## Changes in version 015
+
+- The rig now uses only M3 socket head screws and nuts. There is no standoff, set screw or steel washer.
+- The die rides on the plunger: an M3 x 16 screw, head up, joined to the push rod by a nut. The hex socket in its head, 2.5 mm across, shapes the dot, so dots are a little bigger than standard braille.
+- The pin is an M3 x 20 screw pointing down through the arm's captive nut, its tip sanded round. It is set with a hex key from the top and locked with a nut.
+- The paper is pressed down into the die, so dots form on its underside.
+- The hole in the table's top is 6.2 mm, so the die's screw head can rise to the paper. Only the table changes; `rig_plate_fix` prints it with two washers for the arm screws.
+
 ## Changes in version 014
 
 - The slots in the back wall match our solenoid's threaded holes, measured with calipers. The holes are 13.8 mm apart along the solenoid and 11.5 mm across, not 14.5 and 12 as in the drawing. The hole nearer the push rod is 7.3 mm from that end of the frame. Our solenoid is 26.6 mm long, so its stylus sticks out about 7.4 mm.
