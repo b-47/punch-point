@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Build the punch test rig</title>
+<style>
+:root { --bg: #ffffff; --fg: #1d1d1f; --muted: #5a5a60; --line: #d9d9de; --code: #f2f2f5; --link: #0b57d0; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #141416; --fg: #ececf0; --muted: #a8a8b0; --line: #34343a; --code: #232328; --link: #8ab4f8; }
+}
+body { margin: 0; background: var(--bg); color: var(--fg); font: 17px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif; }
+main { max-width: 46rem; margin: 0 auto; padding: 1.5rem 16px 4rem; }
+h1 { font-size: 1.9rem; line-height: 1.2; }
+h2 { font-size: 1.35rem; margin-top: 2.4rem; padding-top: 0.6rem; border-top: 1px solid var(--line); }
+h3 { font-size: 1.1rem; margin-top: 1.6rem; }
+li { margin: 0.25rem 0; }
+img { max-width: 100%; height: auto; border: 1px solid var(--line); border-radius: 6px; }
+table { border-collapse: collapse; width: 100%; display: block; overflow-x: auto; }
+th, td { border: 1px solid var(--line); padding: 0.4rem 0.6rem; text-align: left; vertical-align: top; }
+code { background: var(--code); padding: 0.1rem 0.3rem; border-radius: 4px; font-size: 0.92em; }
+a { color: var(--link); }
+</style>
+</head>
+<body>
+<main>
+<h1>Build the punch test rig</h1>
+<p>This guide takes you from the print files to the first embossed dot. You will:</p>
+<ol>
+<li>Print the parts. This takes about 3 hours of printer time.</li>
+<li>Buy the hardware on the list below.</li>
+<li>Put the rig together. This takes about an hour.</li>
+<li>Fire the first dot, by hand or with the electronics.</li>
+</ol>
+<p>The <a href="https://github.com/b-47/punch-point/blob/main/concepts/test-rig/design-notes.md">design notes</a> explain why the rig looks the way it does. After the build, run the <a href="https://github.com/b-47/punch-point/blob/main/concepts/test-rig/test-plan.md">test plan</a>.</p>
+<p><img alt="The finished rig: a blue printed frame holds the solenoid upright, with a paper table on top and the die arm over the paper." src="media/build/6-finished.png" /></p>
+<h2>What you need</h2>
+<h3>Printed parts</h3>
+<p>Print these in PLA, a common 3D printing plastic. We use PLA for the first test print because it bridges cleanly and strings less. The files are in <a href="https://github.com/b-47/punch-point/tree/main/concepts/test-rig/print/"><code>print/</code></a>.</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>What it holds</th>
+<th>Plastic and time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>rig_plate.3mf</code></td>
+<td>The frame, two tables, the die arm, three fence shims and the stroke spacer, for a Prusa Core One</td>
+<td>63 g, about 3 hours</td>
+</tr>
+<tr>
+<td><code>rig_plate_mk4.3mf</code></td>
+<td>The same parts, for a Prusa MK4</td>
+<td>63 g, about 3 hours</td>
+</tr>
+</tbody>
+</table>
+<p>Use the file for your printer. Both use these settings:</p>
+<ul>
+<li>Prusament PLA</li>
+<li>0.20 mm layers</li>
+<li>on the Core One, the Balanced profile and a 0.4 mm high-flow nozzle</li>
+<li>on the MK4, the Speed profile and a standard 0.4 mm nozzle. It prints at about the same speeds as Balanced.</li>
+<li>3 perimeters</li>
+<li>4 top and 4 bottom layers</li>
+<li>15% gyroid infill</li>
+<li>a 5 mm brim</li>
+<li>no supports</li>
+</ul>
+<p>For another printer, use the STL files in the same folder with the same settings. STL is the usual 3D printing format.</p>
+<p>The plate has two tables. They differ only in how tightly the stylus guide fits. A number underneath tells them apart: 5.8 is the tighter one, and 6.0 is the looser one.</p>
+<h3>Hardware</h3>
+<p>Solenoid and stylus:</p>
+<ul>
+<li>1 JF-0826B solenoid, 12 V. A solenoid is an electromagnet with a steel rod inside, the plunger. The plunger jumps 10 mm when you switch the power on.</li>
+<li>1 M3 x 18 hex standoff: threaded inside all the way through, 5.5 mm across its flat sides, in steel. A standoff is a hex spacer, like a long nut.</li>
+<li>2 or 3 M3 x 16 dog-point set screws. A set screw has no head, and a dog-point set screw has a narrow tip. One becomes the stylus, the steel pin that presses the dot. Get a spare.</li>
+<li>1 M3 nut, to lock the stylus.</li>
+</ul>
+<p>Die (the metal socket that shapes the dot):</p>
+<ul>
+<li>1 M3 x 25 set screw. An M3 x 30 also works.</li>
+<li>4 M3 nuts.</li>
+</ul>
+<p>Frame:</p>
+<ul>
+<li>2 M3 x 6 socket head screws and 2 M3 washers. They go through the back wall into the solenoid's own threaded holes.</li>
+<li>4 M3 x 8 socket head screws and 4 M3 nuts, for the table. M3 x 10 also works.</li>
+<li>2 M3 x 20 socket head screws, 2 M3 washers and 2 M3 nuts, for the arm.</li>
+</ul>
+<p>Electronics:</p>
+<ul>
+<li>1 ESP32 board and a USB cable that carries data. The ESP32 is a small board you can program.</li>
+<li>1 logic-level MOSFET, an electronic switch: IRLB8721 or IRLZ44N.</li>
+<li>1 1N4007 diode.</li>
+<li>1 100 ohm resistor and 1 10k ohm resistor.</li>
+<li>1 1000 µF (microfarad) capacitor, rated for 25 V or more.</li>
+<li>1 sealed 12 V wall adapter, rated 3 A or more, with a 5.5 x 2.1 mm barrel plug. Use a sealed adapter, not an open-frame power supply with bare terminals.</li>
+<li>1 barrel jack to screw terminal adapter.</li>
+<li>A breadboard and jumper wires.</li>
+</ul>
+<h3>Tools</h3>
+<ul>
+<li>Calipers.</li>
+<li>Hex keys: 1.5 mm, 2 mm and 2.5 mm. A 2.5 mm key with a ball end helps.</li>
+<li>A 5.5 mm wrench and small pliers, to tighten two nuts against each other.</li>
+<li>Tweezers, to place two of the nuts.</li>
+<li>Sandpaper, a diamond nail file or a fine file, to round the stylus tip. Optional, but the dots come out cleaner.</li>
+<li>A US dime, as a height gauge.</li>
+</ul>
+<h2>1. Print the parts</h2>
+<ol>
+<li>Print the rig plate.</li>
+<li>Peel off the brim. Check that every screw hole is clear.</li>
+</ol>
+<h2>2. Make the stylus</h2>
+<ol>
+<li>If you can, round the narrow tip of one dog-point set screw.<ul>
+<li>Rub it on sandpaper or a diamond nail file, rolling the set screw as you go, until the sharp edge is gone. A sharp edge tends to cut the paper instead of pressing it.</li>
+<li>If you have nothing to round it with, skip this step.</li>
+</ul>
+</li>
+<li>Screw an M3 nut onto the set screw from the socket end. Stop a few millimeters from the tip.</li>
+<li>Screw the set screw into the top of the standoff, socket end first. Turn it with the 1.5 mm hex key from the bottom of the standoff.</li>
+<li>Measure from the bottom of the standoff to the tip, with the outside jaws of the calipers. Turn the set screw until this is the standoff's length plus 7.4 mm: 25.4 mm for an 18.0 mm standoff. Measuring the whole stack is easier, because the nut covers the top of the standoff.</li>
+<li>Turn the nut down onto the standoff.</li>
+<li>Hold the standoff with the wrench and tighten the nut. Stop when the nut's flat sides line up with the standoff's flat sides. The table slides over both, so they must line up.</li>
+<li>Measure again. Within 0.2 mm of your target is fine.</li>
+</ol>
+<p>The 7.4 mm suits our solenoids, which measure 26.6 mm long. For a 27 mm solenoid, as in the seller's drawing, use 7.0 mm. For other lengths, see the <a href="https://github.com/b-47/punch-point/blob/main/concepts/test-rig/design-notes.md#check-these-on-the-real-parts">design notes</a>.</p>
+<h2>3. Fit the standoff and set the stroke</h2>
+<p>The acorn nut on the solenoid also stops the plunger at rest, so it sets how far the plunger moves. That distance is the stroke. The standoff replaces the acorn nut, so you set the stroke again with the stroke spacer.</p>
+<p><img alt="The solenoid with its plunger pushed in. The orange stroke spacer sits on top of the solenoid around the push rod, under the standoff." src="media/build/1-stroke-spacer.png" /></p>
+<ol>
+<li>Unscrew the acorn nut and any washer under it from the push rod, the thin threaded rod on top of the solenoid. You won't need them.</li>
+<li>Screw the standoff onto the push rod by a few turns.</li>
+<li>Stand the solenoid on the bench on its spring end. Press down on the solenoid, so the plunger slides all the way in and the push rod sticks up as far as it goes.</li>
+<li>Keep pressing. Slide the stroke spacer onto the push rod, flat on the solenoid.</li>
+<li>Turn the standoff down until it touches the spacer.</li>
+<li>Let go and take out the spacer.</li>
+<li>Push the plunger in and out. The standoff should move about 10 mm.</li>
+</ol>
+<p>Nothing locks the standoff onto the push rod. Once the table is on, its hex guide stops the standoff from turning, so the setting holds.</p>
+<h2>4. Fit the solenoid in the frame</h2>
+<p><img alt="The solenoid slides into the frame from the front, push rod up." src="media/build/2-slide-in.png" /></p>
+<ol>
+<li>Put the four table nuts in first, while the slot in the deck is empty. The deck is the flat top of the frame.<ul>
+<li>Two slots open on the back of the frame, just under the deck. Push an M3 nut into each with a hex key until it stops.</li>
+<li>The other two open into the slot in the middle of the deck, one on each side, just under the deck. Hold an M3 nut flat with tweezers and set it in the mouth of one slot. It falls through if you let go early. Push it outward with a hex key until it stops.</li>
+</ul>
+</li>
+<li>Find the side of the solenoid with two threaded holes. It is one of its two flat steel sides.</li>
+<li>Slide the solenoid in from the front, push rod up, with that side toward the back wall. The stylus ends up under the slot in the deck.</li>
+<li>Push the solenoid back until it touches the back wall. Its bottom plate rests on two ledges inside the side walls.</li>
+<li>Look through the four slots in the back wall. Two of them line up with the solenoid's holes.</li>
+<li>Put an M3 x 6 socket head screw with a washer through each of those two slots. Tighten them with the 2.5 mm hex key. Use 6 mm screws, because longer ones can poke past the steel toward the coil.</li>
+<li>Lead the solenoid's two wires out through a window in a side wall.</li>
+</ol>
+<p><img alt="The frame from behind. Two screws, in orange, go through two of the four slots in the back wall." src="media/build/3-back-screws.png" /></p>
+<p>If no slot lines up with a hole, you can still run the first tests. Two small lips above the solenoid stop it from jumping, and the table holds it in place once it is on. Measure where the holes really are, so we can move the slots to match.</p>
+<h2>5. Fit the table</h2>
+<p><img alt="The table, shown in orange, lifted above the frame. The tube under it slides down over the stylus and standoff." src="media/build/4-table.png" /></p>
+<ol>
+<li>Take the table marked 5.8 underneath.</li>
+<li>Lower it onto the deck, so the tube under it slides down over the stylus, nut and standoff.</li>
+<li>Put in the 4 M3 x 8 socket head screws, loosely. Their heads sink below the table surface.</li>
+<li>Reach through the window in the back wall, under the solenoid, and push the plunger up as far as it goes.</li>
+<li>Check the stylus tip. It should stand about 1.3 mm above the table, about as high as a dime is thick.</li>
+<li>Move the table until the plunger slides up and down freely.</li>
+<li>Tighten the 4 screws.</li>
+<li>Let go of the plunger. It should drop back by itself, and the tip should sink below the table surface.</li>
+</ol>
+<p>If the standoff sticks in the tube, use the table marked 6.0 instead.</p>
+<h2>6. Fit the die arm</h2>
+<p><img alt="The die arm, shown in orange, lifted above the table. The die screw goes through its round end." src="media/build/5-arm.png" /></p>
+<ol>
+<li>Push an M3 nut into the slot in the round end of the arm. Push it in flat until it stops under the hole.</li>
+<li>Screw the M3 x 25 set screw up into the hole from below, plain end first, so it threads through the nut. Turn it with the 1.5 mm hex key in its socket. That hex socket is the die.</li>
+<li>Stop when the socket end is level with the lowest point of the arm, just under the hole.</li>
+<li>Screw an M3 nut onto the set screw, down to the arm. Leave it loose. Later it locks the die height.</li>
+<li>Screw two more M3 nuts onto the top of the set screw.</li>
+<li>Hold the lower one with pliers, and tighten the top one down hard against it with the wrench. Locked together, the two nuts turn the set screw:<ul>
+<li>Turn the top nut clockwise to lower the die.</li>
+<li>Turn the nut just under it counterclockwise to raise the die.</li>
+<li>Each turn moves the die 0.5 mm.</li>
+</ul>
+</li>
+<li>Push an M3 nut into each of the two slots in the outer face of the tower, the block that rises beside the table. Push each nut in flat until it stops under its screw hole.</li>
+<li>Put the arm on top of the tower. Fix it with the two M3 x 20 socket head screws and washers, but leave the screws loose.</li>
+<li>Push the plunger up and hold it there.</li>
+<li>Turn the top nut clockwise until the die rests on the stylus tip.</li>
+<li>Slide the arm until the tip drops into the die's hex socket.</li>
+<li>Tighten the two arm screws. Then let go of the plunger.</li>
+<li>Turn the nut just under the top nut one turn counterclockwise, to raise the die 0.5 mm.</li>
+</ol>
+<h2>7. First dot by hand, without the electronics</h2>
+<p>You can fire the solenoid without the circuit by touching its wires to a 12 V supply for a moment. The supply must give 12 V and at least 2 A. Any of these works:</p>
+<ul>
+<li>a 12 V adapter rated 2 A or more</li>
+<li>a universal adapter set to 12 V, rated 2 A or more at 12 V</li>
+<li>a bench power supply set to 12 V, with a 2.5 A current limit</li>
+</ul>
+<p>Keep your fingers away from the stylus and die while the supply is on.</p>
+<ol>
+<li>With the supply unplugged, connect one solenoid wire to one side of the supply. On a barrel plug, the center is usually + and the outer metal is −. The solenoid works either way round.<ul>
+<li>Without a screw terminal adapter: fold the bare end of the wire over to make it thicker and push it into the plug's center hole. Wrap a bare spare wire tightly around the plug's outer metal. Tape the whole plug so the two can't touch.</li>
+</ul>
+</li>
+<li>If the supply has a voltage dial, set it to 12 V before you plug it in.</li>
+<li>Lay a strip of 65 lb cardstock on the table, with its edge against the fence, the side of the tower that faces the table.</li>
+<li>Plug in the supply. Fire by touching the free wire to the solenoid's other wire for less than half a second. The solenoid clicks once.</li>
+<li>If there is no dot, turn the top nut on the arm a quarter turn clockwise and fire again. If the paper tears, turn it back.</li>
+<li>Stop when the dot is round and firm. Tighten the nut on top of the arm to hold the setting.</li>
+</ol>
+<p>Wait a few seconds between taps, and stop if the solenoid gets warm. Holding the wires together longer doesn't push harder, it only heats the coil. The settings, speed and wear tests in the test plan need the electronics, which time each pulse.</p>
+<h2>8. Wire the electronics</h2>
+<p>Unplug the 12 V adapter whenever you change a wire.</p>
+<p><img alt="Circuit diagram: the 12 V adapter powers the solenoid through the MOSFET. The diode sits across the solenoid, and the ESP32 switches the MOSFET. The steps below list every connection." src="media/circuit.svg" /></p>
+<p>Make these connections on the breadboard:</p>
+<ol>
+<li>Plug the 12 V adapter into the barrel jack adapter. Wire its + terminal to one breadboard rail, the +12 V rail. Wire its − terminal to the other rail, the ground rail.</li>
+<li>Put the capacitor across the two rails. Its longer leg goes to +12 V. The side with the stripe goes to ground. A capacitor put in backwards can burst.</li>
+<li>Put the MOSFET in the breadboard. With its label toward you and its legs down, the pins are gate, drain and source, from left to right.</li>
+<li>Wire one solenoid wire to +12 V and the other to the MOSFET's drain. The solenoid's wires can go either way round.</li>
+<li>Put the diode next to the solenoid: its striped end to +12 V, its other end to the MOSFET's drain. A diode put in backwards shorts the adapter the moment the solenoid fires.</li>
+<li>Wire the MOSFET's source to ground.</li>
+<li>Wire the 100 ohm resistor from the MOSFET's gate to the ESP32 pin labeled GPIO 4.</li>
+<li>Wire the 10k ohm resistor from the MOSFET's gate to ground. It keeps the solenoid off while the ESP32 starts up.</li>
+<li>Wire an ESP32 pin labeled GND, for ground, to the ground rail.</li>
+</ol>
+<p>The ESP32 gets its power from the USB cable. Never connect 12 V to the ESP32.</p>
+<p>For a second solenoid, build a second copy of the solenoid, diode, MOSFET and both resistors. Wire its 100 ohm resistor to the pin labeled GPIO 13.</p>
+<h2>9. Load the code</h2>
+<p>The code is in <a href="https://github.com/b-47/punch-point/tree/main/concepts/test-rig/firmware/punch_test/"><code>firmware/punch_test/</code></a>. It runs on most ESP32 boards and on ESP32-S3 boards.</p>
+<ol>
+<li>In VS Code, install the pioarduino IDE extension. Install it or PlatformIO IDE, not both.</li>
+<li>Open the folder <code>firmware/punch_test</code>.</li>
+<li>In the status bar, pick <code>esp32dev</code> for most ESP32 boards, or <code>esp32-s3</code> for ESP32-S3 boards.</li>
+<li>Plug in the board and click Upload. The first time, this downloads several gigabytes of tools.</li>
+<li>Open the Serial Monitor.</li>
+</ol>
+<p>To move to a newer ESP32 toolkit later, change the release number in the <code>platform</code> line of <code>platformio.ini</code>.</p>
+<h2>10. Fire the first dot with the electronics</h2>
+<p>Keep your fingers away from the stylus and die while the 12 V adapter has power.</p>
+<ol>
+<li>Plug in the 12 V adapter.</li>
+<li>Lay a strip of 65 lb cardstock on the table, with its edge against the fence. The fence is the side of the tower that faces the table. A strip about 30 mm wide leaves the tick marks on the table in view.</li>
+<li>In the Serial Monitor, type <code>f 25</code> and press Enter. The solenoid should click once.</li>
+<li>Look at the paper. If there is no dot, turn the top nut a quarter turn clockwise and fire again.</li>
+<li>Stop when the dot is round and firm and the paper isn't torn.</li>
+<li>Tighten the nut on top of the arm to hold the setting.</li>
+</ol>
+<p>Commands:</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>f 25</code></td>
+<td>Fires one 25 ms pulse.</td>
+</tr>
+<tr>
+<td><code>f 25 2</code></td>
+<td>Fires one 25 ms pulse on solenoid 2.</td>
+</tr>
+<tr>
+<td><code>r 20 25 500</code></td>
+<td>Fires 20 pulses of 25 ms, one every 500 ms.</td>
+</tr>
+<tr>
+<td><code>w 5 40 5</code></td>
+<td>Each press of the button labeled BOOT on the ESP32 fires the next pulse length: 5 ms, then 10, up to 40.</td>
+</tr>
+<tr>
+<td><code>s</code></td>
+<td>Stops a run.</td>
+</tr>
+</tbody>
+</table>
+<p>The code never fires a pulse longer than 100 ms. It also keeps each solenoid off for at least 3 times as long as it was on, so the coil can't overheat.</p>
+<p>Now run the <a href="https://github.com/b-47/punch-point/blob/main/concepts/test-rig/test-plan.md">test plan</a>.</p>
+<h2>If something goes wrong</h2>
+<table>
+<thead>
+<tr>
+<th>What you see</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nothing happens when you fire.</td>
+<td>Check that the adapter has power and the MOSFET pins are in the right order. Check the wire from the ESP32's ground to the ground rail.</td>
+</tr>
+<tr>
+<td>The adapter cuts out when you fire.</td>
+<td>Unplug it. The diode is probably in backwards.</td>
+</tr>
+<tr>
+<td>The solenoid stays on.</td>
+<td>Check the 10k ohm resistor from the gate to ground, and the MOSFET pins.</td>
+</tr>
+<tr>
+<td>The plunger sticks partway up.</td>
+<td>Loosen the table screws and move the table until the plunger slides freely. If that doesn't help, use the table marked 6.0.</td>
+</tr>
+<tr>
+<td>The stylus doesn't reach the paper.</td>
+<td>Check the stroke (step 3) and the stylus height (step 2).</td>
+</tr>
+<tr>
+<td>In step 3, the standoff stops before it touches the spacer.</td>
+<td>The push rod has reached the stylus inside the standoff. Leave the standoff where it stopped. Later, raise the die to match the higher tip.</td>
+</tr>
+<tr>
+<td>The paper drags under the die.</td>
+<td>Raise the die. Loosen the nut on top of the arm, then turn the nut just under the top nut counterclockwise.</td>
+</tr>
+<tr>
+<td>The paper tears.</td>
+<td>Raise the die, or round the stylus tip more.</td>
+</tr>
+<tr>
+<td>Dots are faint.</td>
+<td>Lower the die a quarter turn at a time, or use a longer pulse.</td>
+</tr>
+<tr>
+<td>Dots get fainter during a session.</td>
+<td>Tighten the nut on top of the arm, the arm screws and the two screws in the back wall. Check the stroke with the spacer (step 3).</td>
+</tr>
+</tbody>
+</table>
+<h2>Change the model</h2>
+<p>The model is <a href="https://github.com/b-47/punch-point/tree/main/concepts/test-rig/cad/punch_rig_014.scad"><code>cad/punch_rig_014.scad</code></a>, in OpenSCAD. After you change it:</p>
+<ol>
+<li>Open each file in <code>print/</code> with OpenSCAD and export its STL, or run <code>openscad -o print/frame.stl print/frame.scad</code> for each part.</li>
+<li>Slice the plate again.</li>
+<li>Run <code>python3 tools/print_check.py</code> from the top of the repository. It must end with PRINT CHECK PASSED.</li>
+<li>Run <code>python3 tools/build_rig_parts.py</code> to update the 3D viewer.</li>
+</ol>
+</main>
+</body>
+</html>

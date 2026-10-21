@@ -4,8 +4,7 @@ This guide takes you from the print files to the first embossed dot. You will:
 1. Print the parts. This takes about 3 hours of printer time.
 2. Buy the hardware on the list below.
 3. Put the rig together. This takes about an hour.
-4. Wire the electronics and load the code.
-5. Fire the first dot.
+4. Fire the first dot, by hand or with the electronics.
 
 The [design notes](design-notes.md) explain why the rig looks the way it does. After the build, run the [test plan](test-plan.md).
 
@@ -42,7 +41,7 @@ The plate has two tables. They differ only in how tightly the stylus guide fits.
 Solenoid and stylus:
 - 1 JF-0826B solenoid, 12 V. A solenoid is an electromagnet with a steel rod inside, the plunger. The plunger jumps 10 mm when you switch the power on.
 - 1 M3 x 18 hex standoff: threaded inside all the way through, 5.5 mm across its flat sides, in steel. A standoff is a hex spacer, like a long nut.
-- 2 or 3 M3 x 16 dog-point set screws. A set screw has no head, and a dog-point set screw has a narrow tip. You file one tip round to make the stylus, the steel pin that presses the dot. Get spares in case the filing goes wrong.
+- 2 or 3 M3 x 16 dog-point set screws. A set screw has no head, and a dog-point set screw has a narrow tip. One becomes the stylus, the steel pin that presses the dot. Get a spare.
 - 1 M3 nut, to lock the stylus.
 
 Die (the metal socket that shapes the dot):
@@ -70,8 +69,7 @@ Electronics:
 - Hex keys: 1.5 mm, 2 mm and 2.5 mm. A 2.5 mm key with a ball end helps.
 - A 5.5 mm wrench and small pliers, to tighten two nuts against each other.
 - Tweezers, to place two of the nuts.
-- A fine file or a sharpening stone.
-- A drill, if you have one, to spin the stylus while you file it.
+- Sandpaper, a diamond nail file or a fine file, to round the stylus tip. Optional, but the dots come out cleaner.
 - A US dime, as a height gauge.
 
 ## 1. Print the parts
@@ -81,17 +79,17 @@ Electronics:
 
 ## 2. Make the stylus
 
-1. File the narrow tip of one dog-point set screw into a smooth dome.
-   - The easy way: hold the set screw in a drill, tip out. Run the drill slowly and hold a fine file at an angle against the edge of the tip.
-   - The tip should end up round and about 2 mm wide, with no sharp edge. A sharp edge cuts the paper instead of pressing it.
-2. Screw an M3 nut onto the set screw from the socket end. Stop while the nut is still fully on the thread, a few millimeters from the tip.
+1. If you can, round the narrow tip of one dog-point set screw.
+   - Rub it on sandpaper or a diamond nail file, rolling the set screw as you go, until the sharp edge is gone. A sharp edge tends to cut the paper instead of pressing it.
+   - If you have nothing to round it with, skip this step.
+2. Screw an M3 nut onto the set screw from the socket end. Stop a few millimeters from the tip.
 3. Screw the set screw into the top of the standoff, socket end first. Turn it with the 1.5 mm hex key from the bottom of the standoff.
-4. Stop when the tip sticks out 7.0 mm above the top of the standoff. Measure with calipers.
+4. Measure from the bottom of the standoff to the tip, with the outside jaws of the calipers. Turn the set screw until this is the standoff's length plus 7.4 mm: 25.4 mm for an 18.0 mm standoff. Measuring the whole stack is easier, because the nut covers the top of the standoff.
 5. Turn the nut down onto the standoff.
 6. Hold the standoff with the wrench and tighten the nut. Stop when the nut's flat sides line up with the standoff's flat sides. The table slides over both, so they must line up.
-7. Measure again. The tip should still stick out 7.0 mm, give or take 0.2 mm.
+7. Measure again. Within 0.2 mm of your target is fine.
 
-The 7.0 mm suits a solenoid frame 27 mm long, as in the seller's drawing. Our solenoids measure 26.6 mm, so use 7.4 mm. For another length, see the [design notes](design-notes.md#check-these-on-the-real-parts).
+The 7.4 mm suits our solenoids, which measure 26.6 mm long. For a 27 mm solenoid, as in the seller's drawing, use 7.0 mm. For other lengths, see the [design notes](design-notes.md#check-these-on-the-real-parts).
 
 ## 3. Fit the standoff and set the stroke
 
@@ -163,7 +161,26 @@ If the standoff sticks in the tube, use the table marked 6.0 instead.
 12. Tighten the two arm screws. Then let go of the plunger.
 13. Turn the nut just under the top nut one turn counterclockwise, to raise the die 0.5 mm.
 
-## 7. Wire the electronics
+## 7. First dot by hand, without the electronics
+
+You can fire the solenoid without the circuit by touching its wires to a 12 V supply for a moment. The supply must give 12 V and at least 2 A. Any of these works:
+- a 12 V adapter rated 2 A or more
+- a universal adapter set to 12 V, rated 2 A or more at 12 V
+- a bench power supply set to 12 V, with a 2.5 A current limit
+
+Keep your fingers away from the stylus and die while the supply is on.
+
+1. With the supply unplugged, connect one solenoid wire to one side of the supply. On a barrel plug, the center is usually + and the outer metal is −. The solenoid works either way round.
+   - Without a screw terminal adapter: fold the bare end of the wire over to make it thicker and push it into the plug's center hole. Wrap a bare spare wire tightly around the plug's outer metal. Tape the whole plug so the two can't touch.
+2. If the supply has a voltage dial, set it to 12 V before you plug it in.
+3. Lay a strip of 65 lb cardstock on the table, with its edge against the fence, the side of the tower that faces the table.
+4. Plug in the supply. Fire by touching the free wire to the solenoid's other wire for less than half a second. The solenoid clicks once.
+5. If there is no dot, turn the top nut on the arm a quarter turn clockwise and fire again. If the paper tears, turn it back.
+6. Stop when the dot is round and firm. Tighten the nut on top of the arm to hold the setting.
+
+Wait a few seconds between taps, and stop if the solenoid gets warm. Holding the wires together longer doesn't push harder, it only heats the coil. The settings, speed and wear tests in the test plan need the electronics, which time each pulse.
+
+## 8. Wire the electronics
 
 Unplug the 12 V adapter whenever you change a wire.
 
@@ -184,7 +201,7 @@ The ESP32 gets its power from the USB cable. Never connect 12 V to the ESP32.
 
 For a second solenoid, build a second copy of the solenoid, diode, MOSFET and both resistors. Wire its 100 ohm resistor to the pin labeled GPIO 13.
 
-## 8. Load the code
+## 9. Load the code
 
 The code is in [`firmware/punch_test/`](firmware/punch_test/). It runs on most ESP32 boards and on ESP32-S3 boards.
 
@@ -196,7 +213,7 @@ The code is in [`firmware/punch_test/`](firmware/punch_test/). It runs on most E
 
 To move to a newer ESP32 toolkit later, change the release number in the `platform` line of `platformio.ini`.
 
-## 9. Fire the first dot
+## 10. Fire the first dot with the electronics
 
 Keep your fingers away from the stylus and die while the 12 V adapter has power.
 
@@ -229,10 +246,10 @@ Now run the [test plan](test-plan.md).
 | The adapter cuts out when you fire. | Unplug it. The diode is probably in backwards. |
 | The solenoid stays on. | Check the 10k ohm resistor from the gate to ground, and the MOSFET pins. |
 | The plunger sticks partway up. | Loosen the table screws and move the table until the plunger slides freely. If that doesn't help, use the table marked 6.0. |
-| The stylus doesn't reach the paper. | Check the stroke (step 3) and that the stylus sticks out 7.0 mm (step 2). |
+| The stylus doesn't reach the paper. | Check the stroke (step 3) and the stylus height (step 2). |
 | In step 3, the standoff stops before it touches the spacer. | The push rod has reached the stylus inside the standoff. Leave the standoff where it stopped. Later, raise the die to match the higher tip. |
 | The paper drags under the die. | Raise the die. Loosen the nut on top of the arm, then turn the nut just under the top nut counterclockwise. |
-| The paper tears. | Raise the die, or file the stylus tip rounder. |
+| The paper tears. | Raise the die, or round the stylus tip more. |
 | Dots are faint. | Lower the die a quarter turn at a time, or use a longer pulse. |
 | Dots get fainter during a session. | Tighten the nut on top of the arm, the arm screws and the two screws in the back wall. Check the stroke with the spacer (step 3). |
 
