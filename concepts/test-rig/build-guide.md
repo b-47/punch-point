@@ -1,45 +1,28 @@
 # Build the punch test rig
 
-This guide takes you from the print files to the first embossed dot. You will:
-1. Print the parts. This takes about 3 hours of printer time.
-2. Buy the hardware on the list below.
-3. Put the rig together. This takes about an hour.
-4. Fire the first dot, by hand or with the electronics.
+Printing takes about 3 hours, and assembly about an hour. After the build, run the [test plan](test-plan.md).
 
-The [design notes](design-notes.md) explain why the rig looks the way it does. After the build, run the [test plan](test-plan.md).
-
-![The finished rig: a blue printed frame holds the solenoid upright, with a paper table on top and the die arm over the paper.](media/build/6-finished.png)
+![The finished rig: a blue printed frame holds the solenoid upright, with a paper table on top and the arm over the paper.](media/build/9-finished.png)
 
 ## What you need
 
 ### Printed parts
 
-Print these in PLA, a common 3D printing plastic. We use PLA for the first test print because it bridges cleanly and strings less. The files are in [`print/`](print/).
+Print in PLA. The files are in [`print/`](print/).
 
 | File | What it holds | Plastic and time |
 | --- | --- | --- |
-| `rig_plate.3mf` | The frame, two tables, the die arm, three fence shims, the stroke spacer and the washers, for a Prusa Core One | 63 g, about 3 hours |
-| `rig_plate_mk4.3mf` | The same parts, for a Prusa MK4 | 63 g, about 3 hours |
-| `rig_plate_fix.3mf`, `rig_plate_fix_mk4.3mf` | Only the parts that changed in version 015: the table marked 5.8 and the printed washers. Print this if you printed the full plate before version 015. | 12 g, about 41 minutes |
+| `rig_plate.3mf` | Every printed part, for a Prusa Core One | 63 g, 3 hours |
+| `rig_plate_mk4.3mf` | Every printed part, for a Prusa MK4 | 63 g, 3 hours |
+| `rig_plate_fix.3mf`, `rig_plate_fix_mk4.3mf` | Just the new table and washers, if you printed the full plate before version 015 | 12 g, 41 minutes |
 
-Use the file for your printer. Both use these settings:
-- Prusament PLA
-- 0.20 mm layers
-- on the Core One, the Balanced profile and a 0.4 mm high-flow nozzle
-- on the MK4, the Speed profile and a standard 0.4 mm nozzle. It prints at about the same speeds as Balanced.
-- 3 perimeters
-- 4 top and 4 bottom layers
-- 15% gyroid infill
-- a 5 mm brim
-- no supports
-
-For another printer, use the STL files in the same folder with the same settings. STL is the usual 3D printing format.
+Use the file for your printer. Both use 0.20 mm layers, 3 perimeters, 4 top and 4 bottom layers, 15% gyroid infill, a 5 mm brim and no supports. For another printer, use the STL files with the same settings.
 
 The plate has two tables. They differ only in how tightly the tube under them fits the nuts on the push rod. A number underneath tells them apart: 5.8 is the tighter one, and 6.0 is the looser one.
 
 ### Hardware
 
-Solenoid, die and pin. The rig uses only M3 socket head screws and nuts, with no steel washers, set screws or standoff:
+Solenoid, die and pin:
 - 1 JF-0826B solenoid, 12 V. A solenoid is an electromagnet with a steel rod inside, the plunger. The plunger jumps 10 mm when you switch the power on.
 - 1 M3 x 16 socket head screw: the die. It rides on the plunger, head up, and the hex socket in its head shapes the dot.
 - 1 M3 x 20 socket head screw: the pin. It points down through the arm, and its tip presses the paper into the die.
@@ -76,6 +59,8 @@ Electronics:
 
 ## 2. Round the pin
 
+![The pin: an M3 x 20 socket head screw with its tip rounded.](media/build/1-pin.png)
+
 1. Take the M3 x 20 screw. If you can, round its tip: rub it on sandpaper or a diamond nail file, rolling the screw as you go, until the end is a smooth dome. A sharp end tends to cut the paper instead of pressing it.
 2. If you have nothing to round it with, skip this step.
 
@@ -83,11 +68,15 @@ Electronics:
 
 The acorn nut on the solenoid also stops the plunger at rest, so it sets how far the plunger moves. That distance is the stroke. A stop nut replaces it, and the stroke spacer sets it.
 
+![The solenoid with its plunger pushed in. The stroke spacer, in orange, sits on top of the solenoid around the push rod, with the stop nut on top of it.](media/build/2-stroke-spacer.png)
+
 1. Unscrew the acorn nut and the black rubber washer from the push rod, the thin threaded rod on top of the solenoid. You won't need them. Hold the plunger while they're off, or it can slide out of the spring end.
 2. Screw an M3 nut, the stop nut, onto the push rod by a few turns.
 3. Stand the solenoid on the bench on its spring end. Press down on the solenoid, so the plunger slides all the way in and the push rod sticks up as far as it goes.
 4. Keep pressing. Slide the stroke spacer onto the push rod, flat on the solenoid.
 5. Turn the stop nut down until it touches the spacer. Let go and take out the spacer.
+![The joining nut and the M3 x 16 die screw, in orange, above the stop nut on the push rod.](media/build/3-die-screw.png)
+
 6. Screw a second M3 nut, the joining nut, onto the top of the push rod by 2 or 3 turns, so the rod's end is about halfway into it.
 7. Screw the M3 x 16 screw into the top of the joining nut, head up, until it stops against the end of the push rod. Tighten it with the 2.5 mm hex key while you hold the joining nut with pliers. The screw and the rod now butt end to end inside the nut.
 8. Push the plunger in and out. The screw head should move about 10 mm.
@@ -96,11 +85,13 @@ The hex socket in that screw head is the die.
 
 ## 4. Fit the solenoid in the frame
 
-![The solenoid slides into the frame from the front, push rod up.](media/build/2-slide-in.png)
+![The top of the frame with the four table nuts, in orange, beside their slots: two at the back, and two inside the middle slot of the deck.](media/build/4-table-nuts.png)
 
 1. Put the four table nuts in first, while the slot in the deck is empty. The deck is the flat top of the frame.
    - Two slots open on the back of the frame, just under the deck. Push an M3 nut into each with a hex key until it stops.
    - The other two open into the slot in the middle of the deck, one on each side, just under the deck. Hold an M3 nut flat with tweezers and set it in the mouth of one slot. It falls through if you let go early. Push it outward with a hex key until it stops.
+![The solenoid, in orange, sliding into the frame from the front, push rod up.](media/build/5-slide-in.png)
+
 2. Find the side of the solenoid with two threaded holes. It is one of its two flat steel sides.
 3. Slide the solenoid in from the front, push rod up, with that side toward the back wall. The die screw ends up under the slot in the deck.
 4. Push the solenoid back until it touches the back wall. Its bottom plate rests on two ledges inside the side walls.
@@ -108,13 +99,13 @@ The hex socket in that screw head is the die.
 6. Put an M3 x 6 socket head screw through each of those two slots. Tighten them with the 2.5 mm hex key. Use 6 mm screws, because longer ones can poke past the steel toward the coil.
 7. Lead the solenoid's two wires out through a window in a side wall.
 
-![The frame from behind. Two screws, in orange, go through two of the four slots in the back wall.](media/build/3-back-screws.png)
+![The frame from behind. Two screws, in orange, go through two of the four slots in the back wall.](media/build/6-back-screws.png)
 
 If no slot lines up with a hole, you can still run the first tests. Two small lips above the solenoid stop it from jumping, and the table holds it in place once it is on. Measure where the holes really are, so we can move the slots to match.
 
 ## 5. Fit the table
 
-![The table, shown in orange, lifted above the frame. The tube under it slides down over the parts on the push rod.](media/build/4-table.png)
+![The table and its four screws, in orange, lifted above the frame. The tube under it slides down over the parts on the push rod.](media/build/7-table.png)
 
 1. Take the table marked 5.8 underneath. It needs the 6.2 mm hole in its top from version 015, which the die's screw head rises through. A table with a 3.4 mm hole is from an earlier version.
 2. Lower it onto the deck, so the tube under it slides down over the die screw and the two nuts.
@@ -129,7 +120,7 @@ If the nuts stick in the tube, use the table marked 6.0 instead.
 
 ## 6. Fit the arm and the pin
 
-![The die arm, shown in orange, lifted above the table.](media/build/5-arm.png)
+![The arm, in orange, lifted above the table, with the pin through its round end and the two arm screws through the printed washers.](media/build/8-arm.png)
 
 1. Push an M3 nut into the slot in the round end of the arm. Push it in flat until it stops under the hole.
 2. Screw the M3 x 20 pin into the hole from the top, rounded tip first, so it threads down through the nut. Turn it with the 2.5 mm hex key in its head.

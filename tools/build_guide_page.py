@@ -42,7 +42,7 @@ h1 {{ font-size: 1.9rem; line-height: 1.2; }}
 h2 {{ font-size: 1.35rem; margin-top: 2.4rem; padding-top: 0.6rem; border-top: 1px solid var(--line); }}
 h3 {{ font-size: 1.1rem; margin-top: 1.6rem; }}
 li {{ margin: 0.25rem 0; }}
-img {{ max-width: 100%; height: auto; border: 1px solid var(--line); border-radius: 6px; }}
+img {{ display: block; max-width: 100%; max-height: 24rem; width: auto; height: auto; border: 1px solid var(--line); border-radius: 6px; }}
 table {{ border-collapse: collapse; width: 100%; display: block; overflow-x: auto; }}
 th, td {{ border: 1px solid var(--line); padding: 0.4rem 0.6rem; text-align: left; vertical-align: top; }}
 code {{ background: var(--code); padding: 0.1rem 0.3rem; border-radius: 4px; font-size: 0.92em; }}
