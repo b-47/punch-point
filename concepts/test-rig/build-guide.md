@@ -50,7 +50,6 @@ Electronics:
 - Small pliers or a 5.5 mm wrench, to hold nuts.
 - Tweezers, to place two of the nuts.
 - Sandpaper or a diamond nail file, to round the pin's tip. Optional, but the dots come out cleaner.
-- A US dime, as a height gauge.
 
 ## 1. Print the parts
 
