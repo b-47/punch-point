@@ -112,19 +112,20 @@ If the nuts stick in the tube, use the table marked 6.0 instead.
 
 ## 6. Fit the arm and the pin
 
-![The arm, in orange, lifted above the table, with the pin through its round end and the two arm screws through the printed washers.](media/build/8-arm.png)
+![The arm, in orange, lifted above the table, with the pin through its round end. Above it, the two arm screws, each with a printed washer under its head.](media/build/8-arm.png)
 
 1. Push an M3 nut into the slot in the round end of the arm. Push it in flat until it stops under the hole.
 2. Screw the M3 x 20 pin into the hole from the top, rounded tip first, so it threads down through the nut. Turn it with the 2.5 mm hex key in its head.
 3. Stop when the tip is level with the lowest point of the arm, under the hole.
 4. Screw an M3 nut onto the pin from the top, down to the arm. Leave it loose. Later it locks the pin's height.
 5. Push an M3 nut into each of the two slots in the outer face of the tower, the block that rises beside the table. Push each nut in flat until it stops under its screw hole.
-6. Put the arm on top of the tower. Fix it with the two M3 x 20 socket head screws, each through a printed washer, but leave the screws loose.
-7. Push the plunger up and hold it there.
-8. Turn the pin clockwise, down, until its tip rests in the hex socket of the die screw's head.
-9. Slide the arm until the tip sits centered in the socket.
-10. Tighten the two arm screws. Then let go of the plunger.
-11. Turn the pin one turn counterclockwise, to raise it 0.5 mm.
+6. Slide a printed washer, one of the flat rings, onto each of two M3 x 20 screws, up against the head. The arm's screw holes are wider than a screw head, so without them the heads would sink into the plastic.
+7. Put the arm on top of the tower. Fix it with those two screws, washers under the heads, but leave the screws loose.
+8. Push the plunger up and hold it there.
+9. Turn the pin clockwise, down, until its tip rests in the hex socket of the die screw's head.
+10. Slide the arm until the tip sits centered in the socket.
+11. Tighten the two arm screws. Then let go of the plunger.
+12. Turn the pin one turn counterclockwise, to raise it 0.5 mm.
 
 Turning the pin clockwise lowers it, and each turn moves it 0.5 mm.
 

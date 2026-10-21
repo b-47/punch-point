@@ -28,7 +28,10 @@ STEPS = {
     "7-table": ((60, 0, 25), 'color("SteelBlue") frame();' + SOL + 'color("Silver") plunger(REST_LIFT); color("Silver") standoff(0); color("Silver") nut(REST_LIFT); color("Silver") stylus(REST_LIFT);'
                'color("DarkOrange") translate([0, 0, 25]) { table(); table_screws(); }'),
     "8-arm": ((60, 0, 25), 'color("SteelBlue") frame(); color("LightSteelBlue") table(); color("DimGray") table_screws();'
-             'color("DarkOrange") translate([0, 0, 22]) { arm(); die_screw(); die_nuts(); arm_screws(); }'),
+             'color("DarkOrange") translate([0, 0, 22]) { arm(); die_screw(); die_nuts(); }'
+             'for (p = ARM_SCREWS) translate([p[0], p[1], ARM_Z0 + ARM_T + 30]) {'
+             ' color("Gold") difference() { cylinder(d = WASHER[0], h = WASHER[2]); translate([0, 0, -1]) cylinder(d = WASHER[1], h = 3); }'
+             ' color("DarkOrange") { translate([0, 0, WASHER[2] + 4]) cylinder(d = HEAD_D, h = HEAD_H); translate([0, 0, WASHER[2] + 4 - ARM_SCREW_L]) cylinder(d = 3, h = ARM_SCREW_L); } }'),
     "9-finished": ((60, 0, 25), 'assembly();'),
 }
 
