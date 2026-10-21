@@ -16,17 +16,16 @@ OUT = RIG / "media" / "build"
 SOL = 'color("DimGray") sol_frame(); color("Chocolate") sol_coil();'
 STEPS = {
     "1-pin": ((60, 0, 20), 'color("DarkOrange") rotate([0, 90, 0]) translate([0, 0, -PIN_TIP]) die_screw();'),
-    "2-stroke-spacer": ((70, 0, 30), SOL + 'color("Silver") plunger(STROKE); color("Silver") spring(STROKE);'
-                        'color("DarkOrange") translate([0, 0, SOL_TOP]) spacer(); color("DarkOrange") standoff(STROKE);'),
-    "3-die-screw": ((75, 0, 30), SOL + 'color("Silver") plunger(0); color("Silver") spring(0); color("Silver") standoff(0);'
-                    'color("DarkOrange") translate([0, 0, 8]) nut(0); color("DarkOrange") translate([0, 0, 18]) stylus(0);'),
+    "2-die-parts": ((75, 0, 30), SOL + 'color("Silver") plunger(REST_LIFT); color("Silver") spring(REST_LIFT);'
+                    'color("DarkOrange") translate([0, 0, 6]) standoff(0); color("DarkOrange") translate([0, 0, 14]) nut(REST_LIFT);'
+                    'color("DarkOrange") translate([0, 0, 24]) stylus(REST_LIFT);'),
     "4-table-nuts": ((50, 0, 25), 'color("SteelBlue") intersection() { frame(); translate([-60, -60, DECK_BOT - 14]) cube([120, 120, 40]); }'
                      'color("DarkOrange") for (p = TABLE_SCREWS) translate([p[0] + (p[1] < SLOT_BACK ? -sign(p[0])*6 : 0), p[1] + (p[1] < SLOT_BACK ? 0 : 9), TNUT_CEIL - NUT_T]) '
                      'rotate([0, 0, table_nut_dir(p)]) hexnut();'),
     "5-slide-in": ((60, 0, 25), 'color("SteelBlue") frame(); translate([0, -30, 0]) { color("DarkOrange") sol_frame(); color("Chocolate") sol_coil();'
-                   'color("Silver") plunger(0); color("Silver") spring(0); color("Silver") standoff(0); color("Silver") nut(0); color("Silver") stylus(0); }'),
-    "6-back-screws": ((65, 0, 205), 'color("SteelBlue") frame();' + SOL + 'color("Silver") plunger(0); color("DarkOrange") back_screws();'),
-    "7-table": ((60, 0, 25), 'color("SteelBlue") frame();' + SOL + 'color("Silver") plunger(0); color("Silver") standoff(0); color("Silver") nut(0); color("Silver") stylus(0);'
+                   'color("Silver") plunger(REST_LIFT); color("Silver") spring(REST_LIFT); color("Silver") standoff(0); color("Silver") nut(REST_LIFT); color("Silver") stylus(REST_LIFT); }'),
+    "6-back-screws": ((65, 0, 205), 'color("SteelBlue") frame();' + SOL + 'color("Silver") plunger(REST_LIFT); color("DarkOrange") back_screws();'),
+    "7-table": ((60, 0, 25), 'color("SteelBlue") frame();' + SOL + 'color("Silver") plunger(REST_LIFT); color("Silver") standoff(0); color("Silver") nut(REST_LIFT); color("Silver") stylus(REST_LIFT);'
                'color("DarkOrange") translate([0, 0, 25]) { table(); table_screws(); }'),
     "8-arm": ((60, 0, 25), 'color("SteelBlue") frame(); color("LightSteelBlue") table(); color("DimGray") table_screws();'
              'color("DarkOrange") translate([0, 0, 22]) { arm(); die_screw(); die_nuts(); arm_screws(); }'),

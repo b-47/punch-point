@@ -12,9 +12,9 @@ Print in PLA. The files are in [`print/`](print/).
 
 | File | What it holds | Plastic and time |
 | --- | --- | --- |
-| `rig_plate.3mf` | Every printed part, for a Prusa Core One | 63 g, 3 hours |
-| `rig_plate_mk4.3mf` | Every printed part, for a Prusa MK4 | 63 g, 3 hours |
-| `rig_plate_fix.3mf`, `rig_plate_fix_mk4.3mf` | Just the new table and washers, if you printed the full plate before version 015 | 12 g, 41 minutes |
+| `rig_plate.3mf` | Every printed part, for a Prusa Core One | 62 g, 3 hours |
+| `rig_plate_mk4.3mf` | Every printed part, for a Prusa MK4 | 62 g, 3 hours |
+| `rig_plate_fix.3mf`, `rig_plate_fix_mk4.3mf` | Just the new table, washers and stop sleeves, if you printed the full plate before version 015 | 12 g, 42 minutes |
 
 Use the file for your printer. Both use 0.20 mm layers, 3 perimeters, 4 top and 4 bottom layers, 15% gyroid infill, a 5 mm brim and no supports. For another printer, use the STL files with the same settings.
 
@@ -26,7 +26,7 @@ Solenoid, die and pin:
 - 1 JF-0826B solenoid, 12 V. A solenoid is an electromagnet with a steel rod inside, the plunger. The plunger jumps 10 mm when you switch the power on.
 - 1 M3 x 16 socket head screw: the die. It rides on the plunger, head up, and the hex socket in its head shapes the dot.
 - 1 M3 x 20 socket head screw: the pin. It points down through the arm, and its tip presses the paper into the die.
-- 4 M3 nuts: a stop nut and a joining nut on the plunger's push rod, the captive nut in the arm, and a lock nut on top of the arm.
+- 3 M3 nuts: a joining nut on the plunger's push rod, the captive nut in the arm, and a lock nut on top of the arm.
 
 Frame:
 - 2 M3 x 6 socket head screws. They go through the back wall into the solenoid's own threaded holes.
@@ -63,22 +63,15 @@ Electronics:
 1. Take the M3 x 20 screw. If you can, round its tip: rub it on sandpaper or a diamond nail file, rolling the screw as you go, until the end is a smooth dome. A sharp end tends to cut the paper instead of pressing it.
 2. If you have nothing to round it with, skip this step.
 
-## 3. Fit the die to the solenoid and set the stroke
+## 3. Fit the die to the solenoid
 
-The acorn nut on the solenoid also stops the plunger at rest, so it sets how far the plunger moves. That distance is the stroke. A stop nut replaces it, and the stroke spacer sets it.
-
-![The solenoid with its plunger pushed in. The stroke spacer, in orange, sits on top of the solenoid around the push rod, with the stop nut on top of it.](media/build/2-stroke-spacer.png)
+![The stop sleeve, the joining nut and the M3 x 16 die screw, in orange, above the solenoid's push rod.](media/build/2-die-parts.png)
 
 1. Unscrew the acorn nut and the black rubber washer from the push rod, the thin threaded rod on top of the solenoid. You won't need them. Hold the plunger while they're off, or it can slide out of the spring end.
-2. Screw an M3 nut, the stop nut, onto the push rod by a few turns.
-3. Stand the solenoid on the bench on its spring end. Press down on the solenoid, so the plunger slides all the way in and the push rod sticks up as far as it goes.
-4. Keep pressing. Slide the stroke spacer onto the push rod, flat on the solenoid.
-5. Turn the stop nut down until it touches the spacer. Let go and take out the spacer.
-![The joining nut and the M3 x 16 die screw, in orange, above the stop nut on the push rod.](media/build/3-die-screw.png)
-
-6. Screw a second M3 nut, the joining nut, onto the top of the push rod by 2 or 3 turns, so the rod's end is about halfway into it.
-7. Screw the M3 x 16 screw into the top of the joining nut, head up, until it stops against the end of the push rod. Tighten it with the 2.5 mm hex key while you hold the joining nut with pliers. The screw and the rod now butt end to end inside the nut.
-8. Push the plunger in and out. The screw head should move about 10 mm.
+2. Slide a stop sleeve, the small printed tube, over the push rod and down onto the solenoid. It can sit on the small raised ring there.
+3. Screw an M3 nut, the joining nut, onto the tip of the push rod by 2 or 3 turns. Only the last 4 mm or so of the rod is threaded, and this nut uses that thread.
+4. Screw the M3 x 16 screw into the top of the joining nut, head up, until it stops against the end of the push rod. Hold the joining nut with pliers and tighten the screw with the 2.5 mm hex key.
+5. Push the plunger in and let it go. The screw head should move about 8 mm, and at rest the joining nut should sit on the sleeve.
 
 The hex socket in that screw head is the die.
 
@@ -222,15 +215,15 @@ Now run the [test plan](test-plan.md).
 | The adapter cuts out when you fire. | Unplug it. The diode is probably in backwards. |
 | The solenoid stays on. | Check the 10k ohm resistor from the gate to ground, and the MOSFET pins. |
 | The plunger sticks partway up. | Loosen the table screws and move the table until the plunger slides freely. If that doesn't help, use the table marked 6.0. |
-| The die doesn't reach the paper. | Check the stroke (step 3) and that the M3 x 16 screw is screwed down against the push rod. |
+| The die doesn't reach the paper. | Check that the M3 x 16 screw is screwed down against the push rod (step 3). |
 | The paper drags under the pin. | Raise the pin. Loosen the lock nut on top of the arm, then turn the pin counterclockwise. |
 | The paper tears. | Raise the pin, or round its tip more. |
 | Dots are faint. | Lower the pin a quarter turn at a time, or use a longer pulse. |
-| Dots get fainter during a session. | Tighten the lock nut on top of the arm, the arm screws and the two screws in the back wall. Check the stroke with the spacer (step 3). |
+| Dots get fainter during a session. | Tighten the lock nut on top of the arm, the arm screws and the two screws in the back wall. Check the die screw is still tight against the push rod (step 3). |
 
 ## Change the model
 
-The model is [`cad/punch_rig_015.scad`](cad/punch_rig_015.scad), in OpenSCAD. After you change it:
+The model is [`cad/punch_rig_016.scad`](cad/punch_rig_016.scad), in OpenSCAD. After you change it:
 1. Open each file in `print/` with OpenSCAD and export its STL, or run `openscad -o print/frame.stl print/frame.scad` for each part.
 2. Slice the plate again.
 3. Run `python3 tools/print_check.py` from the top of the repository. It must end with PRINT CHECK PASSED.

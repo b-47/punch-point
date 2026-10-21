@@ -94,6 +94,12 @@ Three choices shape the design:
 - A whole page, or months of use.
 - Tactile graphics, which need the stylus placed anywhere on the page.
 
+## Changes in version 016
+
+- Our solenoids' push rods are threaded only about 4 mm from the tip, so a stop nut can't sit low enough to set the stroke. A printed stop sleeve replaces it: a tube over the smooth part of the rod that the joining nut lands on at rest.
+- The stroke is now about 8 mm instead of 10, depending on the raised ring on top of the solenoid. The strike height doesn't change, because it is set with the plunger pushed fully in. A shorter stroke pushes harder at the end.
+- The stroke spacer is gone. The sleeves print on the fix plate.
+
 ## Changes in version 015
 
 - The rig now uses only M3 socket head screws and nuts. There is no standoff, set screw or steel washer.
