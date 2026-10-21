@@ -94,6 +94,10 @@ Three choices shape the design:
 - A whole page, or months of use.
 - Tactile graphics, which need the stylus placed anywhere on the page.
 
+## Changes in version 014
+
+- The slots in the back wall match our solenoid's threaded holes, measured with calipers. The holes are 13.8 mm apart along the solenoid and 11.5 mm across, not 14.5 and 12 as in the drawing. The hole nearer the push rod is 7.3 mm from that end of the frame. Our solenoid is 26.6 mm long, so its stylus sticks out about 7.4 mm.
+
 ## Changes in version 013
 
 - The two front table nuts slide in from the slot in the middle of the deck, not from the front of the frame. Their slots used to run 14 mm to the front face. PrusaSlicer warned of floating bridge anchors over those long slots, because the bridge lines turn over empty space. Now every nut slot is about 5 mm long.

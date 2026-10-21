@@ -91,7 +91,7 @@ Electronics:
 6. Hold the standoff with the wrench and tighten the nut. Stop when the nut's flat sides line up with the standoff's flat sides. The table slides over both, so they must line up.
 7. Measure again. The tip should still stick out 7.0 mm, give or take 0.2 mm.
 
-The 7.0 mm suits a solenoid frame 27 mm long, as in the seller's drawing. For another length, see the [design notes](design-notes.md#check-these-on-the-real-parts).
+The 7.0 mm suits a solenoid frame 27 mm long, as in the seller's drawing. Our solenoids measure 26.6 mm, so use 7.4 mm. For another length, see the [design notes](design-notes.md#check-these-on-the-real-parts).
 
 ## 3. Fit the standoff and set the stroke
 
@@ -238,7 +238,7 @@ Now run the [test plan](test-plan.md).
 
 ## Change the model
 
-The model is [`cad/punch_rig_013.scad`](cad/punch_rig_013.scad), in OpenSCAD. After you change it:
+The model is [`cad/punch_rig_014.scad`](cad/punch_rig_014.scad), in OpenSCAD. After you change it:
 1. Open each file in `print/` with OpenSCAD and export its STL, or run `openscad -o print/frame.stl print/frame.scad` for each part.
 2. Slice the plate again.
 3. Run `python3 tools/print_check.py` from the top of the repository. It must end with PRINT CHECK PASSED.
