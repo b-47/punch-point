@@ -14,6 +14,7 @@ Print in PLA. The files are in [`print/`](print/).
 | --- | --- | --- |
 | `rig_plate.3mf` | Every printed part, for a Prusa Core One | 62 g, 3 hours |
 | `rig_plate_mk4.3mf` | Every printed part, for a Prusa MK4 | 62 g, 3 hours |
+| `die_caps_coreone.3mf`, `die_caps_mk4.3mf` | Two die caps, one a spare | under 1 g, 3 minutes |
 | `rig_plate_fix.3mf`, `rig_plate_fix_mk4.3mf` | Just the new table, washers and stop sleeves, if you printed the full plate before version 015 | 12 g, 42 minutes |
 
 Use the file for your printer. Both use 0.20 mm layers, 3 perimeters, 4 top and 4 bottom layers, 15% gyroid infill, a 5 mm brim and no supports. For another printer, use the STL files with the same settings.
@@ -24,9 +25,9 @@ The plate has two tables. They differ only in how tightly the tube under them fi
 
 Solenoid, die and pin:
 - 1 JF-0826B solenoid, 12 V. A solenoid is an electromagnet with a steel rod inside, the plunger. The plunger jumps 10 mm when you switch the power on.
-- 1 M3 x 16 socket head screw: the die. It rides on the plunger, head up, and the hex socket in its head shapes the dot.
+- 1 M3 x 10 socket head screw. It stands on the plunger, head up, and carries the printed die cap, whose hole shapes the dot.
 - 1 M3 x 20 socket head screw: the pin. It points down through the arm, and its tip presses the paper into the die.
-- 3 M3 nuts: a joining nut on the plunger's push rod, the captive nut in the arm, and a lock nut on top of the arm.
+- 3 M3 nuts: one on the tip of the plunger's push rod, the captive nut in the arm, and a lock nut on top of the arm.
 
 Frame:
 - 2 M3 x 6 socket head screws. They go through the back wall into the solenoid's own threaded holes.
@@ -63,17 +64,16 @@ Electronics:
 1. Take the M3 x 20 screw. If you can, round its tip: rub it on sandpaper or a diamond nail file, rolling the screw as you go, until the end is a smooth dome. A sharp end tends to cut the paper instead of pressing it.
 2. If you have nothing to round it with, skip this step.
 
-## 3. Fit the die to the solenoid
+## 3. Prepare the solenoid
 
-![The stop sleeve, the joining nut and the M3 x 16 die screw, in orange, above the solenoid's push rod.](media/build/2-die-parts.png)
+![The stop sleeve and the nut, in orange, on the solenoid's push rod, with the M3 x 10 and the die cap above.](media/build/2-die-parts.png)
 
 1. Unscrew the acorn nut and the black rubber washer from the push rod, the thin threaded rod on top of the solenoid. You won't need them. Hold the plunger while they're off, or it can slide out of the spring end.
 2. Slide a stop sleeve, the small printed tube, over the push rod and down onto the solenoid. It can sit on the small raised ring there.
-3. Screw an M3 nut, the joining nut, onto the tip of the push rod by 2 or 3 turns. Only the last 4 mm or so of the rod is threaded, and this nut uses that thread.
-4. Screw the M3 x 16 screw into the top of the joining nut, head up, until it stops against the end of the push rod. Hold the joining nut with pliers and tighten the screw with the 2.5 mm hex key.
-5. Push the plunger in and let it go. The screw head should move about 8 mm, and at rest the joining nut should sit on the sleeve.
+3. Screw an M3 nut onto the tip of the push rod until the end of the rod is level with the top of the nut. Only the last 4 mm or so of the rod is threaded.
+4. Push the plunger in and let it go. The nut should drop back onto the sleeve.
 
-The hex socket in that screw head is the die.
+The die screw and cap go in later, through the table (step 5).
 
 ## 4. Fit the solenoid in the frame
 
@@ -100,13 +100,17 @@ If no slot lines up with a hole, you can still run the first tests. Two small li
 ![The table and its four screws, in orange, lifted above the frame. The tube under it slides down over the parts on the push rod.](media/build/7-table.png)
 
 1. Take the table marked 5.8 underneath. It needs the 6.2 mm hole in its top from version 015, which the die's screw head rises through. A table with a 3.4 mm hole is from an earlier version.
-2. Lower it onto the deck, so the tube under it slides down over the die screw and the two nuts.
+2. Lower it onto the deck, so the tube under it slides down over the nut on the push rod.
 3. Put in the 4 M3 x 8 socket head screws, loosely. Their heads sink below the table surface.
 4. Reach through the window in the back wall, under the solenoid, and push the plunger up as far as it goes.
-5. Check the die screw's head. It should rise to about level with the table surface, centered in the hole.
+5. Look through the big hole. The nut on the push rod should rise into the tube without catching.
 6. Move the table until the plunger slides up and down freely.
 7. Tighten the 4 screws.
-8. Let go of the plunger. It should drop back by itself, and the screw head should sink well below the table surface.
+8. Drop the M3 x 10 into the table's big hole, threaded end first, head up. It stands on the nut on the push rod.
+9. Drop a die cap into the same hole, peg down, hole up. Turn it gently with the tip of the hex key until its peg drops into the socket of the screw head.
+10. Push the plunger up from below and let go. The cap's top should rise to about level with the table, then drop back by itself.
+
+The hole in the top of the cap is the die.
 
 If the nuts stick in the tube, use the table marked 6.0 instead.
 
@@ -122,8 +126,8 @@ If the nuts stick in the tube, use the table marked 6.0 instead.
 6. Slide a printed washer, one of the flat rings, onto each of two M3 x 20 screws, up against the head. The arm's screw holes are wider than a screw head, so without them the heads would sink into the plastic.
 7. Put the arm on top of the tower. Fix it with those two screws, washers under the heads, but leave the screws loose.
 8. Push the plunger up and hold it there.
-9. Turn the pin clockwise, down, until its tip rests in the hex socket of the die screw's head.
-10. Slide the arm until the tip sits centered in the socket.
+9. Turn the pin clockwise, down, until its tip rests in the hole of the die cap.
+10. Slide the arm until the tip sits centered in the hole.
 11. Tighten the two arm screws. Then let go of the plunger.
 12. Turn the pin one turn counterclockwise, to raise it 0.5 mm.
 
@@ -216,15 +220,15 @@ Now run the [test plan](test-plan.md).
 | The adapter cuts out when you fire. | Unplug it. The diode is probably in backwards. |
 | The solenoid stays on. | Check the 10k ohm resistor from the gate to ground, and the MOSFET pins. |
 | The plunger sticks partway up. | Loosen the table screws and move the table until the plunger slides freely. If that doesn't help, use the table marked 6.0. |
-| The die doesn't reach the paper. | Check that the M3 x 16 screw is screwed down against the push rod (step 3). |
+| The die doesn't reach the paper. | Check that the nut is level with the tip of the push rod (step 3) and the cap sits on the screw head (step 5). |
 | The paper drags under the pin. | Raise the pin. Loosen the lock nut on top of the arm, then turn the pin counterclockwise. |
 | The paper tears. | Raise the pin, or round its tip more. |
 | Dots are faint. | Lower the pin a quarter turn at a time, or use a longer pulse. |
-| Dots get fainter during a session. | Tighten the lock nut on top of the arm, the arm screws and the two screws in the back wall. Check the die screw is still tight against the push rod (step 3). |
+| Dots get fainter during a session. | Tighten the lock nut on top of the arm, the arm screws and the two screws in the back wall. A worn die cap makes faint dots: drop in the spare. |
 
 ## Change the model
 
-The model is [`cad/punch_rig_016.scad`](cad/punch_rig_016.scad), in OpenSCAD. After you change it:
+The model is [`cad/punch_rig_017.scad`](cad/punch_rig_017.scad), in OpenSCAD. After you change it:
 1. Open each file in `print/` with OpenSCAD and export its STL, or run `openscad -o print/frame.stl print/frame.scad` for each part.
 2. Slice the plate again.
 3. Run `python3 tools/print_check.py` from the top of the repository. It must end with PRINT CHECK PASSED.

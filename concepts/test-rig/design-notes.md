@@ -94,6 +94,12 @@ Three choices shape the design:
 - A whole page, or months of use.
 - Tactile graphics, which need the stylus placed anywhere on the page.
 
+## Changes in version 017
+
+- First test: the rig struck the paper but left only a mark. The pin is a plain M3 screw, 3 mm across, and the die was the 2.5 mm socket in a screw head, so the pin couldn't push the paper into it.
+- A printed die cap now sits on an M3 x 10, head up, by a hex peg in its socket. Its 3.8 mm hole leaves room for the 3 mm pin and the paper. The cap's top is where the M3 x 16's head was, so nothing else changes. Printed dies wear out, so this is for testing.
+- The nut on the push rod is now flush with the rod's tip, and the screw stands on it. One nut couldn't join the rod and a screw: the two threads don't line up, and half a nut holds only two threads of each.
+
 ## Changes in version 016
 
 - Our solenoids' push rods are threaded only about 4 mm from the tip, so a stop nut can't sit low enough to set the stroke. A printed stop sleeve replaces it: a tube over the smooth part of the rod that the joining nut lands on at rest.
