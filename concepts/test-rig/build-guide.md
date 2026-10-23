@@ -120,10 +120,11 @@ If the coupler sticks in the tube, loosen the table screws and shift the table u
 5. Push an M3 nut into each of the two slots in the outer face of the tower, the block that rises beside the table. Push each nut in flat until it stops under its screw hole.
 6. Slide a printed washer, one of the flat rings, onto each of two M3 x 20 screws, up against the head. The arm's screw holes are wider than a screw head, so without them the heads would sink into the plastic.
 7. Put the arm on top of the tower. Fix it with those two screws, washers under the heads, but leave the screws loose.
-8. Lay a strip of cardstock on the table. Push the plunger all the way up and hold it there.
-9. Turn the pin clockwise, down, until its tip just touches the paper above the die hole in the top of the coupler.
-10. Slide the arm until the tip sits centered over the die hole. Tighten the two arm screws.
-11. Turn the pin one more full turn down, for a dot about 0.5 mm deep. Then let go of the plunger.
+8. Push the plunger all the way up and hold it there. Turn the pin clockwise, down, until its tip goes into the die hole in the top of the coupler.
+9. Slide the arm until the tip sits centered in the hole. Tighten the two arm screws. Let go of the plunger.
+10. Turn the pin 3 turns counterclockwise, up. Lay a strip of cardstock on the table.
+11. Push the plunger all the way up again and hold it. Turn the pin down until its tip just touches the paper.
+12. Turn the pin one more full turn down, for a dot about 0.5 mm deep. Then let go of the plunger.
 
 Turning the pin clockwise lowers it, and each turn moves it 0.5 mm.
 
