@@ -94,6 +94,12 @@ Three choices shape the design:
 - A whole page, or months of use.
 - Tactile graphics, which need the stylus placed anywhere on the page.
 
+## Changes in version 018
+
+- The dropped-in die screw had play, so the die could wander under the pin. A printed coupler replaces it, the die cap and the nut on the push rod.
+- The coupler screws onto the push rod by a captive M3 nut. Its 8 mm hex body slides in the table's hex tube, so it can't turn or tip. A 5.5 mm neck rises through the table's hole, and its top face has the 3.8 mm die hole.
+- It needs the coupler table, with an 8.3 mm tube, and 3.5 mm stop sleeves, for about 9 mm of stroke. Both print with two couplers on `coupler_plate`.
+
 ## Changes in version 017
 
 - First test: the rig struck the paper but left only a mark. The pin is a plain M3 screw, 3 mm across, and the die was the 2.5 mm socket in a screw head, so the pin couldn't push the paper into it.

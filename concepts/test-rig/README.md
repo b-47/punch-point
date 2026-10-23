@@ -13,7 +13,7 @@ This rig embosses one braille dot at a time.
 
 | File | What it is |
 | --- | --- |
-| `cad/punch_rig_017.scad` | The 3D model, in OpenSCAD. Older versions are in `cad/iterations/`. |
+| `cad/punch_rig_018.scad` | The 3D model, in OpenSCAD. Older versions are in `cad/iterations/`. |
 | `print/rig_plate.3mf` | All the printed parts on one plate for a Prusa Core One: about 63 g of PLA and 3 hours. |
 | `print/rig_plate_mk4.3mf` | The same plate for a Prusa MK4. |
 | `print/*.stl` | Each printed part. |

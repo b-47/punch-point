@@ -17,8 +17,8 @@ SOL = 'color("DimGray") sol_frame(); color("Chocolate") sol_coil();'
 STEPS = {
     "1-pin": ((60, 0, 20), 'color("DarkOrange") rotate([0, 90, 0]) translate([0, 0, -PIN_TIP]) die_screw();'),
     "2-die-parts": ((75, 0, 30), SOL + 'color("Silver") plunger(REST_LIFT); color("Silver") spring(REST_LIFT);'
-                    'color("DarkOrange") translate([0, 0, 6]) standoff(0); color("DarkOrange") translate([0, 0, 14]) nut(REST_LIFT);'
-                    'color("DarkOrange") translate([0, 0, 24]) stylus(REST_LIFT);'),
+                    'color("DarkOrange") translate([0, 0, 8]) standoff(0); color("Gold") translate([-12, 0, 18]) nut(REST_LIFT);'
+                    'color("DarkOrange") translate([0, 0, 18]) stylus(REST_LIFT);'),
     "4-table-nuts": ((50, 0, 25), 'color("SteelBlue") intersection() { frame(); translate([-60, -60, DECK_BOT - 14]) cube([120, 120, 40]); }'
                      'color("DarkOrange") for (p = TABLE_SCREWS) translate([p[0] + (p[1] < SLOT_BACK ? -sign(p[0])*6 : 0), p[1] + (p[1] < SLOT_BACK ? 0 : 9), TNUT_CEIL - NUT_T]) '
                      'rotate([0, 0, table_nut_dir(p)]) hexnut();'),
@@ -53,7 +53,7 @@ def main():
     with tempfile.TemporaryDirectory() as tmp:
         for name, ((rx, ry, rz), body) in STEPS.items():
             scad = Path(tmp) / f"{name}.scad"
-            scad.write_text(f'include <{MODEL}>\nPART = "none";\n$fn = 48;\n{body}\n')
+            scad.write_text(f'include <{MODEL}>\nPART = "none";\n$fn = 48;\nHEX_AF = 8.3; NUT_BORE = 9.8; BOSS_D = 12.6;   // the coupler table\n{body}\n')
             png = OUT / f"{name}.png"
             subprocess.run(["openscad-nightly", "--backend=manifold", "--render", "--imgsize=1200,1000", "--viewall", "--autocenter",
                             f"--camera=0,0,0,{rx},{ry},{rz},0", "--colorscheme=Tomorrow", "-o", str(png), str(scad)],

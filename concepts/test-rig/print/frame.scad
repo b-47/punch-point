@@ -1,3 +1,3 @@
 // Frame, printed upright as modelled. PLA, no supports.
-include <../cad/punch_rig_017.scad>
+include <../cad/punch_rig_018.scad>
 PART = "frame_print";

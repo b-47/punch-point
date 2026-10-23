@@ -1,6 +1,6 @@
 # Build the punch test rig
 
-Printing takes about 3 hours, and assembly about an hour. After the build, run the [test plan](test-plan.md).
+Printing takes about 2.5 hours, and assembly about an hour. After the build, run the [test plan](test-plan.md).
 
 ![The finished rig: a blue printed frame holds the solenoid upright, with a paper table on top and the arm over the paper.](media/build/9-finished.png)
 
@@ -12,22 +12,19 @@ Print in PLA. The files are in [`print/`](print/).
 
 | File | What it holds | Plastic and time |
 | --- | --- | --- |
-| `rig_plate.3mf` | Every printed part, for a Prusa Core One | 62 g, 3 hours |
-| `rig_plate_mk4.3mf` | Every printed part, for a Prusa MK4 | 62 g, 3 hours |
-| `die_caps_coreone.3mf`, `die_caps_mk4.3mf` | Two die caps, one a spare | under 1 g, 3 minutes |
-| `rig_plate_fix.3mf`, `rig_plate_fix_mk4.3mf` | Just the new table, washers and stop sleeves, if you printed the full plate before version 015 | 12 g, 42 minutes |
+| `rig_plate.3mf` | Every printed part, for a Prusa Core One | 52 g, 2.5 hours |
+| `rig_plate_mk4.3mf` | Every printed part, for a Prusa MK4 | 52 g, 2.5 hours |
+| `coupler_plate_coreone.3mf`, `coupler_plate_mk4.3mf` | Just the coupler table (marked 8.3), two couplers and two stop sleeves, if you printed the full plate before version 018 | 15 g, 31 minutes on the Core One at 0.28 mm |
 
 Use the file for your printer. Both use 0.20 mm layers, 3 perimeters, 4 top and 4 bottom layers, 15% gyroid infill, a 5 mm brim and no supports. For another printer, use the STL files with the same settings.
-
-The plate has two tables. They differ only in how tightly the tube under them fits the nuts on the push rod. A number underneath tells them apart: 5.8 is the tighter one, and 6.0 is the looser one.
 
 ### Hardware
 
 Solenoid, die and pin:
 - 1 JF-0826B solenoid, 12 V. A solenoid is an electromagnet with a steel rod inside, the plunger. The plunger jumps 10 mm when you switch the power on.
-- 1 M3 x 10 socket head screw. It stands on the plunger, head up, and carries the printed die cap, whose hole shapes the dot.
+- The printed coupler. It screws onto the plunger's push rod by a captive nut, and the hole in its top is the die.
 - 1 M3 x 20 socket head screw: the pin. It points down through the arm, and its tip presses the paper into the die.
-- 3 M3 nuts: one on the tip of the plunger's push rod, the captive nut in the arm, and a lock nut on top of the arm.
+- 3 M3 nuts: the captive nut in the coupler, the captive nut in the arm, and a lock nut on top of the arm.
 
 Frame:
 - 2 M3 x 6 socket head screws. They go through the back wall into the solenoid's own threaded holes.
@@ -64,16 +61,18 @@ Electronics:
 1. Take the M3 x 20 screw. If you can, round its tip: rub it on sandpaper or a diamond nail file, rolling the screw as you go, until the end is a smooth dome. A sharp end tends to cut the paper instead of pressing it.
 2. If you have nothing to round it with, skip this step.
 
-## 3. Prepare the solenoid
+## 3. Fit the coupler to the solenoid
 
-![The stop sleeve and the nut, in orange, on the solenoid's push rod, with the M3 x 10 and the die cap above.](media/build/2-die-parts.png)
+![A 3.5 mm stop sleeve and the coupler, in orange, above the solenoid's push rod. The coupler's nut, in gold, slides into the slot in its side.](media/build/2-die-parts.png)
 
 1. Unscrew the acorn nut and the black rubber washer from the push rod, the thin threaded rod on top of the solenoid. You won't need them. Hold the plunger while they're off, or it can slide out of the spring end.
-2. Slide a stop sleeve, the small printed tube, over the push rod and down onto the solenoid. It can sit on the small raised ring there.
-3. Screw an M3 nut onto the tip of the push rod until the end of the rod is level with the top of the nut. Only the last 4 mm or so of the rod is threaded.
-4. Push the plunger in and let it go. The nut should drop back onto the sleeve.
+2. Slide a 3.5 mm stop sleeve, the short printed tube, over the push rod and down onto the solenoid. It can sit on the small raised ring there.
+3. Push an M3 nut flat into the slot in the side of the coupler, near its bottom, until it stops over the hole.
+4. Screw the coupler onto the push rod, nut end down, until it stops. Only the last 4 mm or so of the rod is threaded.
+5. Turn the coupler back 3 turns. The rod's tip is now about level with the top of the nut inside.
+6. Push the plunger in and let it go. The coupler should move about 9 mm and land on the sleeve.
 
-The die screw and cap go in later, through the table (step 5).
+The hole in the top of the coupler is the die.
 
 ## 4. Fit the solenoid in the frame
 
@@ -99,20 +98,16 @@ If no slot lines up with a hole, you can still run the first tests. Two small li
 
 ![The table and its four screws, in orange, lifted above the frame. The tube under it slides down over the parts on the push rod.](media/build/7-table.png)
 
-1. Take the table marked 5.8 underneath. It needs the 6.2 mm hole in its top from version 015, which the die's screw head rises through. A table with a 3.4 mm hole is from an earlier version.
-2. Lower it onto the deck, so the tube under it slides down over the nut on the push rod.
+1. Take the table marked 8.3 underneath, from the coupler plate. Turn the coupler so its flat sides line up with the hex tube under the table.
+2. Lower it onto the deck, so the tube under it slides down over the coupler.
 3. Put in the 4 M3 x 8 socket head screws, loosely. Their heads sink below the table surface.
 4. Reach through the window in the back wall, under the solenoid, and push the plunger up as far as it goes.
-5. Look through the big hole. The nut on the push rod should rise into the tube without catching.
+5. The coupler's round top should rise to about level with the table surface, centered in the big hole.
 6. Move the table until the plunger slides up and down freely.
 7. Tighten the 4 screws.
-8. Drop the M3 x 10 into the table's big hole, threaded end first, head up. It stands on the nut on the push rod.
-9. Drop a die cap into the same hole, peg down, hole up. Turn it gently with the tip of the hex key until its peg drops into the socket of the screw head.
-10. Push the plunger up from below and let go. The cap's top should rise to about level with the table, then drop back by itself.
+8. Let go of the plunger. It should drop back by itself.
 
-The hole in the top of the cap is the die.
-
-If the nuts stick in the tube, use the table marked 6.0 instead.
+If the coupler sticks in the tube, loosen the table screws and shift the table until it slides freely.
 
 ## 6. Fit the arm and the pin
 
@@ -126,7 +121,7 @@ If the nuts stick in the tube, use the table marked 6.0 instead.
 6. Slide a printed washer, one of the flat rings, onto each of two M3 x 20 screws, up against the head. The arm's screw holes are wider than a screw head, so without them the heads would sink into the plastic.
 7. Put the arm on top of the tower. Fix it with those two screws, washers under the heads, but leave the screws loose.
 8. Push the plunger up and hold it there.
-9. Turn the pin clockwise, down, until its tip rests in the hole of the die cap.
+9. Turn the pin clockwise, down, until its tip rests in the die hole in the top of the coupler.
 10. Slide the arm until the tip sits centered in the hole.
 11. Tighten the two arm screws. Then let go of the plunger.
 12. Turn the pin one turn counterclockwise, to raise it 0.5 mm.
@@ -219,16 +214,16 @@ Now run the [test plan](test-plan.md).
 | Nothing happens when you fire. | Check that the adapter has power and the MOSFET pins are in the right order. Check the wire from the ESP32's ground to the ground rail. |
 | The adapter cuts out when you fire. | Unplug it. The diode is probably in backwards. |
 | The solenoid stays on. | Check the 10k ohm resistor from the gate to ground, and the MOSFET pins. |
-| The plunger sticks partway up. | Loosen the table screws and move the table until the plunger slides freely. If that doesn't help, use the table marked 6.0. |
-| The die doesn't reach the paper. | Check that the nut is level with the tip of the push rod (step 3) and the cap sits on the screw head (step 5). |
+| The plunger sticks partway up. | Loosen the table screws and move the table until the plunger slides freely.  |
+| The die doesn't reach the paper. | Screw the coupler a turn further down onto the push rod (step 3), then lower the pin to match. |
 | The paper drags under the pin. | Raise the pin. Loosen the lock nut on top of the arm, then turn the pin counterclockwise. |
 | The paper tears. | Raise the pin, or round its tip more. |
 | Dots are faint. | Lower the pin a quarter turn at a time, or use a longer pulse. |
-| Dots get fainter during a session. | Tighten the lock nut on top of the arm, the arm screws and the two screws in the back wall. A worn die cap makes faint dots: drop in the spare. |
+| Dots get fainter during a session. | Tighten the lock nut on top of the arm, the arm screws and the two screws in the back wall. A worn die makes faint dots: fit the spare coupler. |
 
 ## Change the model
 
-The model is [`cad/punch_rig_017.scad`](cad/punch_rig_017.scad), in OpenSCAD. After you change it:
+The model is [`cad/punch_rig_018.scad`](cad/punch_rig_018.scad), in OpenSCAD. After you change it:
 1. Open each file in `print/` with OpenSCAD and export its STL, or run `openscad -o print/frame.stl print/frame.scad` for each part.
 2. Slice the plate again.
 3. Run `python3 tools/print_check.py` from the top of the repository. It must end with PRINT CHECK PASSED.

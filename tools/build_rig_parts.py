@@ -16,6 +16,10 @@ PARTS = ["frame", "table", "arm", "sol_frame", "sol_coil", "plunger", "spring", 
          "standoff", "nut", "stylus", "die_screw", "die_nuts"]
 
 
+# the rig as built since version 018: the coupler table, with its 8.3 mm hex tube
+COUPLER_TABLE = ["-D", "HEX_AF=8.3", "-D", "NUT_BORE=9.8", "-D", "BOSS_D=12.6"]
+
+
 def openscad():
     # The nightly build's Manifold backend is much faster; 2021.01 also works.
     if shutil.which("openscad-nightly"):
@@ -31,7 +35,7 @@ def main():
     with tempfile.TemporaryDirectory() as tmp:
         for name in PARTS:
             out = Path(tmp) / f"{name}.stl"
-            run = subprocess.run([*cmd, "--export-format=binstl", "-o", str(out), "-D", f'PART="{name}"', str(MODEL)],
+            run = subprocess.run([*cmd, "--export-format=binstl", "-o", str(out), "-D", f'PART="{name}"', *COUPLER_TABLE, str(MODEL)],
                                  check=True, capture_output=True, text=True)
             meshes[name] = base64.b64encode(out.read_bytes()).decode()
             ledges = re.search(r"ledges (-?[\d.]+)", run.stderr)
