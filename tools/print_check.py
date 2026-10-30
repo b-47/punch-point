@@ -237,8 +237,8 @@ def main():
                 print(f"  {f}")
             for n in r["notes"]:
                 print(f"  note: {n}")
-    # one plate per printer: rig_plate (Core One) and rig_plate_mk4
-    for plate in sorted(PRINT.glob("rig_plate*.gcode")) or [PRINT / "rig_plate.gcode"]:
+    # one G-code file per plate: rig_plate, rig_plate_mk4, filament_plate_coreone
+    for plate in sorted(PRINT.glob("*_plate*.gcode")) or [PRINT / "rig_plate.gcode"]:
         g = gcode_audit(plate)
         ok &= not g
         print(f"{plate.name}: {'ok' if not g else 'FAIL'}")

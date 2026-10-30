@@ -15,7 +15,7 @@ OUT = RIG / "media" / "build"
 # Scenes: (file name, camera rotation x/y/z, OpenSCAD body). New parts are DarkOrange.
 SOL = 'color("DimGray") sol_frame(); color("Chocolate") sol_coil();'
 STEPS = {
-    "1-pin": ((60, 0, 20), 'color("DarkOrange") rotate([0, 90, 0]) translate([0, 0, -PIN_TIP]) die_screw();'),
+    "1-stylus": ((60, 0, 20), 'color("DarkOrange") stylus(REST_LIFT);'),
     "2-die-parts": ((75, 0, 30), SOL + 'color("Silver") plunger(REST_LIFT); color("Silver") spring(REST_LIFT);'
                     'color("DarkOrange") translate([0, 0, 8]) standoff(0); color("Gold") translate([-12, 0, 18]) nut(REST_LIFT);'
                     'color("DarkOrange") translate([0, 0, 18]) stylus(REST_LIFT);'),
@@ -28,7 +28,7 @@ STEPS = {
     "7-table": ((60, 0, 25), 'color("SteelBlue") frame();' + SOL + 'color("Silver") plunger(REST_LIFT); color("Silver") standoff(0); color("Silver") nut(REST_LIFT); color("Silver") stylus(REST_LIFT);'
                'color("DarkOrange") translate([0, 0, 25]) { table(); table_screws(); }'),
     "8-arm": ((60, 0, 25), 'color("SteelBlue") frame(); color("LightSteelBlue") table(); color("DimGray") table_screws();'
-             'color("DarkOrange") translate([0, 0, 22]) { arm(); die_screw(); die_nuts(); }'
+             'color("DarkOrange") translate([0, 0, 22]) { arm(); }'
              'for (p = ARM_SCREWS) translate([p[0], p[1], ARM_Z0 + ARM_T + 30]) {'
              ' color("Gold") difference() { cylinder(d = WASHER[0], h = WASHER[2]); translate([0, 0, -1]) cylinder(d = WASHER[1], h = 3); }'
              ' color("DarkOrange") { translate([0, 0, WASHER[2] + 4]) cylinder(d = HEAD_D, h = HEAD_H); translate([0, 0, WASHER[2] + 4 - ARM_SCREW_L]) cylinder(d = 3, h = ARM_SCREW_L); } }'),

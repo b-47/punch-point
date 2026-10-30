@@ -94,6 +94,20 @@ Three choices shape the design:
 - A whole page, or months of use.
 - Tactile graphics, which need the stylus placed anywhere on the page.
 
+## Changes in version 020
+
+- First tests with the 3 mm screw pin and the 3.8 mm die hole gave marks, not dots. A braille dot is about 1.5 mm across, and a 3 mm pin makes a dot twice that, which needs about four times the force.
+- The stylus is now a 1.7 mm pin, printed in one piece on top of the coupler. It has a domed tip and stands 2.5 mm above the coupler at the top of the stroke, with its tip 0.5 mm above the table. The die is a 2.4 mm hole in the arm's nose: the stylus, one paper thickness all round, and a little for printing small.
+- The stylus pushes the paper up into the die, so dots face up again and you can feel them without turning the paper over.
+- The coupler is a hex bar with the pin on top. The bar's top stays 0.8 mm under the table's skin, and the pin passes through a 2.6 mm hole in the skin. That hole is level with the hex tube, so it holds the stylus on the die. It also holds the paper from below.
+- The arm has no pin screw, no captive nut and no lock nut. Its nose face is 0.4 mm over the table, 0.15 mm over the paper. A sheet of printer paper under the arm raises it 0.1 mm. A 5 mm bore above the die lets you see the stylus tip when you line the arm up.
+- The coupler's nut pocket is 0.6 mm over the nut in width and height, because pockets print small. The nut sits free in the pocket, open at the bottom, and the coupler rests on it. The model puts the coupler's bottom 3.0 mm under the rod's tip, so the pocket's roof sits on the nut.
+- The rig needs no M4 screw, set screw or standoff. The frame is unchanged. Only the arm, the coupler table and the couplers print again. Height is set by turning the coupler on the push rod, 0.5 mm a turn.
+- Not tested yet:
+  - how well a printed PLA stylus holds up, and how smooth its tip is
+  - whether the solenoid pushes hard enough for 65 lb cardstock
+  - the dot size a 2.4 mm die gives
+
 ## Changes in version 018
 
 - The dropped-in die screw had play, so the die could wander under the pin. A printed coupler replaces it, the die cap and the nut on the push rod.
